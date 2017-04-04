@@ -10,3 +10,6 @@ Instruções para inicializar projeto:
 - ``` git pull origin master ```
 - Ir até ao eclipse, abrir projeto e selecionar a pasta criada no primeiro passo.
 - Tentar sempre ter código limpo no master, que não tem erros, sempre que estiverem a tentar implementar uma nova feature devem criar um branch.
+
+
+E por fim , quem escreveu isto é um picolho.
