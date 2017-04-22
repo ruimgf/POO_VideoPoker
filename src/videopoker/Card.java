@@ -10,9 +10,14 @@ public class Card {
 		value = inValue;
 	}
 	
+	public Card(String desc){
+		value = CardValue.parse(desc.charAt(0));
+		suit = Suit.parse(desc.charAt(1));
+	}
+	
 	@Override
 	public String toString() {
-		return "Card "+value+suit+"";
+		return "Card " + value + suit + "";
 	}
 
 	@Override
@@ -39,8 +44,35 @@ public class Card {
 			return false;
 		return true;
 	}
+	
+	public boolean equalsSuit(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Card other = (Card) obj;
+		if (suit != other.suit)
+			return false;
+		return true;
+	}
+	
+	public boolean equalsValue(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Card other = (Card) obj;
+		if (value != other.value)
+			return false;
+		return true;
+	}
 
 	public static void main(String[] args) {
+		
 		for (Suit S : Suit.values()){
 			for (CardValue CV : CardValue.values()){
 				Card first = new Card(S,CV);
@@ -50,12 +82,29 @@ public class Card {
 		
 		Card second = new Card( Suit.DIAMONS,CardValue.TWO );
 		Card first = new Card(Suit.DIAMONS,CardValue.TWO);
-		
+		Card thirth = new Card(Suit.DIAMONS,CardValue.THREE);
+		Card fourth = new Card(Suit.HEARTS,CardValue.THREE);
 		if(first.equals(second)){
-			System.out.print("equals a funcionar ");
+			System.out.print("Card 1 equals to card 2 ");
 			System.out.println(first);
 		}
 		
+		if(first.equalsSuit(second)){
+			System.out.println("Card 1 is of same suit of card 2 ");
+		}
+		
+		if(!first.equalsSuit(fourth)){
+			System.out.println("Card 1 isn't of same suit of card 4 ");
+			
+		}
+		
+		if(!first.equalsValue(thirth)){
+			System.out.println("Card 1 isn't of same value of card 3 ");
+			
+		}
+		
+		Card c2 = new Card("TD");
+		System.out.println("Card new constructor : " +  c2);
 		
 	}
 	

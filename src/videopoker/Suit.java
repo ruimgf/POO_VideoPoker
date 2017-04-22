@@ -7,6 +7,16 @@ public enum Suit {
     HEARTS,
     SPADES;
 	
+	public static Suit parse(char Value) {
+		switch(Value) {
+			case 'D': return DIAMONS;
+			case 'C': return CLUBS;
+			case 'H': return HEARTS;
+			case 'S': return SPADES;
+			default: return DIAMONS; // gerar excepcao
+		}
+	}
+	
 	@Override
 	public String toString() {
 		switch(this) {
