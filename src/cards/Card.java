@@ -1,4 +1,4 @@
-package videopoker;
+package cards;
 
 public class Card {
 	
@@ -17,7 +17,7 @@ public class Card {
 	
 	@Override
 	public String toString() {
-		return "Card " + value + suit + "";
+		return "" + value + suit + "";
 	}
 
 	@Override

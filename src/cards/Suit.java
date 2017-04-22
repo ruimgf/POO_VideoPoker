@@ -1,4 +1,4 @@
-package videopoker;
+package cards;
 
 public enum Suit {
 	
