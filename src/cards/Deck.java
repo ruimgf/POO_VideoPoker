@@ -27,7 +27,7 @@ public class Deck {
 	
 	@Override
 	public String toString() {
-		return "Deck " + cards + "";
+		return "Deck " + cards;
 	}
 	
 	public static void main(String[] args) {
