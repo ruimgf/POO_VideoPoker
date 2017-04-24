@@ -1,14 +1,14 @@
 package cards;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 
 public class Deck {
 
-	private ArrayList<Card> cards;
+	private LinkedList<Card> cards;
 	
 	public Deck() {
-		cards = new ArrayList<Card>() ;
+		cards = new LinkedList<Card>() ;
 		for (Suit S : Suit.values()){
 			for (CardValue CV : CardValue.values()){
 				cards.add(new Card(S,CV));
