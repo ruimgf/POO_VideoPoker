@@ -21,6 +21,10 @@ public class Deck {
 		// TODO insert here code to read file
 	}
 
+	public void shuffle(){
+		Collections.shuffle(cards);
+	}
+	
 	@Override
 	public String toString() {
 		return "Deck " + cards + "";
