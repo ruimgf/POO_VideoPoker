@@ -8,7 +8,7 @@ public class CardAnalizer {
 	int [] totalcount;
 	int [] nSuit;
 	Hand h;
-	int [] lastIndexCarts; // Important indexes used in last classification
+	int [] IndexLastClass; // Important indexes used in last classification
 	
 	public CardAnalizer(Hand h){
 		this.h = h;
@@ -16,6 +16,8 @@ public class CardAnalizer {
 		countCard = new int[4][14];
 		totalcount = new int[14];
 		nSuit = new int[4];
+		
+		IndexLastClass = new int[5];
 		
 		int indexSuit;
 		int indexValue;
@@ -74,13 +76,43 @@ public class CardAnalizer {
 		}
 	}
 	
+	private void resetIndexLastClass(){
+		for (int i = 0; i < IndexLastClass.length; i++) {
+			IndexLastClass[i] = -1;
+		}
+	}
+	
+	private void saveIndex(int index){
+		for (int i = 0; i < IndexLastClass.length; i++) {
+			if(IndexLastClass[i] == -1){
+				IndexLastClass[i] = index;
+				break;
+			}
+		}
+	}
+	
+	void printHoldIndex(){
+		java.util.Arrays.sort(IndexLastClass);
+		for (int i = 0; i < IndexLastClass.length; i++) {
+			if(IndexLastClass[i] != -1){
+				System.out.print(IndexLastClass[i] + " ");
+			}
+		}
+		System.out.println("");
+	}
 	
 	boolean NStraight(int N){
 		int countToStr = 0;
-	
+		resetIndexLastClass();
 		for(int i=13;i>=4;i--){
+			
 			for(int j=i;j>i-5;j--){
 				if(totalcount[j]!=0){
+					for (int j2 = 0; j2 < 4; j2++) {
+						if(countCard[j2][j] != -1){
+							saveIndex(countCard[j2][j]);
+						}
+					}
 					countToStr ++;
 				}
 			}
@@ -88,25 +120,35 @@ public class CardAnalizer {
 				return true;
 			}
 			countToStr = 0;
+			resetIndexLastClass();
 		}
 		return false;
 	}
 	
 	boolean NFlush(int N){
+		resetIndexLastClass();
 		for (int i = 0; i < 4; i++) {
 			if(nSuit[i]==N){
+				for (int j = 1; j < 14; j++) {
+					if(countCard[i][j] != -1){
+						saveIndex(countCard[i][j]);
+					}
+				}
 				return true;
 			}
+			resetIndexLastClass();
 		}
 		return false;
 	}
 	
 	boolean NtoStrFlush(int N){
 		int counter = 0;
+		resetIndexLastClass();
 		for(int i=0;i < 4;i++){
 			for(int k=13;k>=4;k--){
 				for(int j=k;j>k-5;j--){
 					if(countCard[i][j]!=-1){
+						saveIndex(countCard[i][j]);
 						counter ++;
 					}
 					
@@ -116,7 +158,9 @@ public class CardAnalizer {
 					return true;
 				}
 				counter = 0;
+				resetIndexLastClass();
 			}
+		
 		}
 		
 		return false;
@@ -124,10 +168,12 @@ public class CardAnalizer {
 	
 	boolean NtoRoyalFlush(int N){
 		int counter = 0;
+		resetIndexLastClass();
 		for(int i=0;i < 4;i++){
 			
 			for(int j=13;j>8;j--){
 				if(countCard[i][j]!=-1){
+					saveIndex(countCard[i][j]);
 					counter ++;
 				}
 			}
@@ -135,21 +181,31 @@ public class CardAnalizer {
 				return true;
 			}
 			counter = 0;
-			
+			resetIndexLastClass();
 		}
 		return false;
 	}
 	
 	boolean NequalValueCards(int N,CardValue v){
+		resetIndexLastClass();
 		if(totalcount[v.intValue()]>=N){
+			for (int i = 0; i < 4; i++) {
+				if(countCard[i][v.intValue()]!=-1)
+					saveIndex(countCard[i][v.intValue()]);
+			}
 			return true;
 		}
 		return false;
 	}
 	
 	boolean NequalValueCards(int N){
+		resetIndexLastClass();
 		for(int i = 0; i < totalcount.length; i++) {
 			if(totalcount[i]>=N){
+				for (int j = 0; j < 4; j++) {
+					if(countCard[j][i]!=-1)
+						saveIndex(countCard[j][i]);
+				}
 				return true;
 			}
 		}
@@ -158,8 +214,16 @@ public class CardAnalizer {
 	
 	boolean NHighCards(int N){
 		int count=0;
+		resetIndexLastClass();
 		for(int i = 10; i < totalcount.length; i++) {
-			count = count + totalcount[i];	
+			if(totalcount[i]!= 0){
+				count = count + totalcount[i];
+				for (int j = 0; j < 4; j++) {
+					if(countCard[j][i]!=-1)
+						saveIndex(countCard[j][i]);
+				}
+			}
+				
 		}
 		if(count>=N){
 			return true;
@@ -168,9 +232,13 @@ public class CardAnalizer {
 	}
 	
 	boolean HighPair(){
-		
+		resetIndexLastClass();
 		for(int i = 10; i < totalcount.length; i++) {
 			if(totalcount[i]==2){
+				for (int j = 0; j < 4; j++) {
+					if(countCard[j][i]!=-1)
+						saveIndex(countCard[j][i]);
+				}
 				return true;
 			}
 		}
@@ -178,8 +246,13 @@ public class CardAnalizer {
 	}
 	
 	boolean LowPair(){
+		resetIndexLastClass();
 		for(int i = 1; i < 10; i++) {
 			if(totalcount[i]==2){
+				for (int j = 0; j < 4; j++) {
+					if(countCard[j][i]!=-1)
+						saveIndex(countCard[j][i]);
+				}
 				return true;
 			}
 		}
@@ -187,10 +260,17 @@ public class CardAnalizer {
 	}
 	
 	boolean InsideStraight(){
+		resetIndexLastClass();
 		int counter = 0;
 		for(int i=13;i>=4;i--){
+			
 			for(int j=i;j>i-5;j--){
 				if(totalcount[j]!=0){
+					for (int k = 0; k < 4; k++) {
+						if(countCard[k][j]!=-1){
+							saveIndex(countCard[k][j]);
+						}
+					}
 					counter ++;
 				}
 			}
@@ -199,22 +279,28 @@ public class CardAnalizer {
 				return true;
 			}
 			counter = 0;
+			resetIndexLastClass();
 		}
 		return false;
 	}
 	
 	boolean OutsideStraight(){
 		int counter = 0;
-		
+		resetIndexLastClass();
 		for(int i=13;i>=4;i--){
 			for(int j=i;j>i-5;j--){
 				if(totalcount[j]!=0){
+					for (int k = 0; k < 4; k++) {
+						if(countCard[k][j]!=-1)
+							saveIndex(countCard[k][j]);
+					}
 					counter ++;
 				}
 			}
 			if(counter == 4 && (totalcount[i]== 0 || totalcount[i-4] == 0)){
 				return true;
 			}
+			resetIndexLastClass();
 			counter = 0;
 		}
 		return false;
@@ -222,8 +308,13 @@ public class CardAnalizer {
 	
 	boolean TwoPair(){
 		int counter = 0;
+		resetIndexLastClass();
 		for (int i = 0; i < totalcount.length - 1; i++) {
 			if(totalcount[i]==2){
+				for (int k = 0; k < 4; k++) {
+					if(countCard[k][i]!=-1)
+						saveIndex(countCard[k][i]);
+				}
 				counter += 1;
 			}
 			
@@ -232,9 +323,12 @@ public class CardAnalizer {
 		if(counter == 2){
 			return true;
 		}
-		
+		resetIndexLastClass();
 		return false;
+		
 	}
+	
+	
 	
 	public static void main(String[] args) {
 		CardAnalizer analise;
@@ -242,58 +336,71 @@ public class CardAnalizer {
 		
 		h = new Hand();
 		
-		h.mycards[0] = new Card(Suit.HEARTS,CardValue.SEVEN);
-		h.mycards[1] = new Card(Suit.CLUBS,CardValue.FIVE);
-		h.mycards[2] = new Card(Suit.SPADES,CardValue.TWO);
-		h.mycards[3] = new Card(Suit.CLUBS,CardValue.NINE);
-		h.mycards[4] = new Card(Suit.HEARTS,CardValue.EIGTH);
+		h.mycards[0] = new Card(Suit.HEARTS,CardValue.ACE);
+		h.mycards[1] = new Card(Suit.HEARTS,CardValue.KING);
+		h.mycards[2] = new Card(Suit.HEARTS,CardValue.QUEEN);
+		h.mycards[3] = new Card(Suit.HEARTS,CardValue.JACK);
+		h.mycards[4] = new Card(Suit.HEARTS,CardValue.TEN);
 		
+		for (int i = 0; i < h.mycards.length; i++) {
+			System.out.print(h.mycards[i] + " ");
+			
+		}
+		System.out.println("");
 		analise = new CardAnalizer(h);
 		
 		if(analise.NFlush(5)){
 			System.out.println("N Flush");
+			analise.printHoldIndex();
 		}else{
 			System.out.println("No N Flush");
 		}
 		
 		if(analise.NStraight(5)){
 			System.out.println("N Straight");
+			analise.printHoldIndex();
 		}else{
 			System.out.println("No N Straight");
 		}
 		
 		if(analise.NtoRoyalFlush(5)){
 			System.out.println("Royal Flush");
+			analise.printHoldIndex();
 		}else{
 			System.out.println("No Royal Flush");
 		}
 		
 		if(analise.NtoStrFlush(5)){
 			System.out.println("Straight Flush");
+			analise.printHoldIndex();
 		}else{
 			System.out.println("No Straigh Flush");
 		}
 		
-		if(analise.NequalValueCards(2,CardValue.ACE)){
+		if(analise.NequalValueCards(1,CardValue.ACE)){
 			System.out.println("ONe ace");
+			analise.printHoldIndex();
 		}else{
 			System.out.println("No ace");
 		}
 	
 		if(analise.NHighCards(1)){
 			System.out.println("High Cards");
+			analise.printHoldIndex();
 		}else{
 			System.out.println("No High Cards");
 		}
 	
 		if(analise.HighPair()){
 			System.out.println("High Pair");
+			analise.printHoldIndex();
 		}else{
 			System.out.println("No High Pair");
 		}
 		
 		if(analise.LowPair()){
 			System.out.println("Low Pair");
+			analise.printHoldIndex();
 		}else{
 			System.out.println("No Low Pair");
 		}
@@ -301,17 +408,20 @@ public class CardAnalizer {
 		
 		if(analise.OutsideStraight()){
 			System.out.println("Out side Straight");
+			analise.printHoldIndex();
 		}else{
 			System.out.println("No Outside Straight");
 		}
 		
 		if(analise.InsideStraight()){
+			analise.printHoldIndex();
 			System.out.println("inside Straight");
 		}else{
 			System.out.println("No Inside Straight");
 		}
 		
 		if(analise.TwoPair()){
+			analise.printHoldIndex();
 			System.out.println("Two Pair");
 		}else{
 			System.out.println("No Two Pair");
