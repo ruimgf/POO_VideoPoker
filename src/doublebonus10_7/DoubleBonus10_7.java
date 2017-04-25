@@ -3,6 +3,7 @@ package doublebonus10_7;
 import videopoker.Result;
 import cards.Card;
 import cards.Deck;
+import videopoker.Bet_Result;
 import videopoker.Invalid_Result;
 import videopoker.Videopoker;
 
@@ -43,6 +44,7 @@ public class DoubleBonus10_7 implements Videopoker{
 			
 			this.credits = this.credits - credits;
 			
+			return new Bet_Result(this.credits);
 			
 			
 		}else{
