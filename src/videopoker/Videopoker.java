@@ -1,10 +1,10 @@
 package videopoker;
 
 public interface Videopoker {
-	public int bet();
-	public int credit();
-	public int deal();
-	public int hold();
-	public int advice();
-	public int statistics();	
+	public bet_result bet();
+	public credit_result credit();
+	public deal_result deal();
+	public hold_result hold();
+	public advice_result advice();
+	public statistics_result statistics();	
 }
