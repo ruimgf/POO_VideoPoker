@@ -287,7 +287,7 @@ public class CardAnalizer {
 	boolean OutsideStraight(){
 		int counter = 0;
 		resetIndexLastClass();
-		for(int i=13;i>=4;i--){
+		for(int i=12;i>=5;i--){ // Windows begin on King and end on Six
 			for(int j=i;j>i-5;j--){
 				if(totalcount[j]!=0){
 					for (int k = 0; k < 4; k++) {
@@ -328,7 +328,51 @@ public class CardAnalizer {
 		
 	}
 	
+	boolean AKQJunsuited(){
+		int JIndex  = CardValue.JACK.intValue();
+		int QIndex  = CardValue.QUEEN.intValue();
+		int KIndex  = CardValue.KING.intValue();
+		int AIndex  = CardValue.ACE.intValue();
+		
+		if(totalcount[JIndex] == 0 || totalcount[QIndex] == 0 || totalcount[KIndex]==0 || totalcount[AIndex]==0 ){
+			return false;
+		}
+		
+		if(NtoRoyalFlush(4)){ // If i have a A K Q J of same suited i have a 4 to Royal Flush 
+			return false;
+		}
+		
+		resetIndexLastClass();
+		
+		for (int i = 10; i < 14; i++) {
+				for (int k = 0; k < 4; k++) {
+					if(countCard[k][i]!=-1){
+						saveIndex(countCard[k][i]);
+						break; 
+					}
+				}
+		}
+		return true;	
+	}
 	
+	boolean isaHighCard(Card c){
+		if(c.getValue().intValue() > CardValue.TEN.intValue())
+			return true;
+		return false;
+	}
+	boolean threeToStrType1(){
+		int counter;
+		
+		if(!NStraight(3)){
+			return false;
+		}
+		
+		if(isaHighCard(h.getCardN(IndexLastClass[0])) && isaHighCard(h.getCardN(IndexLastClass[1])) && isaHighCard(h.getCardN(IndexLastClass[2]))){
+			return true;
+		}
+		
+		return false;
+	}
 	
 	public static void main(String[] args) {
 		CardAnalizer analise;
