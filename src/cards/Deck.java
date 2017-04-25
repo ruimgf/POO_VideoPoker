@@ -7,6 +7,17 @@ public class Deck {
 
 	private LinkedList<Card> cards;
 	
+	public Card get_card(){
+		
+		Card aux = cards.pop();
+		cards.addLast(aux);
+		
+		return aux;
+		
+	}
+	
+
+	
 	public Deck() {
 		cards = new LinkedList<Card>() ;
 		for (Suit S : Suit.values()){
