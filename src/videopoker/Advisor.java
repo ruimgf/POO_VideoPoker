@@ -7,13 +7,8 @@ import java.io.InputStreamReader;
 
 import cards.Card;
 import cards.CardValue;
-import cards.Suit;
 
 public class Advisor {
-
-	public Advisor() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	static void getAdvise(Hand h){
 		CardAnalizer analise = new CardAnalizer(h);
@@ -104,7 +99,6 @@ public class Advisor {
 			analise.printHoldIndex(); return;
 		}
 		
-		
 		if(analise.C1C2Suited(CardValue.QUEEN, CardValue.JACK)){ // 16 - QJ Suited
 			System.out.println("QJ suited");
 			analise.printHoldIndex(); return;
@@ -189,7 +183,7 @@ public class Advisor {
 		}
 		
 		if(analise.NHighCards(1)){ // 31 J or Q or K
-			System.out.println("Jack Queen or King");
+			System.out.println("Jack or Queen or King");
 			analise.printHoldIndex(); return;
 		}
 		
@@ -214,20 +208,20 @@ public class Advisor {
 		
 		
 		// Open the file
-		FileInputStream fstream = new FileInputStream("/Users/rui/code/pooproject/src/videopoker/cardtestadvisor");
+		FileInputStream fstream = new FileInputStream("/Users/rui/code/pooproject/src/videopoker/cardtestadvisor.txt");
 		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
 		String strLine;
 		int counter = 1;
 		//Read File Line By Line
 		while ((strLine = br.readLine()) != null)   {
-		  // Print the content on the console
+		  
 			String[] parts = strLine.split(" ");
 			for (int i = 0; i < parts.length; i++) {
 				h.mycards[i] = new Card(parts[i]);
 				
-			}
-			System.out.print(counter + ":" );
+			} 
+			System.out.print(counter + ": " );
 			Advisor.getAdvise(h);
 			counter ++;
 		}
