@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import cards.Card;
 import cards.CardValue;
 
-public class Advisor {
+public class Advisor10_7 {
 	
 	static void getAdvise(Hand h){
 		CardAnalizer analise = new CardAnalizer(h);
@@ -222,7 +222,7 @@ public class Advisor {
 				
 			} 
 			System.out.print(counter + ": " );
-			Advisor.getAdvise(h);
+			Advisor10_7.getAdvise(h);
 			counter ++;
 		}
 
