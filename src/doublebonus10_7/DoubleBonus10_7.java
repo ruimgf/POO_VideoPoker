@@ -3,6 +3,7 @@ package doublebonus10_7;
 import videopoker.Result;
 import cards.Card;
 import cards.Deck;
+import cards.HandCards;
 import videopoker.Invalid_Result;
 import videopoker.Videopoker;
 
@@ -16,6 +17,7 @@ public class DoubleBonus10_7 implements Videopoker{
 	HandCards game_cards;
 	//TODO INSERIR OBJECTO ESTATISTICAS
 	
+	//TODO METODO QUE CRIA OBJECTO A PARTIR DO FICHEIRO
 	
 	public DoubleBonus10_7(int credits){
 		

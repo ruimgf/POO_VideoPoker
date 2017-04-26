@@ -1,6 +1,4 @@
-package doublebonus10_7;
-
-import cards.Card;
+package cards;
 
 /**
  * Class that represent the 5cards in the game, that are owned by the player.
@@ -15,7 +13,7 @@ public class HandCards {
 	/**
 	 * Default constructor for HandCards, it only initialise gamecards with null
 	 */
-	HandCards(){
+	public HandCards(){
 		gamecards = new Card[5];
 	}
 	
@@ -23,7 +21,7 @@ public class HandCards {
 	 * Method that give a new hand to the player
 	 * @param new_hand 5 cards array that are the new cards of the player;
 	 */
-	void newCards(Card[] new_hand){
+	public void newCards(Card[] new_hand){
 
 		gamecards = new_hand;
 		
@@ -35,7 +33,7 @@ public class HandCards {
 	 * @param to_modify card that we want to add
 	 * @param index where we put the card
 	 */
-	void modifyCard(Card to_modify,int index){
+	public void modifyCard(Card to_modify,int index){
 		
 		if(index > 4){
 			System.out.println("ERROR: HAND CARD INDEX INVALID");
@@ -52,10 +50,40 @@ public class HandCards {
 	 * @param index
 	 * @return
 	 */
-	Card getCard(int index){
+	public Card getCard(int index){
 		
 		return gamecards[index];
 		
 	}
-
+	/**
+	 * getter method for the game cards
+	 * @return
+	 */
+	public Card[] getGameCards(){
+		
+		return gamecards;
+	}
+	
+	/**
+	 * method that given a card check gives it index in the hand, or -1 if not present
+	 * @param to_test card that we want to test
+	 * @return index of the to_test card in the hand, or -1 if not present
+	 */
+	public int getIndex(Card to_test){
+		
+		
+		for(int i = 0;i<5;i++){
+			
+			if(gamecards[i].equals(to_test)){
+				return i;
+			}
+			
+		}
+		
+		return -1;/*if not present*/
+		
+	}
+	
+	
+	
 }

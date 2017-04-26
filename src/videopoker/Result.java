@@ -1,4 +1,4 @@
-package videopoker;
+intpackage videopoker;
 
 import cards.Card;
  

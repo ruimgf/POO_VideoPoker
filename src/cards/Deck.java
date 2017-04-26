@@ -15,9 +15,7 @@ public class Deck {
 		return aux;
 		
 	}
-	
-
-	
+		
 	public Deck() {
 		cards = new LinkedList<Card>() ;
 		for (Suit S : Suit.values()){
