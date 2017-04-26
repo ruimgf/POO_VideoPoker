@@ -212,6 +212,37 @@ public class CardAnalizer {
 		return false;
 	}
 	
+	boolean fullHouse(){
+		boolean three = false;
+		boolean two = false;
+		resetIndexLastClass();
+		for (int i = 0; i < totalcount.length; i++) {
+			if(totalcount[i]==3){
+				three = true;
+				for (int j = 0; j < 4; j++) {
+					if (countCard[j][i]!=-1) {
+						saveIndex(countCard[j][i]);
+					}	
+				}
+			}
+			if(totalcount[i]==2){
+				for (int j = 0; j < 4; j++) {
+					if (countCard[j][i]!=-1) {
+						saveIndex(countCard[j][i]);
+					}	
+				}
+				two = true;
+			}
+		
+		}
+		
+		if(three && two){
+			return true;
+		}
+		
+		return false;
+	}
+	
 	boolean NHighCards(int N){
 		int count=0;
 		resetIndexLastClass();
@@ -355,6 +386,33 @@ public class CardAnalizer {
 		return true;	
 	}
 	
+	boolean KQJunsuited(){
+		int JIndex  = CardValue.JACK.intValue();
+		int QIndex  = CardValue.QUEEN.intValue();
+		int KIndex  = CardValue.KING.intValue();
+		
+		
+		if(totalcount[JIndex] == 0 || totalcount[QIndex] == 0 || totalcount[KIndex]==0){
+			return false;
+		}
+		
+		if(NtoRoyalFlush(3)){ // If i have a K Q J of same suited i have a 4 to Royal Flush 
+			return false;
+		}
+		
+		resetIndexLastClass();
+		
+		for (int i = 10; i < 13; i++) {
+				for (int k = 0; k < 4; k++) {
+					if(countCard[k][i]!=-1){
+						saveIndex(countCard[k][i]);
+						break; 
+					}
+				}
+		}
+		return true;	
+	}
+	
 	private boolean isaHighCard(Card c){
 		if(c.getValue().intValue() > CardValue.TEN.intValue())
 			return true;
@@ -378,12 +436,39 @@ public class CardAnalizer {
 			return false;
 		}
 		
-		if(nrOfHighCardsOnIndex()>=3){
+		if(nrOfHighCardsOnIndex()>=2){
 			return true;
 		}
 		resetIndexLastClass();
 		return false;
 	}
+	// isto ainda não está be,
+	boolean threeToStrType2(){
+		
+		if(!NtoStrFlush(3)){
+			return false;
+		}
+		
+		if(nrOfHighCardsOnIndex()>=1){
+			return true;
+		}
+		resetIndexLastClass();
+		return false;
+	}
+	
+	boolean threeToStrType3(){
+		
+		if(!NtoStrFlush(3)){
+			return false;
+		}
+		
+		if(nrOfHighCardsOnIndex()==0){
+			return true;
+		}
+		resetIndexLastClass();
+		return false;
+	}
+	
 	
 	boolean fourInStrWithNHighCards(int N){
 		
@@ -430,7 +515,7 @@ public class CardAnalizer {
 		int c2Index = c2.intValue();
 		resetIndexLastClass();
 		
-		if(totalcount[c1Index] == 0 &&totalcount[c2Index] == 0)
+		if(totalcount[c1Index] == 0 || totalcount[c2Index] == 0)
 			return false;
 		
 		for(int i=0;i<4;i++){

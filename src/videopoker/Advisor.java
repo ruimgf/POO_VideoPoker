@@ -1,5 +1,10 @@
 package videopoker;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import cards.Card;
 import cards.CardValue;
 import cards.Suit;
@@ -46,7 +51,10 @@ public class Advisor {
 			analise.printHoldIndex(); return;
 		}
 		
-		// TO DO FULL HOUSE 
+		if(analise.fullHouse()){ // 4- Full House
+			System.out.println("Full House");
+			analise.printHoldIndex(); return;
+		} 
 		
 		if(analise.NequalValueCards(3)){ // 5 - Three of a kind
 			System.out.println("Three of a kind");
@@ -130,7 +138,10 @@ public class Advisor {
 			analise.printHoldIndex(); return;
 		}
 	
-		// TODO 22
+		if(analise.KQJunsuited()){ // 22 - KQJ unsuited
+			System.out.println("KQJ unsuited");
+			analise.printHoldIndex(); return;
+		}
 		
 		if(analise.C1C2Suited(CardValue.JACK, CardValue.TEN)){ // 23 - JT Suited
 			System.out.println("JT suited");
@@ -152,9 +163,12 @@ public class Advisor {
 			analise.printHoldIndex(); return;
 		}
 	
-		// TODO 27
+		if(analise.threeToStrType3()){ // 27 - 3 to a straight flush type 3
+			System.out.println("3 to straight flush type 3");
+			analise.printHoldIndex(); return;
+		}
 		
-		if(analise.C1C2Unsuited(CardValue.QUEEN, CardValue.KING)){ // 28 - KJ UnSuited
+		if(analise.C1C2Unsuited(CardValue.JACK, CardValue.KING)){ // 28 - KJ UnSuited
 			System.out.println("KJ Unsuited");
 			analise.printHoldIndex(); return;
 		}
@@ -179,12 +193,12 @@ public class Advisor {
 			analise.printHoldIndex(); return;
 		}
 		
-		if(analise.fourInStrWithNHighCards(0)){ // 31 - 4 inside straight with 0 high cards
+		if(analise.fourInStrWithNHighCards(0)){ // 32 - 4 inside straight with 0 high cards
 			System.out.println("4 inside straight with 0 high cards");
 			analise.printHoldIndex(); return;
 		}
 		
-		if(analise.threeToFlushWithNHighCards(0)){ // 31 - 3 to flush with 0 HIGH Cards
+		if(analise.threeToFlushWithNHighCards(0)){ // 33 - 3 to flush with 0 HIGH Cards
 			System.out.println("3 to flush with 1 HIGH Cards");
 			analise.printHoldIndex(); return;
 		}
@@ -194,22 +208,36 @@ public class Advisor {
 	}
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Hand h;
 		h = new Hand();
 		
-		h.mycards[0] = new Card(Suit.SPADES,CardValue.TWO);
-		h.mycards[1] = new Card(Suit.HEARTS,CardValue.JACK);
-		h.mycards[2] = new Card(Suit.HEARTS,CardValue.KING);
-		h.mycards[3] = new Card(Suit.SPADES,CardValue.TWO);
-		h.mycards[4] = new Card(Suit.DIAMONS,CardValue.EIGTH);
-		for (int i = 0; i < h.mycards.length; i++) {
-			System.out.print(h.mycards[i] + " ");
-			
+		
+		// Open the file
+		FileInputStream fstream = new FileInputStream("/Users/rui/code/pooproject/src/videopoker/cardtestadvisor");
+		BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+		String strLine;
+		int counter = 1;
+		//Read File Line By Line
+		while ((strLine = br.readLine()) != null)   {
+		  // Print the content on the console
+			String[] parts = strLine.split(" ");
+			for (int i = 0; i < parts.length; i++) {
+				h.mycards[i] = new Card(parts[i]);
+				
+			}
+			System.out.print(counter + ":" );
+			Advisor.getAdvise(h);
+			counter ++;
 		}
+
+		//Close the input stream
+		br.close();
+	
 		System.out.println("");
 		
-		Advisor.getAdvise(h);
+		
 	}
 
 }
