@@ -1,14 +1,12 @@
-package videopoker;
-
-import cards.*;
+package cards;
 
 public class CardAnalizer {
 	
-	int [][] countCard;
-	int [] totalcount;
-	int [] nSuit;
-	Hand h;
-	int [] IndexLastClass; // Important indexes used in last classification
+	private int [][] countCard;
+	private int [] totalcount;
+	private int [] nSuit;
+	private Hand h;
+	private int [] IndexLastClass; // Important indexes used in last classification
 	
 	public CardAnalizer(Hand h){
 		this.h = h;
@@ -91,7 +89,7 @@ public class CardAnalizer {
 		}
 	}
 	
-	void printHoldIndex(){
+	public void printHoldIndex(){
 		java.util.Arrays.sort(IndexLastClass);
 		for (int i = 0; i < IndexLastClass.length; i++) {
 			if(IndexLastClass[i] != -1){
@@ -101,7 +99,7 @@ public class CardAnalizer {
 		System.out.println("");
 	}
 	
-	boolean NStraight(int N){
+	public boolean NStraight(int N){
 		int countToStr = 0;
 		resetIndexLastClass();
 		for(int i=13;i>=4;i--){
@@ -125,7 +123,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean NFlush(int N){
+	public boolean NFlush(int N){
 		resetIndexLastClass();
 		for (int i = 0; i < 4; i++) {
 			if(nSuit[i]==N){
@@ -141,7 +139,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean NtoStrFlush(int N){
+	public boolean NtoStrFlush(int N){
 		int counter = 0;
 		resetIndexLastClass();
 		for(int i=0;i < 4;i++){
@@ -166,7 +164,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean NtoRoyalFlush(int N){
+	public boolean NtoRoyalFlush(int N){
 		int counter = 0;
 		resetIndexLastClass();
 		for(int i=0;i < 4;i++){
@@ -186,7 +184,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean NequalValueCards(int N,CardValue v){
+	public boolean NequalValueCards(int N,CardValue v){
 		resetIndexLastClass();
 		if(totalcount[v.intValue()]>=N){
 			for (int i = 0; i < 4; i++) {
@@ -198,7 +196,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean NequalValueCards(int N){
+	public boolean NequalValueCards(int N){
 		resetIndexLastClass();
 		for(int i = 0; i < totalcount.length; i++) {
 			if(totalcount[i]>=N){
@@ -212,7 +210,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean fullHouse(){
+	public boolean fullHouse(){
 		boolean three = false;
 		boolean two = false;
 		resetIndexLastClass();
@@ -243,7 +241,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean NHighCards(int N){
+	public boolean NHighCards(int N){
 		int count=0;
 		resetIndexLastClass();
 		for(int i = 10; i < totalcount.length; i++) {
@@ -262,7 +260,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean HighPair(){
+	public boolean HighPair(){
 		resetIndexLastClass();
 		for(int i = 10; i < totalcount.length; i++) {
 			if(totalcount[i]==2){
@@ -276,7 +274,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean LowPair(){
+	public boolean LowPair(){
 		resetIndexLastClass();
 		for(int i = 1; i < 10; i++) {
 			if(totalcount[i]==2){
@@ -289,8 +287,8 @@ public class CardAnalizer {
 		}
 		return false;
 	}
-	
-	boolean InsideStraight(){
+	// falta incluir o caso do AKQJ e A234
+	public boolean InsideStraight(){
 		resetIndexLastClass();
 		int counter = 0;
 		for(int i=13;i>=4;i--){
@@ -315,7 +313,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean OutsideStraight(){
+	public boolean OutsideStraight(){
 		int counter = 0;
 		resetIndexLastClass();
 		for(int i=12;i>=5;i--){ // Windows begin on King and end on Six
@@ -337,7 +335,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean TwoPair(){
+	public boolean TwoPair(){
 		int counter = 0;
 		resetIndexLastClass();
 		for (int i = 0; i < totalcount.length - 1; i++) {
@@ -359,7 +357,7 @@ public class CardAnalizer {
 		
 	}
 	
-	boolean AKQJunsuited(){
+	public boolean AKQJunsuited(){
 		int JIndex  = CardValue.JACK.intValue();
 		int QIndex  = CardValue.QUEEN.intValue();
 		int KIndex  = CardValue.KING.intValue();
@@ -386,7 +384,7 @@ public class CardAnalizer {
 		return true;	
 	}
 	
-	boolean KQJunsuited(){
+	public boolean KQJunsuited(){
 		int JIndex  = CardValue.JACK.intValue();
 		int QIndex  = CardValue.QUEEN.intValue();
 		int KIndex  = CardValue.KING.intValue();
@@ -430,7 +428,7 @@ public class CardAnalizer {
 		}
 		return counter;
 	}
-	boolean threeToStrType1(){
+	public boolean threeToStrType1(){
 		
 		if(!NtoStrFlush(3)){
 			return false;
@@ -456,7 +454,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean threeToStrType3(){
+	public boolean threeToStrType3(){
 		
 		if(!NtoStrFlush(3)){
 			return false;
@@ -470,7 +468,7 @@ public class CardAnalizer {
 	}
 	
 	
-	boolean fourInStrWithNHighCards(int N){
+	public boolean fourInStrWithNHighCards(int N){
 		
 		if(!InsideStraight()){
 			return false;
@@ -482,7 +480,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean threeToFlushWithNHighCards(int N){
+	public boolean threeToFlushWithNHighCards(int N){
 		
 		if(!NFlush(3)){
 			return false;
@@ -494,7 +492,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean C1C2Suited(CardValue c1, CardValue c2){
+	public boolean C1C2Suited(CardValue c1, CardValue c2){
 		int c1Index = c1.intValue();
 		int c2Index = c2.intValue();
 		resetIndexLastClass();
@@ -510,7 +508,7 @@ public class CardAnalizer {
 		return false;
 	}
 	
-	boolean C1C2Unsuited(CardValue c1, CardValue c2){
+	public boolean C1C2Unsuited(CardValue c1, CardValue c2){
 		int c1Index = c1.intValue();
 		int c2Index = c2.intValue();
 		resetIndexLastClass();
@@ -529,7 +527,7 @@ public class CardAnalizer {
 		return true;
 	}
 	
-	boolean twoSuitedHighCards(){
+	public boolean twoSuitedHighCards(){
 		resetIndexLastClass();
 		int counter = 0;
 		for(int i=0;i<4;i++){

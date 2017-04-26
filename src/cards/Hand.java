@@ -1,10 +1,9 @@
-package videopoker;
+package cards;
 
-import cards.*;
 
 public class Hand {
 
-	Card[] mycards;
+	public Card[] mycards;
 	int length = 5;
 	
 	public Hand (){

@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import cards.Card;
+import cards.CardAnalizer;
 import cards.CardValue;
+import cards.Hand;
 
 public class Advisor10_7 {
 	
