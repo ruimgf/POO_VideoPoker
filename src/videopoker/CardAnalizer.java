@@ -355,22 +355,111 @@ public class CardAnalizer {
 		return true;	
 	}
 	
-	boolean isaHighCard(Card c){
+	private boolean isaHighCard(Card c){
 		if(c.getValue().intValue() > CardValue.TEN.intValue())
 			return true;
 		return false;
 	}
+	
+	private int nrOfHighCardsOnIndex(){
+		int counter =0;
+		for(int i=0; i < IndexLastClass.length; i++){
+			if(IndexLastClass[i]==-1)
+				break;
+			if(isaHighCard(h.getCardN(IndexLastClass[i]))){
+				counter++;
+			}
+		}
+		return counter;
+	}
 	boolean threeToStrType1(){
-		int counter;
 		
-		if(!NStraight(3)){
+		if(!NtoStrFlush(3)){
 			return false;
 		}
 		
-		if(isaHighCard(h.getCardN(IndexLastClass[0])) && isaHighCard(h.getCardN(IndexLastClass[1])) && isaHighCard(h.getCardN(IndexLastClass[2]))){
+		if(nrOfHighCardsOnIndex()>=3){
 			return true;
 		}
+		resetIndexLastClass();
+		return false;
+	}
+	
+	boolean fourInStrWithNHighCards(int N){
 		
+		if(!InsideStraight()){
+			return false;
+		}
+		if(nrOfHighCardsOnIndex()>=N){
+			return true;
+		}
+		resetIndexLastClass();
+		return false;
+	}
+	
+	boolean threeToFlushWithNHighCards(int N){
+		
+		if(!NFlush(3)){
+			return false;
+		}
+		if(nrOfHighCardsOnIndex()>=N){
+			return true;
+		}
+		resetIndexLastClass();
+		return false;
+	}
+	
+	boolean C1C2Suited(CardValue c1, CardValue c2){
+		int c1Index = c1.intValue();
+		int c2Index = c2.intValue();
+		resetIndexLastClass();
+		
+		for(int i=0;i<4;i++){
+			if(countCard[i][c1Index] != -1 && countCard[i][c2Index] != -1){
+				saveIndex(countCard[i][c1Index]);
+				saveIndex(countCard[i][c2Index]);
+				return true;
+			}
+		}
+		resetIndexLastClass();
+		return false;
+	}
+	
+	boolean C1C2Unsuited(CardValue c1, CardValue c2){
+		int c1Index = c1.intValue();
+		int c2Index = c2.intValue();
+		resetIndexLastClass();
+		
+		if(totalcount[c1Index] == 0 &&totalcount[c2Index] == 0)
+			return false;
+		
+		for(int i=0;i<4;i++){
+			if(countCard[i][c1Index] != -1){
+				saveIndex(countCard[i][c1Index]);
+			}
+			if(countCard[i][c2Index] != -1){
+				saveIndex(countCard[i][c2Index]);
+			}
+		}
+		return true;
+	}
+	
+	boolean twoSuitedHighCards(){
+		resetIndexLastClass();
+		int counter = 0;
+		for(int i=0;i<4;i++){
+			for(int j=10;j<14;j++){
+				if(countCard[i][j] != -1 && countCard[i][j] != -1){
+					saveIndex(countCard[i][j]);
+					counter ++ ;
+				}
+			}
+			if(counter == 2){
+				return true;
+			}
+			counter = 0;
+			resetIndexLastClass();
+		}
 		return false;
 	}
 	
