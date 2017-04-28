@@ -9,8 +9,12 @@ public class Deal_Result extends Result {
 		super(hand,credits);
 		
 	}
+
 	
-	//TODO override tostring
+	@Override
+	public String toString() {
+		return "Player Cards: " + this.hand;
+	}
 	
 
 }

@@ -80,16 +80,11 @@ public class DoubleBonus10_7 implements Videopoker{
 			
 		}
 		
-		
-		
-		return new Invalid_Result("b: illegal command");
-		
-		
 	}
 	
 	public Result deal(){
 		
-		if(this.gamestate = 2){
+		if(this.gamestate == 2){
 			
 			this.game_deck.shuffle(); /*shuffle the deck*/
 			/*pick 5 cards*/
@@ -100,12 +95,14 @@ public class DoubleBonus10_7 implements Videopoker{
 			/*pass cards to the player hand*/
 			this.game_cards.newCards(aux);
 			
+			/*return result of the bet*/
+			return new Deal_Result(this.game_cards,this.credits);
 			
 			
 			
 		}
 		
-		return new 
+		return new Invalid_Result("d: illegal command");
 		
 		
 	}
