@@ -93,6 +93,13 @@ public class DoubleBonus10_7 implements Videopoker{
 			
 			this.game_deck.shuffle(); /*shuffle the deck*/
 			/*pick 5 cards*/
+			Card[] aux = new Card[5];
+			for(int i=0;i<5;i++){
+				aux[i] = this.game_deck.get_card();
+			}
+			/*pass cards to the player hand*/
+			this.game_cards.newCards(aux);
+			
 			
 			
 			

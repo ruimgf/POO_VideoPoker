@@ -10,5 +10,7 @@ public class Deal_Result extends Result {
 		
 	}
 	
+	//TODO override tostring
+	
 
 }

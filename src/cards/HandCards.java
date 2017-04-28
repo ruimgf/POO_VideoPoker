@@ -55,5 +55,35 @@ public class HandCards {
 		return gamecards[index];
 		
 	}
-
+	/**
+	 * getter method for the game cards
+	 * @return
+	 */
+	public Card[] getGameCards(){
+		
+		return gamecards;
+	}
+	
+	/**
+	 * method that given a card check gives it index in the hand, or -1 if not present
+	 * @param to_test card that we want to test
+	 * @return index of the to_test card in the hand, or -1 if not present
+	 */
+	public int getIndex(Card to_test){
+		
+		
+		for(int i = 0;i<5;i++){
+			
+			if(gamecards[i].equals(to_test)){
+				return i;
+			}
+			
+		}
+		
+		return -1;/*if not present*/
+		
+	}
+	
+	
+	
 }
