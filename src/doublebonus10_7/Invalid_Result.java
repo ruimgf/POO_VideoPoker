@@ -1,4 +1,4 @@
-package videopoker;
+package doublebonus10_7;
 
 /**
  * Invalid_Result Class represents a type of Result that is a invalid play
