@@ -2,13 +2,22 @@ package doublebonus10_7;
 
 public class Bet_Result extends Result {
 	
-	public Bet_Result(int credits){
+	int bet;
+	
+	public Bet_Result(int credits,int bet){
 		
-		super();
+		super(credits);
 		
-		this.credits = credits;
+		this.bet = bet;
+		
 		
 	}
+
+	@Override
+	public String toString() {
+		return "Player is betting " + this.bet ;
+	}
+	
 	
 	
 }

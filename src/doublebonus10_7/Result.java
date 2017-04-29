@@ -21,6 +21,10 @@ public abstract class Result {
 		this.hand = null;
 	}
 	
+	public Result(int credits){
+		this.credits = credits;
+	}
+	
 	public Result(HandCards hand){
 		this.hand = hand;
 	}

@@ -5,10 +5,10 @@ public class CardAnalizer {
 	private int [][] countCard;
 	private int [] totalcount;
 	private int [] nSuit;
-	private Hand h;
+	private HandCards h;
 	private int [] IndexLastClass; // Important indexes used in last classification
 	
-	public CardAnalizer(Hand h){
+	public CardAnalizer(HandCards h){
 		this.h = h;
 		
 		countCard = new int[4][14];
@@ -31,7 +31,7 @@ public class CardAnalizer {
 			nSuit[i] = 0;
 		}
 		
-		for(int i=0; i<h.length; i++){
+		for(int i=0; i<h.length(); i++){
 			Card temp = h.getCardN(i);
 			
 			switch (temp.getSuit()) {
@@ -548,20 +548,21 @@ public class CardAnalizer {
 	
 	public static void main(String[] args) {
 		CardAnalizer analise;
-		Hand h;
+		HandCards h;
 		
-		h = new Hand();
+		h = new HandCards();
 		
-		h.mycards[0] = new Card(Suit.HEARTS,CardValue.ACE);
-		h.mycards[1] = new Card(Suit.HEARTS,CardValue.KING);
-		h.mycards[2] = new Card(Suit.HEARTS,CardValue.QUEEN);
-		h.mycards[3] = new Card(Suit.HEARTS,CardValue.JACK);
-		h.mycards[4] = new Card(Suit.HEARTS,CardValue.TEN);
+		h.addCard(new Card(Suit.HEARTS,CardValue.ACE), 0);
+		h.addCard(new Card(Suit.HEARTS,CardValue.KING), 1);
+		h.addCard(new Card(Suit.HEARTS,CardValue.QUEEN), 2);
+		h.addCard(new Card(Suit.HEARTS,CardValue.JACK), 3);
+		h.addCard(new Card(Suit.HEARTS,CardValue.TWO), 4);
 		
-		for (int i = 0; i < h.mycards.length; i++) {
-			System.out.print(h.mycards[i] + " ");
+		for (int i = 0; i < h.length(); i++) {
+			System.out.print(h.getCardN(i) + " ");
 			
 		}
+		
 		System.out.println("");
 		analise = new CardAnalizer(h);
 		
@@ -594,7 +595,7 @@ public class CardAnalizer {
 		}
 		
 		if(analise.NequalValueCards(1,CardValue.ACE)){
-			System.out.println("ONe ace");
+			System.out.println("One ace");
 			analise.printHoldIndex();
 		}else{
 			System.out.println("No ace");

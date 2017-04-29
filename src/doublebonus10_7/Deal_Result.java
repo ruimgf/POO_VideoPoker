@@ -13,7 +13,7 @@ public class Deal_Result extends Result {
 	
 	@Override
 	public String toString() {
-		return "Player Cards: " + this.hand;
+		return "player's hand: " + this.hand;
 	}
 	
 

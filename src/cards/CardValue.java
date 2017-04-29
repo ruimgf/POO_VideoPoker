@@ -41,6 +41,25 @@ public enum CardValue {
 		}
 	}
 	
+	public static CardValue parse(int value) {
+		switch(value) {
+			case 1: return TWO;
+			case 2: return THREE;
+			case 3: return FOUR;
+			case 4: return FIVE;
+			case 5: return SIX;
+			case 6: return SEVEN;
+			case 7: return EIGTH;
+			case 8: return NINE;
+			case 9: return TEN;
+			case 10: return JACK;
+			case 11: return QUEEN;
+			case 12: return KING;
+			case 13: return ACE;
+			default: return TWO; // gerar excepcao
+		}
+	}
+	
 	public String toString() {
 		switch(this) {
 			case TWO: return "2";

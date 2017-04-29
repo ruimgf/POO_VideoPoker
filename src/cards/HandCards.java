@@ -11,12 +11,18 @@ public class HandCards {
 	
 	/*hand of the player*/
 	private Card[] gamecards;
+	/*lenght of the hand*/
+	private int length = 5;
 	
 	/**
 	 * Default constructor for HandCards, it only initialise gamecards with null
 	 */
 	public HandCards(){
 		gamecards = new Card[5];
+	}
+	
+	public int length(){
+		return this.length;
 	}
 	
 	/**
@@ -29,6 +35,20 @@ public class HandCards {
 		
 	}
 	
+	/**
+	 * method to add a card only - only to debug i think
+	 * @param to_add
+	 * @param index
+	 */
+	public void addCard(Card to_add,int index){
+		
+		if(index < 0 || index > 4){
+			return;
+		}
+		
+		this.gamecards[index] = to_add;
+		
+	}
 	
 	/**
 	 * method that modify a card of the player hand, that card is specified by the index
@@ -52,7 +72,11 @@ public class HandCards {
 	 * @param index
 	 * @return
 	 */
-	public Card getCard(int index){
+	public Card getCardN(int index){
+		
+		if(index < 0 || index > 4){
+			return null;
+		}
 		
 		return gamecards[index];
 		
