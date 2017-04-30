@@ -24,8 +24,7 @@ public class DoubleBonus10_7 implements Videopoker{
 	/* represents the state were the game is 
 	 * 1- begin 
 	 * 2 - after the deal 
-	 * 3 - after the hold 
-	 * 4 - gameover*/
+	 * 3 - after the hold */
 	int gamestate = 1;
 	/*last bet of the player by default is 5*/
 	int lastbet = 5;
@@ -57,7 +56,9 @@ public class DoubleBonus10_7 implements Videopoker{
 		/*it can only bet in the gamestate 1*/
 		if(gamestate == 1){
 			
-			
+			if(credits <0 || credits >5){
+				return new Invalid_Result("Invalid number of credits to bet!",this.credits);
+			}
 			if(this.credits == 0){
 				return new Invalid_Result("No more credits please quit!",this.credits);
 			}
@@ -272,6 +273,7 @@ public class DoubleBonus10_7 implements Videopoker{
 	public Result advice(){
 	
 		CardAnalizer analise = new CardAnalizer(game_cards);
+		boolean discard_all = false;
 		while(true){
 			
 		
@@ -459,6 +461,14 @@ public class DoubleBonus10_7 implements Videopoker{
 				System.out.println("3 to flush with 1 HIGH Cards");
 				break;
 			}
+			
+			discard_all = true;
+			break;
+			
+		}
+		
+		if(discard_all){
+			return new Advice_Result(new boolean[5]);
 		}
 		return new Advice_Result(analise.holdCards());
 		
