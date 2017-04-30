@@ -8,11 +8,11 @@ import java.io.InputStreamReader;
 import cards.Card;
 import cards.CardAnalizer;
 import cards.CardValue;
-import cards.Hand;
+import cards.HandCards;
 
 public class Advisor10_7 {
 	
-	static void getAdvise(Hand h){
+	static void getAdvise(HandCards h){
 		CardAnalizer analise = new CardAnalizer(h);
 		
 		if(analise.NtoRoyalFlush(5)){ // 1 - Royal Flush
@@ -121,13 +121,13 @@ public class Advisor10_7 {
 			System.out.println("4 inside straight with 2 high cards");
 			analise.printHoldIndex(); return;
 		}
-		// TODO 
-		/* 3 to str type 2
-		if(){ // 4 inside straight with 2 high cards
-			System.out.println("4 inside straight with 2 high cards");
+		
+		
+		if(analise.threeToStrType2()){ // 20 -3 straight flush type 2
+			System.out.println("3 straight flush type 2");
 			analise.printHoldIndex(); return;
 		}
-		*/
+		
 		
 		if(analise.fourInStrWithNHighCards(1)){ // 21 - 4 inside straight with 1 high cards
 			System.out.println("4 inside straight with 1 high cards");
@@ -203,10 +203,14 @@ public class Advisor10_7 {
 		
 	}
 	
-	
+	/**
+	 * Main to test advisor
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
-		Hand h;
-		h = new Hand();
+		HandCards h;
+		h = new HandCards();
 		
 		
 		// Open the file
@@ -220,7 +224,7 @@ public class Advisor10_7 {
 		  
 			String[] parts = strLine.split(" ");
 			for (int i = 0; i < parts.length; i++) {
-				h.mycards[i] = new Card(parts[i]);
+				h.addCard(new Card(parts[i]), i);
 				
 			} 
 			System.out.print(counter + ": " );
