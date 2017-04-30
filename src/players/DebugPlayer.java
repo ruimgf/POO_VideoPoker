@@ -34,6 +34,10 @@ public class DebugPlayer extends Player10_7 {
 		
 		card_buffer.close();
 	}*/
+	public DebugPlayer() {
+		// TODO Auto-generated constructor stub
+		super(1000); // just to compile
+	}
 	
 	public void ReadCmds (String filename) throws IOException{
 		System.out.println(filename);
@@ -80,7 +84,9 @@ public class DebugPlayer extends Player10_7 {
 	    commandsDebug = cmds;
 	} 	
 	
-	
+	public void Play(){
+		
+	}
 	
 	public static void main(String[] args) throws IOException {
 		//DoubleBonus_7 videopoker = new DoubleBonus_7();

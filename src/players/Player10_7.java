@@ -5,10 +5,12 @@ import doublebonus10_7.DoubleBonus10_7;
 public abstract class Player10_7 {
 	DoubleBonus10_7 game;
 	
-	public Player10_7() {
+	public Player10_7(int credits) {
 		// TODO Auto-generated constructor stub
-		this.game = new DoubleBonus10_7(1000);
+		this.game = new DoubleBonus10_7(credits);
 	}
+	
+	abstract void Play();
 	
 	public void Comand (String cmd){
 		

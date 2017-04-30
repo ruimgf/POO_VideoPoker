@@ -17,7 +17,12 @@ public class Advice_Result extends Result {
 				str += " " + (i+1) ;
 			}
 		}
-		return str;
+		if(str == "Player should hold cards "){
+			return "Player should discard all cards";
+		}else{
+			return str;
+		}
+		
 	}
 
 }
