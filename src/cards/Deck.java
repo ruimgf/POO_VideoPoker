@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 public class Deck {
 
-	private LinkedList<Card> cards;
+	protected LinkedList<Card> cards;
 	
 	public Card get_card(){
 		
