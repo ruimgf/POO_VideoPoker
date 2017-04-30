@@ -1,7 +1,5 @@
 package doublebonus10_7;
 
-import cards.HandCards;
-
 /**
  * Invalid_Result Class represents a type of Result that is a invalid play
  * @author Alexandre

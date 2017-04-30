@@ -22,15 +22,15 @@ public class DoubleBonus10_7 implements Videopoker{
 	
 	int credits;
 	/* represents the state were the game is 
-	 * 1- begin 
-	 * 2 - after the deal 
-	 * 3 - after the hold */
+	 * 1 - begin 
+	 * 2 - after the bet 
+	 * 3 - after the deal */
 	int gamestate = 1;
 	/*last bet of the player by default is 5*/
 	int lastbet = 5;
 	Deck game_deck;
 	HandCards game_cards;
-	//TODO INSERIR OBJECTO ESTATISTICAS
+	Statistics game_stats;
 	
 	
 	public DoubleBonus10_7(int credits){
@@ -42,7 +42,7 @@ public class DoubleBonus10_7 implements Videopoker{
 		/*initialize the player hand , with null cards*/
 		game_cards = new HandCards();
 		
-		//TODO INSERIR INICIALIZA��O ESTATISCTICAS
+		game_stats = new Statistics(this.credits);
 		
 	}
 	
@@ -72,6 +72,9 @@ public class DoubleBonus10_7 implements Videopoker{
 			this.lastbet = credits;
 			
 			this.gamestate = 2;
+			/*update the statistics because the money draw*/
+			this.game_stats.updateActualCredit(this.credits);
+			
 			return new Bet_Result(this.credits,this.lastbet);
 			
 			
@@ -113,6 +116,8 @@ public class DoubleBonus10_7 implements Videopoker{
 			
 			/*change the game state to the next state = 3*/
 			this.gamestate = 3;
+			/*update the number of deals in the statisctics*/
+			this.game_stats.addDeal();
 			/*return result of the bet*/
 			return new Deal_Result(this.game_cards,this.credits);
 			
@@ -165,6 +170,8 @@ public class DoubleBonus10_7 implements Videopoker{
 			/*update gamestate*/
 			this.gamestate = 1;
 			
+			/*update statistics*/
+			this.game_stats.updateActualCredit(this.credits);
 			/*return the result of the play*/
 			return new Hold_Result(this.game_cards,this.credits,aux);	
 			
@@ -177,7 +184,7 @@ public class DoubleBonus10_7 implements Videopoker{
 	
 	/**
 	 * private method that are used to check the hand of the player and return a final hand aproperly choosen
-	 * with cardanalizer class
+	 * with cardanalizer class and update the statistics
 	 * @return
 	 */
 	FinalHand analize_player_hand()
@@ -189,11 +196,13 @@ public class DoubleBonus10_7 implements Videopoker{
 		
 		/*check if it is a RoyalFlush*/
 		if(aux.NtoRoyalFlush(5)){
+			this.game_stats.addRoyalFlush();
 			return new RoyalFlush();
 		}
 		
 		/*check if it is Straight Flush - the multiplier is 50*/
 		if(aux.NtoStrFlush(5)){
+			this.game_stats.addStraightFlush();
 			return new FinalHand("Straigh Flush",50);
 		}
 		
@@ -204,19 +213,45 @@ public class DoubleBonus10_7 implements Videopoker{
 			if(aux.NequalValueCards(4, CardValue.parse(i))){
 				
 				switch(CardValue.parse(i)) {
-					case TWO: return new FinalHand(" Four TWO's",80);
-					case THREE: return new FinalHand(" Four THREE's",80);
-					case FOUR: return new FinalHand(" Four FOUR's",80);
-					case FIVE: return new FinalHand(" Four FIVE's", 50);
-					case SIX: return new FinalHand(" Four SIX's", 50);
-					case SEVEN: return new FinalHand(" Four SEVEN's", 50);
-					case EIGTH: return new FinalHand(" Four EIGTH's", 50);
-					case NINE: return new FinalHand(" Four NINE's", 50);
-					case TEN: return new FinalHand(" Four TEN's", 50);
-					case JACK: return new FinalHand(" Four JACK's", 50);
-					case QUEEN: return new FinalHand(" Four QUEEN's", 50);
-					case KING: return new FinalHand(" Four KING's", 50);
-					case ACE: return new FinalHand(" Four ACE's", 160);
+					case TWO: 						
+						this.game_stats.addFour();
+						return new FinalHand(" Four TWO's",80);
+					case THREE: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four THREE's",80);
+					case FOUR:
+						this.game_stats.addFour();
+						return new FinalHand(" Four FOUR's",80);
+					case FIVE:
+						this.game_stats.addFour();
+						return new FinalHand(" Four FIVE's", 50);
+					case SIX: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four SIX's", 50);
+					case SEVEN: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four SEVEN's", 50);
+					case EIGTH: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four EIGTH's", 50);
+					case NINE: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four NINE's", 50);
+					case TEN: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four TEN's", 50);
+					case JACK: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four JACK's", 50);
+					case QUEEN: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four QUEEN's", 50);
+					case KING: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four KING's", 50);
+					case ACE: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four ACE's", 160);
 					default: ;
 				}
 			}
@@ -224,16 +259,19 @@ public class DoubleBonus10_7 implements Videopoker{
 		
 		/*check if FullHouse*/
 		if(aux.fullHouse()){
+			this.game_stats.addFullHouse();
 			return new FinalHand(" Full House", 10);
 		}
 		
 		/*check if flush*/
 		if(aux.NFlush(5)){
+			this.game_stats.addFlush();
 			return new FinalHand(" Flush", 7);
 		}
 		
 		/*Straight*/
 		if(aux.NStraight(5)){
+			this.game_stats.addStraight();
 			return new FinalHand(" Straight", 5);
 		}
 		
@@ -241,7 +279,7 @@ public class DoubleBonus10_7 implements Videopoker{
 		for(int i=1;i<14;i++){
 			
 			if(aux.NequalValueCards(3, CardValue.parse(i))){
-				
+				this.game_stats.addThree();
 				return new FinalHand(" Four" + CardValue.parse(i), 3);
 				
 			}
@@ -250,15 +288,17 @@ public class DoubleBonus10_7 implements Videopoker{
 		
 		/*two pair*/
 		if(aux.TwoPair()){
+			this.game_stats.addTwoPair();
 			return new FinalHand(" Two Pair" , 1);
 		}
 		/*jacks or better*/
-		if(aux.HighPair()){ 
+		if(aux.HighPair()){
+			this.game_stats.addJacks();
 			return new FinalHand(" Jacks or Better" , 1);
 		}
 		
 		/*no prize hand*/
-		
+		this.game_stats.addOther();
 		return new NoPrize();
 		
 		
@@ -271,9 +311,12 @@ public class DoubleBonus10_7 implements Videopoker{
 	}
 	
 	public Result advice(){
-	
+		
+		if(this.gamestate != 3){
+			return new Invalid_Result("a: illegal command!",this.credits);
+		}
+		
 		CardAnalizer analise = new CardAnalizer(game_cards);
-		boolean discard_all = false;
 		while(true){
 			
 		
@@ -462,31 +505,30 @@ public class DoubleBonus10_7 implements Videopoker{
 				break;
 			}
 			
-			discard_all = true;
 			break;
 			
 		}
 		
-		if(discard_all){
-			return new Advice_Result(new boolean[5]);
-		}
 		return new Advice_Result(analise.holdCards());
 		
 	}
 	
 	public Result statistics(){
 		
-		return new Invalid_Result("NOT IMPLEMENTE YET",this.credits);
+		return new Statistics_Result(this.game_stats);
 		
 	}
 	
 	public Result quit(){
 		
+		if(this.gamestate == 1){
+		
 		System.out.println("QUIT");
 		System.exit(1);
+		return new Invalid_Result("No more credits please quit!",this.credits);
+		}
 		
-		return new Invalid_Result("NOT IMPLEMENTE YET",this.credits);
-				
+		return new Invalid_Result("q: illegal command!",this.credits);
 	}
 	
 	
