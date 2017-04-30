@@ -1,7 +1,5 @@
 package cards;
 
-import java.util.Arrays;
-
 /**
  * Class that represent the 5 cards in the game, that are owned by the player.
  * @author Alexandre
@@ -112,7 +110,7 @@ public class HandCards {
 
 	@Override
 	public String toString() {
-		return " " + Arrays.toString(gamecards);
+		return " " + gamecards[0] + " " + gamecards[1] + " " + gamecards[2] + " " + gamecards[3] + " " + gamecards[4];
 	}
 	
 	

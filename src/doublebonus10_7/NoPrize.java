@@ -10,7 +10,7 @@ public class NoPrize extends FinalHand{
 
 	public NoPrize(){
 	
-		super("loses",0);
+		super(" loses",0);
 		
 	}
 

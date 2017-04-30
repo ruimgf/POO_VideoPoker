@@ -14,13 +14,20 @@ public abstract class Result {
 	
 	int credits;
 	HandCards hand;
-		
+	boolean[] holdcards;
+	
+	public boolean[] getHoldcards() {
+		return holdcards;
+	}	
+	
 	public Result(){
 		
 		this.credits = -1;
 		this.hand = null;
 	}
 	
+	
+	// nao sei se gosto de tantos construtores
 	public Result(int credits){
 		this.credits = credits;
 	}
@@ -33,5 +40,6 @@ public abstract class Result {
 		this.credits = credits;
 		this.hand = hand;
 	}
+	
 	
 }
