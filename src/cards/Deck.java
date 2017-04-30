@@ -15,9 +15,7 @@ public class Deck {
 		return aux;
 		
 	}
-	
-
-	
+		
 	public Deck() {
 		cards = new LinkedList<Card>() ;
 		for (Suit S : Suit.values()){
@@ -28,10 +26,6 @@ public class Deck {
 		Collections.shuffle(cards);
 	}
 	
-	public Deck(String cardFile) {
-		// TODO insert here code to read file
-	}
-
 	public void shuffle(){
 		Collections.shuffle(cards);
 	}

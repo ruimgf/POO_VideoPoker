@@ -24,20 +24,39 @@ public enum CardValue {
 	
 	public int intValue() {
 		switch(this) {
-			case TWO: return 2;
-			case THREE: return 3;
-			case FOUR: return 4;
-			case FIVE: return 5;
-			case SIX: return 6;
-			case SEVEN: return 7;
-			case EIGTH: return 8;
-			case NINE: return 9;
-			case TEN: return 10;
-			case JACK: return 11;
-			case QUEEN: return 12;
-			case KING: return 13;
-			case ACE: return 14;
+			case TWO: return 1;
+			case THREE: return 2;
+			case FOUR: return 3;
+			case FIVE: return 4;
+			case SIX: return 5;
+			case SEVEN: return 6;
+			case EIGTH: return 7;
+			case NINE: return 8;
+			case TEN: return 9;
+			case JACK: return 10;
+			case QUEEN: return 11;
+			case KING: return 12;
+			case ACE: return 13;
 			default: return -1; // gerar expecao
+		}
+	}
+	
+	public static CardValue parse(int value) {
+		switch(value) {
+			case 1: return TWO;
+			case 2: return THREE;
+			case 3: return FOUR;
+			case 4: return FIVE;
+			case 5: return SIX;
+			case 6: return SEVEN;
+			case 7: return EIGTH;
+			case 8: return NINE;
+			case 9: return TEN;
+			case 10: return JACK;
+			case 11: return QUEEN;
+			case 12: return KING;
+			case 13: return ACE;
+			default: return TWO; // gerar excepcao
 		}
 	}
 	

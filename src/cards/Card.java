@@ -2,6 +2,8 @@ package cards;
 
 public class Card {
 	
+	
+
 	final Suit suit;
 	final CardValue value;
 	
@@ -14,6 +16,16 @@ public class Card {
 		value = CardValue.parse(desc.charAt(0));
 		suit = Suit.parse(desc.charAt(1));
 	}
+	
+	
+	public Suit getSuit() {
+		return suit;
+	}
+
+	public CardValue getValue() {
+		return value;
+	}
+	
 	
 	@Override
 	public String toString() {
