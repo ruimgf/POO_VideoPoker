@@ -1,42 +1,26 @@
 package players;
 import java.util.*;
+
+import doublebonus10_7.DebugDoubleBonus10_7;
+
 import java.io.*;
 
 
 public class DebugPlayer extends Player10_7 {
 	
 	ArrayList<String> commandsDebug; 
-	/*
-	public DebugPlayer(String CardsFile){
-		DoubleBonus_7 videopoker = new DoubleBonus_7(CardsFile);
-	}
 	
-	//Metodo para ler o ficheiro das cartas
-	//Não é para usar aqui, mas pode-se aproveitar!
-	public String[] ReadCards (String filename){
-		
-		BufferedReader card_buffer = new BufferedReader(new FileReader("src/files/" + filename));
-		String all_cards = new String();
-		
-		String line = card_buffer.readLine();
-
-	    while (line != null) {
-	    	all_cards=all_cards.concat(line);
-	        if(!all_cards.endsWith(" ")){
-	        	all_cards=all_cards.concat(" ");
-	        }
-	        line = card_buffer.readLine();
-	    }
-	    String[] cards = all_cards.split(" ");
-	    System.out.println(cards[2]);
-		
-	    return cards;
-		
-		card_buffer.close();
-	}*/
-	public DebugPlayer() {
+	public DebugPlayer(int credits, String cmdfile,String cardfile) {
 		// TODO Auto-generated constructor stub
-		super(1000); // just to compile
+		super(credits);
+		game = new DebugDoubleBonus10_7(credits,cardfile);
+		try {
+			ReadCmds(cmdfile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void ReadCmds (String filename) throws IOException{
@@ -85,18 +69,20 @@ public class DebugPlayer extends Player10_7 {
 	} 	
 	
 	public void Play(){
-		
+		for(String temp : commandsDebug){
+			Comand(temp);
+		}
 	}
 	
 	public static void main(String[] args) throws IOException {
 		//DoubleBonus_7 videopoker = new DoubleBonus_7();
-		DebugPlayer player= new DebugPlayer();
-		//String[] cmds = player.ReadCmds (args[2]);< 
-		
-		player.ReadCmds(args[0]);
-		for(String temp : player.commandsDebug){
-			player.Comand(temp);
-		}
+//		DebugPlayer player= new DebugPlayer();
+//		//String[] cmds = player.ReadCmds (args[2]);< 
+//		
+//		player.ReadCmds(args[0]);
+//		for(String temp : player.commandsDebug){
+//			player.Comand(temp);
+//		}
 	}
 			
 		

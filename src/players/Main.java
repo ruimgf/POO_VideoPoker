@@ -1,5 +1,7 @@
 package players;
 
+import doublebonus10_7.DebugDoubleBonus10_7;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -10,7 +12,7 @@ public class Main {
 		Player10_7 player=null;
 		switch(args[0]){
 			case "-d":
-				
+				player = new DebugPlayer(Integer.parseInt(args[1]),args[2],args[3]);
 				break;
 			case "-s":
 				player = new SimulationPlayer(Integer.parseInt(args[1]),Integer.parseInt(args[2]),Integer.parseInt(args[3]));
