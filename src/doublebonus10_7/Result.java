@@ -41,5 +41,9 @@ public abstract class Result {
 		this.hand = hand;
 	}
 	
+	public int getCredits(){
+		return credits;
+	}
+
 	
 }

@@ -59,12 +59,12 @@ public class DoubleBonus10_7 implements Videopoker{
 			
 			
 			if(this.credits == 0){
-				return new Invalid_Result("No more credits please quit!");
+				return new Invalid_Result("No more credits please quit!",this.credits);
 			}
 			
 			if(this.credits-credits < 0){
 				/*player cannot bet*/
-				return new Invalid_Result("Illegal amount");
+				return new Invalid_Result("Illegal amount",this.credits);
 			}			
 			
 			this.credits = this.credits - credits;
@@ -76,7 +76,7 @@ public class DoubleBonus10_7 implements Videopoker{
 			
 		}else{
 			
-			return new Invalid_Result("b: illegal command");
+			return new Invalid_Result("b: illegal command",this.credits);
 			
 		}
 		
@@ -119,7 +119,7 @@ public class DoubleBonus10_7 implements Videopoker{
 			
 		}
 		
-		return new Invalid_Result("d: illegal command");
+		return new Invalid_Result("d: illegal command",this.credits);
 		
 		
 	}
@@ -136,7 +136,7 @@ public class DoubleBonus10_7 implements Videopoker{
 			
 			/*only to avoid errors*/
 			if(to_hold.length != 5){
-				return new Invalid_Result("h: illegal command - error in hold");
+				return new Invalid_Result("h: illegal command - error in hold",this.credits);
 			}
 			
 			/*keep the cards that are to hold and give new cards to the player, only at the ones that it dont 
@@ -170,7 +170,7 @@ public class DoubleBonus10_7 implements Videopoker{
 		}
 		
 		/*if not in the right game state*/
-		return new Invalid_Result("h: illegal command");
+		return new Invalid_Result("h: illegal command",this.credits);
 		
 	}
 	
@@ -270,7 +270,7 @@ public class DoubleBonus10_7 implements Videopoker{
 	}
 	
 	public Result advice(){
-		
+	
 		CardAnalizer analise = new CardAnalizer(game_cards);
 		while(true){
 			
@@ -466,7 +466,7 @@ public class DoubleBonus10_7 implements Videopoker{
 	
 	public Result statistics(){
 		
-		return new Invalid_Result("NOT IMPLEMENTE YET");
+		return new Invalid_Result("NOT IMPLEMENTE YET",this.credits);
 		
 	}
 	
@@ -475,7 +475,7 @@ public class DoubleBonus10_7 implements Videopoker{
 		System.out.println("QUIT");
 		System.exit(1);
 		
-		return new Invalid_Result("NOT IMPLEMENTE YET");
+		return new Invalid_Result("NOT IMPLEMENTE YET",this.credits);
 				
 	}
 	
