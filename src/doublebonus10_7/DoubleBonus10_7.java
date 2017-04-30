@@ -31,7 +31,6 @@ public class DoubleBonus10_7 implements Videopoker{
 	Deck game_deck;
 	HandCards game_cards;
 	Statistics game_stats;
-	//TODO INSERIR OBJECTO ESTATISTICAS
 	
 	
 	public DoubleBonus10_7(int credits){

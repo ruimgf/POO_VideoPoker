@@ -25,12 +25,17 @@ public class Statistics {
 		
 		
 	}
-	
+	/**
+	 * method that increment the number of Jacks or Better hands
+	 */
 	void addJacks(){
 		this.hands_stats[0] = this.hands_stats[0] + 1;
 		
 	}
 	
+	/**
+	 * method that increment the number of two pair hands
+	 */
 	void addTwoPair(){
 		this.hands_stats[1] = this.hands_stats[1] + 1;
 		
