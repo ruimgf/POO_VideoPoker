@@ -5,8 +5,8 @@ public class InteractivePlayer extends Player10_7 {
 	
 	String cmd;
 	Scanner scan = new Scanner(System.in);
-	public InteractivePlayer() {
-		super();
+	public InteractivePlayer(int credits) {
+		super(credits);
 	}
 	
 	public void ReadCmd () {
@@ -14,9 +14,16 @@ public class InteractivePlayer extends Player10_7 {
 	    cmd=line.replace(" ","");
 	    
 	} 
+	
+	public void Play(){
+		while(true){
+			ReadCmd();
+			Comand(cmd);
+		}
+	}
 	public static void main(String[] args){
 		
-		InteractivePlayer player= new InteractivePlayer();
+		InteractivePlayer player= new InteractivePlayer(1000);
 		 
 		while(true){
 			player.ReadCmd();
