@@ -20,7 +20,7 @@ package players;
 		
 		public void Play () {
 			int currentCredit=0;
-			while(numPlays>0){
+			while(numPlays>0 && game.credit().getCredits()>0){
 				if((currentCredit=game.credit().getCredits())<betValue){
 					Intructions(currentCredit);
 				}else{
@@ -33,7 +33,7 @@ package players;
 		
 		public static void main(String[] args){
 			
-			SimulationPlayer player= new SimulationPlayer(1000,5,5);
+			SimulationPlayer player= new SimulationPlayer(10000,5,10000);
 			player.Play();
 			
 		}

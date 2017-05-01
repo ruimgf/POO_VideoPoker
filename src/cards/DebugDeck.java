@@ -16,7 +16,7 @@ public class DebugDeck extends Deck {
 				BufferedReader br =null;
 				try {
 					fstream = new FileInputStream(filename);
-					 br = new BufferedReader(new InputStreamReader(fstream));
+					br = new BufferedReader(new InputStreamReader(fstream));
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

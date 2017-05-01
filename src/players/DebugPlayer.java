@@ -51,7 +51,7 @@ public class DebugPlayer extends Player10_7 {
 					cmd=cmd.concat(cmdsAux[i+1]);
 					i++;
 				}catch(NumberFormatException e){
-
+					//TODO code for catch of the exception
 				}
 			}else if(cmdsAux[i].contains("h")){
 				cmd=cmdsAux[i];
