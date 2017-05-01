@@ -28,6 +28,7 @@ package players;
 				}
 				numPlays--;
 			}
+			System.out.println(game.statistics());
 		} 
 		
 		public static void main(String[] args){
