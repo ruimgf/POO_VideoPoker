@@ -22,15 +22,15 @@ public class DoubleBonus10_7 implements Videopoker{
 	
 	int credits;
 	/* represents the state were the game is 
-	 * 1- begin 
-	 * 2 - after the deal 
-	 * 3 - after the hold */
+	 * 1 - begin 
+	 * 2 - after the bet 
+	 * 3 - after the deal */
 	int gamestate = 1;
 	/*last bet of the player by default is 5*/
 	int lastbet = 5;
 	Deck game_deck;
 	HandCards game_cards;
-	//TODO INSERIR OBJECTO ESTATISTICAS
+	Statistics game_stats;
 	
 	
 	public DoubleBonus10_7(int credits){
@@ -42,7 +42,7 @@ public class DoubleBonus10_7 implements Videopoker{
 		/*initialize the player hand , with null cards*/
 		game_cards = new HandCards();
 		
-		//TODO INSERIR INICIALIZA��O ESTATISCTICAS
+		game_stats = new Statistics(this.credits);
 		
 	}
 	
@@ -72,6 +72,9 @@ public class DoubleBonus10_7 implements Videopoker{
 			this.lastbet = credits;
 			
 			this.gamestate = 2;
+			/*update the statistics because the money draw*/
+			this.game_stats.updateActualCredit(this.credits);
+			
 			return new Bet_Result(this.credits,this.lastbet);
 			
 			
@@ -113,6 +116,8 @@ public class DoubleBonus10_7 implements Videopoker{
 			
 			/*change the game state to the next state = 3*/
 			this.gamestate = 3;
+			/*update the number of deals in the statisctics*/
+			this.game_stats.addDeal();
 			/*return result of the bet*/
 			return new Deal_Result(this.game_cards,this.credits);
 			
@@ -165,6 +170,8 @@ public class DoubleBonus10_7 implements Videopoker{
 			/*update gamestate*/
 			this.gamestate = 1;
 			
+			/*update statistics*/
+			this.game_stats.updateActualCredit(this.credits);
 			/*return the result of the play*/
 			return new Hold_Result(this.game_cards,this.credits,aux);	
 			
@@ -177,7 +184,7 @@ public class DoubleBonus10_7 implements Videopoker{
 	
 	/**
 	 * private method that are used to check the hand of the player and return a final hand aproperly choosen
-	 * with cardanalizer class
+	 * with cardanalizer class and update the statistics
 	 * @return
 	 */
 	FinalHand analize_player_hand()
@@ -189,11 +196,13 @@ public class DoubleBonus10_7 implements Videopoker{
 		
 		/*check if it is a RoyalFlush*/
 		if(aux.NtoRoyalFlush(5)){
+			this.game_stats.addRoyalFlush();
 			return new RoyalFlush();
 		}
 		
 		/*check if it is Straight Flush - the multiplier is 50*/
 		if(aux.NtoStrFlush(5)){
+			this.game_stats.addStraightFlush();
 			return new FinalHand("Straigh Flush",50);
 		}
 		
@@ -204,19 +213,45 @@ public class DoubleBonus10_7 implements Videopoker{
 			if(aux.NequalValueCards(4, CardValue.parse(i))){
 				
 				switch(CardValue.parse(i)) {
-					case TWO: return new FinalHand(" Four TWO's",80);
-					case THREE: return new FinalHand(" Four THREE's",80);
-					case FOUR: return new FinalHand(" Four FOUR's",80);
-					case FIVE: return new FinalHand(" Four FIVE's", 50);
-					case SIX: return new FinalHand(" Four SIX's", 50);
-					case SEVEN: return new FinalHand(" Four SEVEN's", 50);
-					case EIGTH: return new FinalHand(" Four EIGTH's", 50);
-					case NINE: return new FinalHand(" Four NINE's", 50);
-					case TEN: return new FinalHand(" Four TEN's", 50);
-					case JACK: return new FinalHand(" Four JACK's", 50);
-					case QUEEN: return new FinalHand(" Four QUEEN's", 50);
-					case KING: return new FinalHand(" Four KING's", 50);
-					case ACE: return new FinalHand(" Four ACE's", 160);
+					case TWO: 						
+						this.game_stats.addFour();
+						return new FinalHand(" Four TWO's",80);
+					case THREE: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four THREE's",80);
+					case FOUR:
+						this.game_stats.addFour();
+						return new FinalHand(" Four FOUR's",80);
+					case FIVE:
+						this.game_stats.addFour();
+						return new FinalHand(" Four FIVE's", 50);
+					case SIX: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four SIX's", 50);
+					case SEVEN: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four SEVEN's", 50);
+					case EIGTH: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four EIGTH's", 50);
+					case NINE: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four NINE's", 50);
+					case TEN: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four TEN's", 50);
+					case JACK: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four JACK's", 50);
+					case QUEEN: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four QUEEN's", 50);
+					case KING: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four KING's", 50);
+					case ACE: 
+						this.game_stats.addFour();
+						return new FinalHand(" Four ACE's", 160);
 					default: ;
 				}
 			}
@@ -224,16 +259,19 @@ public class DoubleBonus10_7 implements Videopoker{
 		
 		/*check if FullHouse*/
 		if(aux.fullHouse()){
+			this.game_stats.addFullHouse();
 			return new FinalHand(" Full House", 10);
 		}
 		
 		/*check if flush*/
 		if(aux.NFlush(5)){
+			this.game_stats.addFlush();
 			return new FinalHand(" Flush", 7);
 		}
 		
 		/*Straight*/
 		if(aux.NStraight(5)){
+			this.game_stats.addStraight();
 			return new FinalHand(" Straight", 5);
 		}
 		
@@ -241,7 +279,7 @@ public class DoubleBonus10_7 implements Videopoker{
 		for(int i=1;i<14;i++){
 			
 			if(aux.NequalValueCards(3, CardValue.parse(i))){
-				
+				this.game_stats.addThree();
 				return new FinalHand(" Four" + CardValue.parse(i), 3);
 				
 			}
@@ -250,15 +288,17 @@ public class DoubleBonus10_7 implements Videopoker{
 		
 		/*two pair*/
 		if(aux.TwoPair()){
+			this.game_stats.addTwoPair();
 			return new FinalHand(" Two Pair" , 1);
 		}
 		/*jacks or better*/
-		if(aux.HighPair()){ 
+		if(aux.HighPair()){
+			this.game_stats.addJacks();
 			return new FinalHand(" Jacks or Better" , 1);
 		}
 		
 		/*no prize hand*/
-		
+		this.game_stats.addOther();
 		return new NoPrize();
 		
 		
@@ -271,222 +311,224 @@ public class DoubleBonus10_7 implements Videopoker{
 	}
 	
 	public Result advice(){
-	
+		
+		if(this.gamestate != 3){
+			return new Invalid_Result("a: illegal command!",this.credits);
+		}
+		
 		CardAnalizer analise = new CardAnalizer(game_cards);
-		boolean discard_all = false;
 		while(true){
 			
 		
 			if(analise.NtoRoyalFlush(5)){ // 1 - Royal Flush
-				System.out.println(" Royal Flush");
-				analise.printHoldIndex(); 
+				//System.out.println(" Royal Flush");
+				break;
 				
 			}
 			if(analise.NtoStrFlush(5)){ // 1 - Straight Flush
-				System.out.println("Straight Flush");
+				//System.out.println("Straight Flush");
 				break;
 			}
 			if(analise.NequalValueCards(4)){// 1 - Four of a Kind
-				System.out.println("4 of a Kind");
+				//System.out.println("4 of a Kind");
 				break;
 			}
 			
 			if(analise.NtoRoyalFlush(4)){ // 2 - 4 to Royal Flush
-				System.out.println("4 Royal Flush");
+				//System.out.println("4 Royal Flush");
 				break;
 			}
 			
 			if(analise.NequalValueCards(3,CardValue.ACE)){ // 3 - Three Aces
-				System.out.println("Three Aces");
+				//System.out.println("Three Aces");
 				break;
 			}
 			
 			if(analise.NFlush(5)){ // 4 - Flush
-				System.out.println("5 Flush");
+				//System.out.println("5 Flush");
 				break;
 			}
 			
 			if(analise.NStraight(5)){ // 4 - Straight
-				System.out.println("5 Straight");
+				//System.out.println("5 Straight");
 				break;
 			}
 			
 			if(analise.fullHouse()){ // 4- Full House
-				System.out.println("Full House");
+				//System.out.println("Full House");
 				break;
 			} 
 			
 			if(analise.NequalValueCards(3)){ // 5 - Three of a kind
-				System.out.println("Three of a kind");
+				//System.out.println("Three of a kind");
 				break;
 			}
 			if(analise.NtoStrFlush(4)){ // 6 - 4 to Straight Flush
-				System.out.println("4 to Straight Flush");
+				//System.out.println("4 to Straight Flush");
 				break;
 			}
 			if(analise.TwoPair()){ // 7 - Two Pair
-				System.out.println("Two Pair");
+				//System.out.println("Two Pair");
 				break;
 			}
 			if(analise.HighPair()){ // 8 -  High Pair
-				System.out.println("High Pair");
+				//System.out.println("High Pair");
 				break;
 			}
 			if(analise.NFlush(4)){ // 9 - 4 to a flush
-				System.out.println("4 to Flush");
+				//System.out.println("4 to Flush");
 				break;
 			}
 			if(analise.NtoRoyalFlush(3)){ // 10 - 3 to Royal Flush
-				System.out.println("3 to Royal Flush");
+				//System.out.println("3 to Royal Flush");
 				break;
 			}
 			if(analise.OutsideStraight()){ // 11 - 4 to an outside straight
-				System.out.println("4 to outside Straight");
+				//System.out.println("4 to outside Straight");
 				break;
 			}
 			if(analise.LowPair()){ // 12 - Low Pair
-				System.out.println("Low Pair");
+				//System.out.println("Low Pair");
 				break;
 			}
 		
 			if(analise.AKQJunsuited()){ // 13 - AKQJ unsuited
-				System.out.println("AKQJ unsuited");
+				//System.out.println("AKQJ unsuited");
 				break;
 			}
 			
 			if(analise.threeToStrType1()){ // 14 - 3 to straight type 1
-				System.out.println("Three to a straight (type 1)");
+				//System.out.println("Three to a straight (type 1)");
 				break;
 			}
 			
 			if(analise.fourInStrWithNHighCards(3)){ // 15 - 4 inside straight with 3 high cards
-				System.out.println("4 inside straight with 3 high cards");
+				//System.out.println("4 inside straight with 3 high cards");
 				break;
 			}
 			
 			if(analise.C1C2Suited(CardValue.QUEEN, CardValue.JACK)){ // 16 - QJ Suited
-				System.out.println("QJ suited");
+				//System.out.println("QJ suited");
 				break;
 			}
 		
 			if(analise.threeToFlushWithNHighCards(2)){ // 17 - 3 to flush with 2 HIGH Cards
-				System.out.println("3 to flush with 2 HIGH Cards");
+				//System.out.println("3 to flush with 2 HIGH Cards");
 				break;
 			}
 			
 			if(analise.twoSuitedHighCards()){  // 18 - 2 Suited HIGH Cards
-				System.out.println("2 Suited High Cards");
+				//System.out.println("2 Suited High Cards");
 				break;
 			}
 		
 			
 			if(analise.fourInStrWithNHighCards(2)){ // 19 - 4 inside straight with 2 high cards
-				System.out.println("4 inside straight with 2 high cards");
+				//System.out.println("4 inside straight with 2 high cards");
 				break;
 			}
 			
 			
 			if(analise.threeToStrType2()){ // 20 -3 straight flush type 2
-				System.out.println("3 straight flush type 2");
+				//System.out.println("3 straight flush type 2");
 				break;
 			}
 			
 			
 			if(analise.fourInStrWithNHighCards(1)){ // 21 - 4 inside straight with 1 high cards
-				System.out.println("4 inside straight with 1 high cards");
+				//System.out.println("4 inside straight with 1 high cards");
 				break;
 			}
 		
 			if(analise.KQJunsuited()){ // 22 - KQJ unsuited
-				System.out.println("KQJ unsuited");
+				//System.out.println("KQJ unsuited");
 				break;
 			}
 			
 			if(analise.C1C2Suited(CardValue.JACK, CardValue.TEN)){ // 23 - JT Suited
-				System.out.println("JT suited");
+				//System.out.println("JT suited");
 				break;
 			}
 			
 			if(analise.C1C2Unsuited(CardValue.QUEEN, CardValue.JACK)){ // 24 - QJ UnSuited
-				System.out.println("QJ Unsuited");
+				//System.out.println("QJ Unsuited");
 				break;
 			}
 			
 			if(analise.threeToFlushWithNHighCards(1)){ // 25 - 3 to flush with 1 HIGH Cards
-				System.out.println("3 to flush with 1 HIGH Cards");
+				//System.out.println("3 to flush with 1 HIGH Cards");
 				break;
 			}
 			
 			if(analise.C1C2Suited(CardValue.QUEEN, CardValue.TEN)){ // 26 - QT Suited
-				System.out.println("QT suited");
+				//System.out.println("QT suited");
 				break;
 			}
 		
 			if(analise.threeToStrType3()){ // 27 - 3 to a straight flush type 3
-				System.out.println("3 to straight flush type 3");
+				//System.out.println("3 to straight flush type 3");
 				break;
 			}
 			
 			if(analise.C1C2Unsuited(CardValue.JACK, CardValue.KING)){ // 28 - KJ UnSuited
-				System.out.println("KJ Unsuited");
+				//System.out.println("KJ Unsuited");
 				break;
 			}
 			
 			if(analise.C1C2Unsuited(CardValue.QUEEN, CardValue.KING)){ // 28 - KQ UnSuited
-				System.out.println("KQ Unsuited");
+				//System.out.println("KQ Unsuited");
 				break;
 			}
 			
 			if(analise.NequalValueCards(1, CardValue.ACE)){ // 29 - ACE
-				System.out.println("ACE");
+				//System.out.println("ACE");
 				break;
 			}
 			
 			if(analise.C1C2Suited(CardValue.KING, CardValue.TEN)){ // 30 - KT Suited
-				System.out.println("KT suited");
+				//System.out.println("KT suited");
 				break;
 			}
 			
 			if(analise.NHighCards(1)){ // 31 J or Q or K
-				System.out.println("Jack or Queen or King");
+				//System.out.println("Jack or Queen or King");
 				break;
 			}
 			
 			if(analise.fourInStrWithNHighCards(0)){ // 32 - 4 inside straight with 0 high cards
-				System.out.println("4 inside straight with 0 high cards");
+				//System.out.println("4 inside straight with 0 high cards");
 				break;
 			}
 			
 			if(analise.threeToFlushWithNHighCards(0)){ // 33 - 3 to flush with 0 HIGH Cards
-				System.out.println("3 to flush with 1 HIGH Cards");
+				//System.out.println("3 to flush with 1 HIGH Cards");
 				break;
 			}
 			
-			discard_all = true;
 			break;
 			
 		}
 		
-		if(discard_all){
-			return new Advice_Result(new boolean[5]);
-		}
 		return new Advice_Result(analise.holdCards());
 		
 	}
 	
 	public Result statistics(){
 		
-		return new Invalid_Result("NOT IMPLEMENTE YET",this.credits);
+		return new Statistics_Result(this.game_stats);
 		
 	}
 	
 	public Result quit(){
 		
+		if(this.gamestate == 1){
+		
 		System.out.println("QUIT");
 		System.exit(1);
+		return new Invalid_Result("No more credits please quit!",this.credits);
+		}
 		
-		return new Invalid_Result("NOT IMPLEMENTE YET",this.credits);
-				
+		return new Invalid_Result("q: illegal command!",this.credits);
 	}
 	
 	

@@ -10,7 +10,7 @@ import cards.HandCards;
  */
 public class Hold_Result extends Result{
 	
-	FinalHand result_of_play;
+	private FinalHand result_of_play;
 	
 	public Hold_Result(HandCards player_cards, int credits , FinalHand result_of_play){
 		

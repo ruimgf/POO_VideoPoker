@@ -5,10 +5,12 @@ import doublebonus10_7.DoubleBonus10_7;
 public abstract class Player10_7 {
 	DoubleBonus10_7 game;
 	
-	public Player10_7() {
+	public Player10_7(int credits) {
 		// TODO Auto-generated constructor stub
-		this.game = new DoubleBonus10_7(1000);
+		this.game = new DoubleBonus10_7(credits);
 	}
+	
+	abstract void Play();
 	
 	public void Comand (String cmd){
 		
@@ -46,9 +48,11 @@ public abstract class Player10_7 {
 		}else if(cmd.contains("a")){
 			System.out.println(game.advice());
 		}else if(cmd.contains("s")){
-			System.out.println(game.statistics());	
+			System.out.println(game.statistics());
+		}else if(cmd.contains("q")){
+			System.out.println(game.quit());			
 		}else{
-			System.out.println("Invalid instruction!\nPlease insert a command of type: b [amount(1-5)], h [cards to hold], $, d, a, s");	
+			System.out.println("Invalid instruction!\nPlease insert a command of type: b [amount(1-5)], h [cards to hold], $, d, a, s, q");	
 		} 
 		//System.out.println(text);	
 	}
