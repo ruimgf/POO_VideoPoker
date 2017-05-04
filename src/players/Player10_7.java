@@ -34,7 +34,7 @@ public abstract class Player10_7 {
 				System.out.println(game.bet());
 			}
 		}else if(cmd.contains("h")){
-			boolean flag = false; // flag to know if there was a error in try
+			boolean flag = true; // flag to know if there was a error in try
 			while(j<cmd.length()){
 				flag = false;
 				try {
@@ -61,7 +61,7 @@ public abstract class Player10_7 {
 		}else if(cmd.contains("q")){
 			System.out.println(game.quit());			
 		}else{
-			System.out.println("Invalid instruction!\nPlease insert a command of type: b [amount(1-5)], h [cards to hold], $, d, a, s, q");	
+			System.out.println("Invalid instruction!\n Please insert a command of type: b [amount(1-5)], h [cards to hold], $, d, a, s, q");	
 		} 
 		//System.out.println(text);	
 	}
