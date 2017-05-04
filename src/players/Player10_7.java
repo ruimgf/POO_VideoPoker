@@ -39,7 +39,7 @@ public abstract class Player10_7 {
 				}
 				
 			}
-			if(flag == true) 
+			if(flag == true)  
 				System.out.println(game.hold(hold_cards));
 			break;
 		case '$' :

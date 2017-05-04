@@ -19,9 +19,6 @@ public class Statistics {
 	Statistics(int initial_credit){
 		
 		this.initial_credit=initial_credit;
-		
-		
-		
 	}
 	/**
 	 * method that increment the number of Jacks or Better hands
