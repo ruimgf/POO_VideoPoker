@@ -13,7 +13,6 @@ import videopoker.Videopoker;
  * 		- 1 begin
  * 		- 2 after the bet
  * 		- 3 after the deal
- * 		- 4 after the hold
  * 
  * @author Alexandre
  *
@@ -22,10 +21,13 @@ public class DoubleBonus10_7 implements Videopoker{
 	
 	int credits;
 	/* represents the state were the game is 
-	 * 1 - begin 
-	 * 2 - after the bet 
-	 * 3 - after the deal */
-	int gamestate = 1;
+	 * 0 - begin
+	 * 1 - after first bet 
+	 * 2 - after deal
+	 * 3 - after the hold - and end of play
+	 * 4 - after the bet but not the first bet
+	 * */
+	int gamestate = 0;
 	/*last bet of the player by default is 5*/
 	int lastbet = 5;
 	Deck game_deck;
@@ -54,7 +56,7 @@ public class DoubleBonus10_7 implements Videopoker{
 	 */
 	public Result bet(int credits){
 		/*it can only bet in the gamestate 1*/
-		if(gamestate == 1){
+		if(gamestate == 0 || gamestate == 3){
 			
 			if(credits <0 || credits >5){
 				return new Invalid_Result("Invalid number of credits to bet!",this.credits);
@@ -70,10 +72,18 @@ public class DoubleBonus10_7 implements Videopoker{
 			
 			this.credits = this.credits - credits;
 			this.lastbet = credits;
-			
-			this.gamestate = 2;
 			/*update the statistics because the money draw*/
 			this.game_stats.updateActualCredit(this.credits);
+			
+			/*if it is in the gamestate 0 it goes to gamestate 1*/
+			if(this.gamestate == 0){
+				this.gamestate = 1;
+			}else{
+				/*if it is in the gamestate 3 it goes to gamestate 4*/
+				this.gamestate = 4;
+			}
+			
+			
 			
 			return new Bet_Result(this.credits,this.lastbet);
 			
@@ -103,7 +113,7 @@ public class DoubleBonus10_7 implements Videopoker{
 	 */
 	public Result deal(){
 		
-		if(this.gamestate == 2){
+		if(this.gamestate == 1 || this.gamestate == 3 || this.gamestate == 4){
 			
 			this.game_deck.shuffle(); /*shuffle the deck*/
 			/*pick 5 cards*/
@@ -114,8 +124,22 @@ public class DoubleBonus10_7 implements Videopoker{
 			/*pass cards to the player hand*/
 			this.game_cards.newCards(aux);
 			
-			/*change the game state to the next state = 3*/
-			this.gamestate = 3;
+			/*if it is on the gamestate 1 it goes to gamestate 2 and the money draw as been already done by bet*/
+			if(this.gamestate == 1){
+				this.gamestate =2;
+			}else if(this.gamestate == 3){
+				/*if it is on the gamestate 3 then we have to do the money draw whit the last_bet there and move to state 2*/
+				this.credits = this.credits - this.lastbet;
+				/*update the statistics because the money draw*/
+				this.game_stats.updateActualCredit(this.credits);
+				this.gamestate = 2;
+			}else{
+				/*if it is oh the gamestate 4 the money draw as already done in bet and we go to gamestate  2*/
+				this.gamestate = 2;
+			}
+			
+			
+			
 			/*update the number of deals in the statisctics*/
 			this.game_stats.addDeal();
 			/*return result of the bet*/
@@ -138,7 +162,7 @@ public class DoubleBonus10_7 implements Videopoker{
 	public Result hold(boolean[] to_hold){
 		
 		/* it can only do hold if the game is in the state 3*/
-		if(this.gamestate == 3){
+		if(this.gamestate == 2){
 			
 			/*only to avoid errors*/
 			if(to_hold.length != 5){
@@ -168,7 +192,7 @@ public class DoubleBonus10_7 implements Videopoker{
 			this.credits = this.credits + aux.payout(this.lastbet);
 			
 			/*update gamestate*/
-			this.gamestate = 1;
+			this.gamestate = 3;
 			
 			/*update statistics*/
 			this.game_stats.updateActualCredit(this.credits);
@@ -312,7 +336,8 @@ public class DoubleBonus10_7 implements Videopoker{
 	
 	public Result advice(){
 		
-		if(this.gamestate != 3){
+		/*if it is not on gamestate 2 then it cannot do advice*/
+		if(this.gamestate !=2){
 			return new Invalid_Result("a: illegal command!",this.credits);
 		}
 		
@@ -520,8 +545,8 @@ public class DoubleBonus10_7 implements Videopoker{
 	}
 	
 	public Result quit(){
-		
-		if(this.gamestate == 1){
+		/*it can only quit if it is in the gamestate 0 or 3*/
+		if(this.gamestate == 3 || this.gamestate == 0){
 		
 		System.out.println("QUIT");
 		System.exit(1);
