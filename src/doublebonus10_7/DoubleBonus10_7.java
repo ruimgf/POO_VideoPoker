@@ -276,7 +276,8 @@ public class DoubleBonus10_7 implements Videopoker{
 					case ACE: 
 						this.game_stats.addFour();
 						return new FinalHand(" Four ACE's", 160);
-					default: ;
+					default:
+						;
 				}
 			}
 		}
@@ -304,7 +305,7 @@ public class DoubleBonus10_7 implements Videopoker{
 			
 			if(aux.NequalValueCards(3, CardValue.parse(i))){
 				this.game_stats.addThree();
-				return new FinalHand(" There of a Kind", 3);
+				return new FinalHand(" There of a Kind" , 3);
 				
 			}
 			

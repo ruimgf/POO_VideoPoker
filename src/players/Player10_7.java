@@ -6,7 +6,6 @@ public abstract class Player10_7 {
 	DoubleBonus10_7 game;
 	
 	public Player10_7(int credits) {
-		// TODO Auto-generated constructor stub
 		this.game = new DoubleBonus10_7(credits);
 	}
 	
@@ -14,28 +13,23 @@ public abstract class Player10_7 {
 	
 	public void Comand (String cmd){
 		
-		int BetValue;
-		int j=0;
-		int index=0;
-		boolean[] hold_cards = new boolean[5];
-	
-		j=1;
 		switch (cmd.charAt(0)) {
 		case 'b':
 			if(cmd.length()>1){
-				BetValue=Integer.parseInt(cmd.substring(1));
+				int BetValue=Integer.parseInt(cmd.substring(1));
 				System.out.println(game.bet(BetValue));
 			}else{
-				
 				System.out.println(game.bet());
 			}
 			break;
 		case 'h':
-			boolean flag = true; // flag to know if there was a error in try
+			boolean[] hold_cards = new boolean[5];
+			boolean flag = true; // flag to know if there was an error on try catch
+			int j = 1;
 			while(j<cmd.length()){
 				flag = false;
 				try {
-					index=Character.getNumericValue(cmd.charAt(j));
+					int index = Character.getNumericValue(cmd.charAt(j));
 					hold_cards[index-1]=true;
 					j++;
 					flag = true;
@@ -64,7 +58,8 @@ public abstract class Player10_7 {
 			System.out.println(game.quit());
 			break;
 		default:
-			System.out.println("Invalid instruction!\n Please insert a command of type: b [amount(1-5)], h [cards to hold], $, d, a, s, q");
+			System.out.println("Invalid instruction!");
+			System.out.println("\n Please insert a command of type: b [amount(1-5)], h [cards to hold], $, d, a, s, q");
 			break;
 		}
 		
