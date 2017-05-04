@@ -34,13 +34,22 @@ public abstract class Player10_7 {
 				System.out.println(game.bet());
 			}
 		}else if(cmd.contains("h")){
+			boolean flag = false; // flag to know if there was a error in try
 			while(j<cmd.length()){
-				index=Character.getNumericValue(cmd.charAt(j));
-				hold_cards[index-1]=true;
-				j++;
+				flag = false;
+				try {
+					index=Character.getNumericValue(cmd.charAt(j));
+					hold_cards[index-1]=true;
+					j++;
+					flag = true;
+				}catch (Exception e) {
+					System.out.println("Invalid card to hold");
+					break;
+				}
+				
 			}
-			
-			System.out.println(game.hold(hold_cards));
+			if(flag == true) 
+				System.out.println(game.hold(hold_cards));
 		}else if(cmd.contains("$")){
 			System.out.println(game.credit());
 		}else if(cmd.contains("d")){
