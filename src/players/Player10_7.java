@@ -19,13 +19,9 @@ public abstract class Player10_7 {
 		int index=0;
 		boolean[] hold_cards = new boolean[5];
 	
-		for(j=0; j<5; j++){
-			hold_cards[j]=false;
-		}
 		j=1;
-		
-		if(cmd.contains("b")){
-			
+		switch (cmd.charAt(0)) {
+		case 'b':
 			if(cmd.length()>1){
 				BetValue=Integer.parseInt(cmd.substring(1));
 				System.out.println(game.bet(BetValue));
@@ -33,7 +29,8 @@ public abstract class Player10_7 {
 				
 				System.out.println(game.bet());
 			}
-		}else if(cmd.contains("h")){
+			break;
+		case 'h':
 			boolean flag = true; // flag to know if there was a error in try
 			while(j<cmd.length()){
 				flag = false;
@@ -50,19 +47,27 @@ public abstract class Player10_7 {
 			}
 			if(flag == true) 
 				System.out.println(game.hold(hold_cards));
-		}else if(cmd.contains("$")){
+			break;
+		case '$' :
 			System.out.println(game.credit());
-		}else if(cmd.contains("d")){
+			break;
+		case 'd':
 			System.out.println(game.deal());
-		}else if(cmd.contains("a")){
-			System.out.println(game.advice());
-		}else if(cmd.contains("s")){
+			break;
+		case 's':
 			System.out.println(game.statistics());
-		}else if(cmd.contains("q")){
-			System.out.println(game.quit());			
-		}else{
-			System.out.println("Invalid instruction!\n Please insert a command of type: b [amount(1-5)], h [cards to hold], $, d, a, s, q");	
-		} 
-		//System.out.println(text);	
+			break;
+		case 'a':
+			System.out.println(game.advice());
+			break;
+		case 'q':
+			System.out.println(game.quit());
+			break;
+		default:
+			System.out.println("Invalid instruction!\n Please insert a command of type: b [amount(1-5)], h [cards to hold], $, d, a, s, q");
+			break;
+		}
+		
+
 	}
 }
