@@ -304,7 +304,7 @@ public class DoubleBonus10_7 implements Videopoker{
 			
 			if(aux.NequalValueCards(3, CardValue.parse(i))){
 				this.game_stats.addThree();
-				return new FinalHand(" Four" + CardValue.parse(i), 3);
+				return new FinalHand(" There of a Kind", 3);
 				
 			}
 			
