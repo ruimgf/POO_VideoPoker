@@ -1,4 +1,4 @@
-package doublebonus10_7;
+package videopoker;
 
 public class Statistics_Result extends Result {
 	Statistics game_stats;

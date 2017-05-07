@@ -1,4 +1,4 @@
-package doublebonus10_7;
+package videopoker;
 
 public class Bet_Result extends Result {
 	

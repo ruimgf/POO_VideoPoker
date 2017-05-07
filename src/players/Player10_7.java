@@ -1,9 +1,10 @@
 package players;
 
 import doublebonus10_7.DoubleBonus10_7;
+import videopoker.Videopoker;
 
 public abstract class Player10_7 {
-	DoubleBonus10_7 game;
+	Videopoker game;
 	
 	public Player10_7(int credits) {
 		// TODO Auto-generated constructor stub

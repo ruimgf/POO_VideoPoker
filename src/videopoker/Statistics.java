@@ -1,4 +1,4 @@
-package doublebonus10_7;
+package videopoker;
 
 /**
  * Class that implements the statisctics of the game, that is , the number of hands of each wining hand and 

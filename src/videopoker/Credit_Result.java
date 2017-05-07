@@ -1,4 +1,4 @@
-package doublebonus10_7;
+package videopoker;
 
 public class Credit_Result extends Result{
 	

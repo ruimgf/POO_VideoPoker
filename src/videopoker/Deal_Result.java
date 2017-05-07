@@ -1,4 +1,4 @@
-package doublebonus10_7;
+package videopoker;
 
 import cards.HandCards;
 
@@ -23,7 +23,7 @@ public class Deal_Result extends Result {
 	
 	@Override
 	public String toString() {
-		return "player's hand: " + this.hand;
+		return "Player's hand: " + this.hand;
 	}
 	
 
