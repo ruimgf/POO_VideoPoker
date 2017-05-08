@@ -1,52 +1,28 @@
 package videopoker;
-
-import cards.HandCards;
  
 /**
- * 
+ * TODO
  * @author Alexandre
- * Abstract Class that returns the result of a play, it can be a bet, hold , credit , deal, advice  and statistics
- * or invalid the plays are to be implemented by subcalss's
- * @see Bet_Result @see Invalid_Result
- *
+ * @see Bet_Result @see Invalid_Result @see Credit_Result @see Advice_Result @see Hold_Result
  */
 public abstract class Result {
 	
-	int credits;
-	HandCards hand;
-	boolean[] holdcards;
-	
-	public boolean[] getHoldcards() {
-		return holdcards;
-	}	
-	
-	public Result(){
+	protected int credits;
 		
-		this.credits = -1;
-		this.hand = null;
-	}
-	
-	
-	// nao sei se gosto de tantos construtores
-	public Result(int credits){
+	/**
+	 * TODO
+	 * @param credits
+	 */
+	Result(int credits){
 		this.credits = credits;
 	}
 	
-	public Result(HandCards hand){
-		this.hand = hand;
-	}
-	
-	public Result(HandCards hand,int credits){
-		this.credits = credits;
-		this.hand = hand;
-	}
-	
-	public int getCredits(){
+	/**
+	 * TODO
+	 * @return
+	 */
+	int getCredits(){
 		return credits;
-	}
-
-	public HandCards getHand(){
-		return hand;
 	}
 	
 }

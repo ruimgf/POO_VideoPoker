@@ -12,7 +12,7 @@ public class OurVideoPokerFile extends OurVideoPoker {
 		
 	}
 	
-	public Result deal(){
+	public Deal_Result deal(){
 		
 
 		if(this.gamestate == 1 || this.gamestate == 3 || this.gamestate == 4){
@@ -50,7 +50,8 @@ public class OurVideoPokerFile extends OurVideoPoker {
 			
 		}
 		
-		return new Invalid_Result("d: illegal command",this.credits);
+		//TODO THROW EXEPTION;
+		return null;
 	}
 
 }

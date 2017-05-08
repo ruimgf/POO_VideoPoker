@@ -1,10 +1,22 @@
 package videopoker;
 
+/**
+ * TODO
+ * @author Alexandre
+ *
+ */
 public class Statistics_Result extends Result {
-	Statistics game_stats;
 	
-	Statistics_Result(Statistics game_stats){
+	protected Statistics game_stats;
+	
+	/**
+	 * TODO
+	 * @param credits
+	 * @param game_stats
+	 */
+	Statistics_Result(int credits, Statistics game_stats){
 		
+		super(credits);
 		this.game_stats = game_stats;
 		
 	}
