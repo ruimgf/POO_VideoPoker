@@ -1,6 +1,15 @@
 package cards;
-
+/**
+ * Exception to take of no more cards in {@link Deck}
+ * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo
+ *
+ */
 public class EndOfDeck extends Throwable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public EndOfDeck() {
 		// TODO Auto-generated constructor stub

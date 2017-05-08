@@ -3,10 +3,24 @@ package cards;
 import java.util.Collections;
 import java.util.LinkedList;
 
-public class Deck {
+/**
+ * Class that represents a Card Deck with Cards of all possible combinations between {@link CardValue} and {@link Suit}
+ * @author rui
+ *
+ */
 
+public class Deck {
+	/**
+	 * List of cards present in deck
+	 */
 	protected LinkedList<Card> cards;
 	
+	
+	/**
+	 * Get first Card of Deck
+	 * @return First card
+	 * @throws EndOfDeck
+	 */
 	public Card get_card() throws EndOfDeck{
 		try {
 			Card aux = cards.pop();
@@ -18,7 +32,10 @@ public class Deck {
 	
 		
 	}
-		
+	/**
+	 * Create a new Deck
+	 * 
+	 */
 	public Deck() {
 		cards = new LinkedList<Card>() ;
 		for (Suit S : Suit.values()){
@@ -29,6 +46,9 @@ public class Deck {
 		Collections.shuffle(cards);
 	}
 	
+	/**
+	 * Shuffle Deck
+	 */
 	public void shuffle(){
 		Collections.shuffle(cards);
 	}
