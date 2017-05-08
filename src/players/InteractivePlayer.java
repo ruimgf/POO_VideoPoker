@@ -17,6 +17,8 @@ public class InteractivePlayer extends Player10_7 {
 	
 	public void Play(){
 		while(true){
+			System.out.print(">> ");
+			System.out.flush();
 			ReadCmd();
 			Comand(cmd);
 		}
@@ -25,9 +27,6 @@ public class InteractivePlayer extends Player10_7 {
 		
 		InteractivePlayer player= new InteractivePlayer(1000);
 		 
-		while(true){
-			player.ReadCmd();
-			player.Comand(player.cmd);
-		}
+		player.Play();
 	}
 }
