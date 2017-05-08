@@ -39,7 +39,9 @@ public class CardAnalizer {
 		int indexValue;
 		Arrays.fill(nSuit,0);
 		Arrays.fill(totalcount,0);
-		Arrays.fill(indexCard,-1);
+		for (int[] row: indexCard)
+		    Arrays.fill(row, -1);
+		
 		
 		
 		for(int i=0; i<hand.length(); i++){
