@@ -23,6 +23,8 @@ import java.awt.Font;
 import java.awt.Cursor;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 public class GuiPlayer extends Player10_7 {
 
@@ -41,9 +43,8 @@ public class GuiPlayer extends Player10_7 {
 	Timer timer;
 	int timerAux=0;
 
-
 	private JLabel credit;
-	private JTable table;
+	JTextArea statistics;
 	
 	/**
 	 * Create the application.
@@ -51,6 +52,7 @@ public class GuiPlayer extends Player10_7 {
 	public GuiPlayer() {
 		super(1000);
 		initialize();
+		
 		message = new JLabel("");
 		message.setBorder(null);
 		message.setHorizontalAlignment(SwingConstants.CENTER);
@@ -113,6 +115,7 @@ public class GuiPlayer extends Player10_7 {
 						btnHold.setEnabled(false);
 						btnAdvice.setEnabled(false);
 						message.setVisible(true);
+						PrintStatistics(game.statistics());
 					}catch(IndexOutOfBoundsException err){
 						btnDeal.setEnabled(false);
 						btnHold.setEnabled(true);
@@ -133,7 +136,7 @@ public class GuiPlayer extends Player10_7 {
 				
             }
 		};
-		timer = new Timer(300, taskPerformer);
+		timer = new Timer(100, taskPerformer);
 		timer.start();
 	}
 	
@@ -226,40 +229,22 @@ public class GuiPlayer extends Player10_7 {
 		}
 	}
 	
-	private void InitializeStatisticsTable(){
-		table = new JTable();
-		table.setForeground(Color.WHITE);
-		table.setShowGrid(false);
-		table.setOpaque(false);
-		table.setFont(new Font("URW Bookman L", Font.BOLD, 12));
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Jacks or Better", new Integer(0)},
-				{"Two Pair", new Integer(0)},
-				{"Straight", new Integer(0)},
-				{"Three of a Kind", new Integer(0)},
-				{"Straight", new Integer(0)},
-				{"Flush", new Integer(0)},
-				{"Full House", new Integer(0)},
-				{"Four of a Kind", new Integer(0)},
-				{"Straight Flush", new Integer(0)},
-				{"Royal Flush", new Integer(0)},
-				{"Other", new Integer(0)},
-				{"Total", new Integer(0)},
-				{"Credit", new String ("CREDITO (%)")},
-			},
-			new String[] {
-				"Hand", "New column"
-			}
-		));
-		
-		table.setBackground(new Color(0,0,0,0));
-		table.setBounds(684, 12, 290, 236);
-		frame.getContentPane().add(table);
+	
+	
+	private void PrintStatistics(Result res){
+		statistics.setText(""+res);
 	}
 	
-	private void UpdateTable(int i){
-		table.getModel().setValueAt("", i,1);
+	private void InitializeStatistics(){
+		statistics= new JTextArea();
+		statistics.setLineWrap(true);
+		statistics.setTabSize(1);
+		statistics.setFont(new Font("Monospaced", Font.BOLD, 10));
+		statistics.setBackground(new Color(0,0,0,0));
+		statistics.setForeground(Color.WHITE);
+		statistics.setEditable(false);
+		statistics.setBounds(685, 24, 287, 222);
+		frame.getContentPane().add(statistics);
 	}
 	
 	private void InitializeCreditMessage(){
@@ -292,7 +277,6 @@ public class GuiPlayer extends Player10_7 {
 				game.bet(betValue);
 				Result res = game.deal();
 				showCards(res);
-
 				credit.setText(game.credit().toString());
 				message.setVisible(false);
 			}
@@ -317,8 +301,6 @@ public class GuiPlayer extends Player10_7 {
 				
 				Result res = game.hold(holdCards);
 				showCards(res);
-
-
 
 			}
 		});
@@ -367,7 +349,8 @@ public class GuiPlayer extends Player10_7 {
 		InitializeChips();
 		InitializeCreditMessage();
 		InitializeButtons();	
-		InitializeStatisticsTable();
+		InitializeStatistics();
+		PrintStatistics(game.statistics());
 	}
 	
 	/**

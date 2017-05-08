@@ -263,7 +263,7 @@ public class CardAnalizer {
 	/**
 	 * Function that analysis if there are N cards of same value
 	 * @param N - Number of cards
-	 * @return
+	 * @return true if there is a N equal value cards
 	 */
 	public boolean NequalValueCards(int N){
 		resetIndexLastClass();
@@ -280,8 +280,8 @@ public class CardAnalizer {
 	}
 	
 	/**
-	 * Function that analyse if there are a Full House
-	 * @return
+	 * Function that analyze if there are a Full House
+	 * @return true if there is a Full House
 	 */
 	public boolean fullHouse(){
 		boolean three = false;
@@ -316,7 +316,7 @@ public class CardAnalizer {
 	/**
 	 * Function that analyze if there are N high cards on HandCards h
 	 * @param N
-	 * @return
+	 * @return true if there is a N High Cards
 	 */
 	public boolean NHighCards(int N){
 		int count=0;
@@ -340,7 +340,7 @@ public class CardAnalizer {
 	
 	/**
 	 * Function that analyze if there is a high pair
-	 * @return
+	 * @return true if there is a High Pair
 	 */
 	public boolean HighPair(){
 		resetIndexLastClass();
@@ -359,7 +359,7 @@ public class CardAnalizer {
 	
 	/**
 	 * Function that analyze if there is a low pair
-	 * @return
+	 * @return true if there is a Low Pair
 	 */
 	public boolean LowPair(){
 		resetIndexLastClass();
@@ -378,7 +378,7 @@ public class CardAnalizer {
 	
 	/**
 	 * Function that analyze if i have a Inside Straight
-	 * @return
+	 * @return true if there is a Inside Straight
 	 */
 	public boolean InsideStraight(){
 		resetIndexLastClass();
@@ -415,7 +415,7 @@ public class CardAnalizer {
 	
 	/**
 	 * Function that analyze if i have a OutSide Straight
-	 * @return
+	 * @return true if there is an OutSideStraight
 	 */
 	public boolean OutsideStraight(){
 		int counter = 0;
@@ -440,7 +440,7 @@ public class CardAnalizer {
 	}
 	/**
 	 * Function that analyze if i have a two Pair
-	 * @return
+	 * @return true if there is a Two Pair
 	 */
 	public boolean TwoPair(){
 		int counter = 0;
@@ -467,7 +467,7 @@ public class CardAnalizer {
 	
 	/**
 	 * Function that analyze if i have a AKQJ suited
-	 * @return
+	 * @return true if there is a AKQJ suited
 	 */
 	public boolean AKQJunsuited(){
 		int JIndex  = CardValue.JACK.intValue();
@@ -497,7 +497,7 @@ public class CardAnalizer {
 	}
 	/**
 	 * Function that analyze if i have a KQJ unsuited
-	 * @return
+	 * @return true if there is a KQJ unsuited
 	 */
 	public boolean KQJunsuited(){
 		int JIndex  = CardValue.JACK.intValue();
@@ -530,7 +530,7 @@ public class CardAnalizer {
 	/**
 	 * Function that sees if a card is an High Card
 	 * @param c
-	 * @return
+	 * @return true if there is a HighCard
 	 */
 	private boolean isaHighCard(Card c){
 		if(c.getValue().intValue() > CardValue.TEN.intValue())
@@ -541,7 +541,7 @@ public class CardAnalizer {
 	
 	/**
 	 * Function that count number of High Cards in vector IndexLastClass
-	 * @return
+	 * @return number of High cards on Index
 	 */
 	private int nrOfHighCardsOnIndex(){
 		int counter =0;
@@ -613,7 +613,7 @@ public class CardAnalizer {
 	
 	/**
 	 * See if there is an Straight Flush type 1
-	 * @return
+	 * @return true if there is an Straight type 1
 	 */
 	public boolean threeToStrType1(){
 		
@@ -626,7 +626,7 @@ public class CardAnalizer {
 	}
 	/**
 	 * See if there is an Straight Flush type 2
-	 * @return
+	 * @return true if there is a Straight type 2
 	 */
 	public boolean threeToStrType2(){
 		
@@ -637,8 +637,8 @@ public class CardAnalizer {
 		return false;
 	}
 	/**
-	 * See if there is an Straight Flush type 1
-	 * @return
+	 * See if there is an Straight Flush type 3
+	 * @return true if there is a Straight type 3
 	 */
 	public boolean threeToStrType3(){
 		
@@ -652,7 +652,7 @@ public class CardAnalizer {
 	
 	/**
 	 * See if there is a 4 to inside Straight with N high Cards
-	 * @return
+	 * @return true if there is a 4 to inside Straight
 	 */
 	public boolean fourInStrWithNHighCards(int N){
 		
@@ -668,7 +668,7 @@ public class CardAnalizer {
 	
 	/**
 	 * See if there is a 3 to Flush with N high Cards
-	 * @return
+	 * @return true if there is a three to Flush with N High Cards
 	 */
 	public boolean threeToFlushWithNHighCards(int N){
 		
