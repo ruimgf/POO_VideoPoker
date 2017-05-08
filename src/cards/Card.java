@@ -15,7 +15,7 @@ public class Card {
 		value = inValue;
 	}
 	
-	public Card(String desc){
+	public Card(String desc) throws InvalidCard{
 		value = CardValue.parse(desc.charAt(0));
 		suit = Suit.parse(desc.charAt(1));
 	}
@@ -118,8 +118,14 @@ public class Card {
 			
 		}
 		
-		Card c2 = new Card("TD");
-		System.out.println("Card new constructor : " +  c2);
+		Card c2;
+		try {
+			c2 = new Card("TD");
+			System.out.println("Card new constructor : " +  c2);
+		} catch (InvalidCard e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 	

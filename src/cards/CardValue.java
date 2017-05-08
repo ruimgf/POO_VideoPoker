@@ -3,7 +3,7 @@ package cards;
 public enum CardValue {
 	TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGTH,NINE,TEN,JACK,QUEEN,KING,ACE;
 	
-	public static CardValue parse(char value) {
+	public static CardValue parse(char value) throws InvalidCard {
 		switch(value) {
 			case '2': return TWO;
 			case '3': return THREE;
@@ -15,10 +15,11 @@ public enum CardValue {
 			case '9': return NINE;
 			case 'T': return TEN;
 			case 'J': return JACK;
-			case 'Q': return QUEEN;
+			case 'Q': return QUEEN; 
 			case 'K': return KING;
 			case 'A': return ACE;
-			default: return TWO; // gerar excepcao
+			default:
+				throw new InvalidCard("Invalid Card Value");
 		}
 	}
 	
@@ -41,7 +42,7 @@ public enum CardValue {
 		}
 	}
 	
-	public static CardValue parse(int value) {
+	public static CardValue parse(int value) throws InvalidCard {
 		switch(value) {
 			case 1: return TWO;
 			case 2: return THREE;
@@ -56,7 +57,8 @@ public enum CardValue {
 			case 11: return QUEEN;
 			case 12: return KING;
 			case 13: return ACE;
-			default: return TWO; // gerar excepcao
+			default: 
+				throw new InvalidCard("Invalid int Value");
 		}
 	}
 	
@@ -75,7 +77,8 @@ public enum CardValue {
 			case QUEEN: return "Q";
 			case KING: return "K";
 			case ACE: return "A";
-			default: return "null"; // gerar expecao
+			default: return "";
+			
 		}
 	}
 

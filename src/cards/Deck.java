@@ -7,12 +7,15 @@ public class Deck {
 
 	protected LinkedList<Card> cards;
 	
-	public Card get_card(){
-		
-		Card aux = cards.pop();
-		cards.addLast(aux);
-		
-		return aux;
+	public Card get_card() throws EndOfDeck{
+		try {
+			Card aux = cards.pop();
+			cards.addLast(aux);
+			return aux;
+		} catch (Exception e) {
+			throw new EndOfDeck("No more cards on Deck");
+		}
+	
 		
 	}
 		

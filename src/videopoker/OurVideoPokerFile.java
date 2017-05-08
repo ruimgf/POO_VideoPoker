@@ -2,11 +2,11 @@ package videopoker;
 
 import cards.Card;
 import cards.DebugDeck;
-import cards.Deck;
+import cards.InvalidCard;
 
 public class OurVideoPokerFile extends OurVideoPoker {
 
-	public OurVideoPokerFile(int credits,String cardfile, VideoPokerVariation variation) {
+	public OurVideoPokerFile(int credits,String cardfile, VideoPokerVariation variation) throws InvalidCard {
 		super(credits,variation);
 		game_deck = new DebugDeck(cardfile);
 		
