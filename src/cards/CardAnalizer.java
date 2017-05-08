@@ -315,7 +315,7 @@ public class CardAnalizer {
 	}
 	/**
 	 * Function that analyze if there are N high cards on HandCards h
-	 * @param N
+	 * @param N Number of High Cards
 	 * @return true if there is a N High Cards
 	 */
 	public boolean NHighCards(int N){
@@ -652,6 +652,7 @@ public class CardAnalizer {
 	
 	/**
 	 * See if there is a 4 to inside Straight with N high Cards
+	 * @param N - Number of High Cards
 	 * @return true if there is a 4 to inside Straight
 	 */
 	public boolean fourInStrWithNHighCards(int N){
@@ -668,6 +669,7 @@ public class CardAnalizer {
 	
 	/**
 	 * See if there is a 3 to Flush with N high Cards
+	 * @param N - Number of High cards
 	 * @return true if there is a three to Flush with N High Cards
 	 */
 	public boolean threeToFlushWithNHighCards(int N){
@@ -682,8 +684,10 @@ public class CardAnalizer {
 		return false;
 	}
 	/**
-	 * See if there the cards of value c1 and c2 of same suite are present
-	 * @return
+	 * See if there the cards of value c1 and c2 of same suit are present
+	 * @param c1 - Card 1
+	 * @param c2 - Card 2
+	 * @return true if there is an card C1 and C2 from same suit
 	 */
 	public boolean C1C2Suited(CardValue c1, CardValue c2){
 		int c1Index = c1.intValue();
@@ -701,8 +705,10 @@ public class CardAnalizer {
 		return false;
 	}
 	/**
-	 * See if there the cards of value c1 and c2 of with diferent suite are present
-	 * @return
+	 * See if the cards of value c1 and c2 of with different suit are present
+	 * @param c1 - Card 1
+	 * @param c2 - Card 2
+	 * @return true if cards of value c1 and c2 of with different suit are present
 	 */
 	public boolean C1C2Unsuited(CardValue c1, CardValue c2){
 		int c1Index = c1.intValue();
@@ -724,7 +730,7 @@ public class CardAnalizer {
 	}
 	/**
 	 * See if there are present two Suited high cards
-	 * @return
+	 * @return true if there is two Suited High Cards
 	 */
 	public boolean twoSuitedHighCards(){
 		resetIndexLastClass();
@@ -748,7 +754,7 @@ public class CardAnalizer {
 	/**
 	 * 
 	 * Return index important in last Classification
-	 * @return
+	 * @return boolean vector with true in positions to hold
 	 */
 	public boolean[]holdCards(){
 		boolean[] ret = new boolean[5];

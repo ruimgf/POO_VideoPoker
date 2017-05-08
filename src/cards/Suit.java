@@ -7,13 +7,13 @@ public enum Suit {
     HEARTS,
     SPADES;
 	
-	public static Suit parse(char Value) {
+	public static Suit parse(char Value) throws InvalidCard {
 		switch(Value) {
 			case 'D': return DIAMONS;
 			case 'C': return CLUBS;
 			case 'H': return HEARTS;
 			case 'S': return SPADES;
-			default: return DIAMONS; // gerar excepcao
+			default: throw new InvalidCard("Invalid Card Suit");
 		}
 	}
 	
@@ -24,7 +24,7 @@ public enum Suit {
 			case CLUBS: return "C";
 			case HEARTS: return "H";
 			case SPADES: return "S";
-			default: return "null";
+			default: return "";
 		}
 	}
 }

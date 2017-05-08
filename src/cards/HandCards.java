@@ -35,8 +35,8 @@ public class HandCards {
 	
 	/**
 	 * method to add a card only - only to debug i think
-	 * @param to_add
-	 * @param index
+	 * @param to_add card to add
+	 * @param index index of card
 	 */
 	public void addCard(Card to_add,int index){
 		
@@ -67,8 +67,8 @@ public class HandCards {
 
 	/**
 	 * method that return the card specified in the index
-	 * @param index
-	 * @return
+	 * @param index index of card to get
+	 * @return Card at index
 	 */
 	public Card getCardN(int index){
 		
@@ -81,7 +81,7 @@ public class HandCards {
 	}
 	/**
 	 * getter method for the game cards
-	 * @return
+	 * @return Game Cards
 	 */
 	public Card[] getGameCards(){
 		
