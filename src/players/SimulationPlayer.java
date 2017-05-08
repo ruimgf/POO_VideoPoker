@@ -13,15 +13,17 @@ public class SimulationPlayer extends Player10_7 {
 		}
 		
 		public void Intructions (int betValue) throws InvalidPlayException{
-			
+		
 			game.bet(betValue);
 			game.deal();
 			game.hold(game.advice().getHoldCards());
 		
+
 		}
 		
 		public void Play () {
 			int currentCredit=0;
+
 			while(numPlays>0 ){
 			
 				try {
@@ -40,6 +42,7 @@ public class SimulationPlayer extends Player10_7 {
 				e.printStackTrace();
 			}
 		} 
+
 		
 		public static void main(String[] args){
 			

@@ -2,18 +2,22 @@ package videopoker;
 
 
 /**
-TODO
- * @author Alexandre
- *
+ * Class that represent the Result of a advice play move in the videopoker machine
+ * @author Alexandre, Rui , Pedro
+ * @see Result
  */
 public class AdviceResult extends Result {
 	
+	/**
+	 * This Result type class have also a boolean field holdcards that is true in the 
+	 * index's of the player hand that are to hold by the advice ruller
+	 */
 	protected boolean[] holdcards;
 
 	/**
-	 * TODO
-	 * @param credits
-	 * @param holdCards
+	 * Constructor for a Advice
+	 * @param credits the credits that the player have after the advice move
+	 * @param holdCards boolean array that is true in the indexs of cards to hold
 	 */
 	public AdviceResult(int credits, boolean[] holdCards) {
 		super(credits);
@@ -21,8 +25,10 @@ public class AdviceResult extends Result {
 	}
 	
 	/**
-	 * TODO
-	 * @return
+	 * Getter method for the boolean array hold_cards - that is the cards that the adviser
+	 * recomends to the player to hold
+	 * @return boolean array that is true in the index's of the hand that are to hold and false
+	 * in the index's that are to discard
 	 */
 	public boolean[] getHoldCards(){
 		return this.holdcards;

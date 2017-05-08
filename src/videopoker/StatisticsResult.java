@@ -1,16 +1,19 @@
 package videopoker;
 
 /**
- * TODO
- * @author Alexandre
+ * Class that represents the result of the Statistics command insert in the videopoker machine
+ * @author Alexandre , Rui , Pedro
  *
  */
 public class StatisticsResult extends Result {
 	
+	/**
+	 * This class have a a object of type Statistics that represent the statistics of the machine when the command is called @see Statistics
+	 */
 	protected Statistics game_stats;
 	
 	/**
-	 * TODO
+	 * Constructor requires the objectt of Statistics of the game at the time that the command is called
 	 * @param credits
 	 * @param game_stats
 	 */
