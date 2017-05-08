@@ -8,7 +8,7 @@ import cards.HandCards;
 
 public class DoubleBonus10_7 implements VideoPokerVariation{
 	
-	private HashMap<String, Integer > PayoutMap = new HashMap<String, Integer>();
+	private HashMap <String, Integer > PayoutMap = new HashMap<String, Integer>();
 	
 	
 	public DoubleBonus10_7(){

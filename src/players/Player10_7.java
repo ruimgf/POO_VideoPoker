@@ -1,14 +1,12 @@
 package players;
 
-import doublebonus10_7.DoubleBonus10_7;
-import videopoker.Videopoker;
+import videopoker.*;
 
 public abstract class Player10_7 {
 	Videopoker game;
 	
 	public Player10_7(int credits) {
-		// TODO Auto-generated constructor stub
-		this.game = new DoubleBonus10_7(credits);
+		this.game = new OurVideoPoker(credits,new DoubleBonus10_7());
 	}
 	
 	abstract void Play();
