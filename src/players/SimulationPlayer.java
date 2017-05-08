@@ -33,7 +33,7 @@ package players;
 		
 		public static void main(String[] args){
 			
-			SimulationPlayer player= new SimulationPlayer(10000,5,10000);
+			SimulationPlayer player= new SimulationPlayer(10000,5,100000);
 			player.Play();
 			
 		}
