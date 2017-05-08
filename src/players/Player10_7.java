@@ -22,8 +22,7 @@ public abstract class Player10_7 {
 					int BetValue=Integer.parseInt(cmd.substring(1));
 				
 					System.out.println(game.bet(BetValue));
-					
-					
+			
 					
 				}else{
 					
@@ -72,7 +71,7 @@ public abstract class Player10_7 {
 				break;
 			}
 		} catch (InvalidPlayException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 

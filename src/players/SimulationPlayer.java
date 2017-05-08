@@ -1,6 +1,8 @@
 package players;
 
-	public class SimulationPlayer extends Player10_7 {
+import videopoker.InvalidPlayException;
+
+public class SimulationPlayer extends Player10_7 {
 		int numPlays;
 		int betValue;
 		
@@ -10,25 +12,33 @@ package players;
 			this.numPlays = numPlays;
 		}
 		
-		public void Intructions (int betValue){
+		public void Intructions (int betValue) throws InvalidPlayException{
 			
 			game.bet(betValue);
 			game.deal();
-			game.hold(game.advice().getHoldcards());
+			game.hold(game.advice().getHoldCards());
 		
 		}
 		
 		public void Play () {
 			int currentCredit=0;
-			while(numPlays>0 && game.credit().getCredits()>0){
-				if((currentCredit=game.credit().getCredits())<betValue){
-					Intructions(currentCredit);
-				}else{
+			while(numPlays>0 ){
+			
+				try {
 					Intructions(betValue);
+					numPlays--;
+				} catch (InvalidPlayException e) {
+					e.printStackTrace();
+					System.exit(-1);
 				}
-				numPlays--;
+				
+				
 			}
-			System.out.println(game.statistics());
+			try {
+				System.out.println(game.statistics());
+			} catch (InvalidPlayException e) {
+				e.printStackTrace();
+			}
 		} 
 		
 		public static void main(String[] args){
