@@ -14,16 +14,11 @@ import cards.HandCards;
  */
 public class DoubleBonus10_7 implements VideoPokerVariation{
 	
-<<<<<<< HEAD
+
 	private HashMap<String, Integer > PayoutMap = new HashMap<String, Integer>();
 	/**
 	 * 
 	 */
-=======
-	private HashMap <String, Integer > PayoutMap = new HashMap<String, Integer>();
-	
-	
->>>>>>> 630f0e590daef580fabfd975a3c6e5c60ac7704f
 	public DoubleBonus10_7(){
 		
 		/*create the payout table and put in the payoutmap the payouttable have the multiplier of each hand
