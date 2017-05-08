@@ -1,5 +1,7 @@
 package videopoker;
- 
+
+import cards.HandCards;
+
 /**
  * TODO
  * @author Alexandre
@@ -25,4 +27,5 @@ public abstract class Result {
 		return credits;
 	}
 	
+	 
 }

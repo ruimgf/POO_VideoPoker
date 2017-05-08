@@ -65,7 +65,7 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 	 * Method that give the hand cards of the game gives the name of the and
 	 * @return a string with the name of the hand according with DoubleBonus10_7
 	 */
-	public String evaluate_hand_name(HandCards hand)
+	public String evaluateHandName(HandCards hand)
 	{
 		analizer.reinitializeCount(hand);
 		/*vector of constants only to check the four of a kind and three of a kind in a four loop*/
@@ -149,7 +149,7 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 	 * @return payout of the bet
 	 */
 	@Override
-	public int get_payout(HandCards hand, int bet) {
+	public int getPayout(HandCards hand, int bet) {
 		
 		analizer.reinitializeCount(hand);
 		/*vector of constants only to check the four of a kind and three of a kind in a four loop*/
@@ -162,7 +162,7 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 			}
 		}
 		
-		return bet * this.PayoutMap.get(this.evaluate_hand_name(hand));
+		return bet * this.PayoutMap.get(this.evaluateHandName(hand));
 		
 		
 		
@@ -170,7 +170,7 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 	}
 
 	@Override
-	public boolean[] evaluate_hand_advice(HandCards hand) {
+	public boolean[] evaluateHandAdvice(HandCards hand) {
 		analizer.reinitializeCount(hand);
 		
 		while(true){

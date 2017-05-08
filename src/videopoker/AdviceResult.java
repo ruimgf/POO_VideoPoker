@@ -6,7 +6,7 @@ TODO
  * @author Alexandre
  *
  */
-public class Advice_Result extends Result {
+public class AdviceResult extends Result {
 	
 	protected boolean[] holdcards;
 
@@ -15,7 +15,7 @@ public class Advice_Result extends Result {
 	 * @param credits
 	 * @param holdCards
 	 */
-	public Advice_Result(int credits, boolean[] holdCards) {
+	public AdviceResult(int credits, boolean[] holdCards) {
 		super(credits);
 		this.holdcards = holdCards;	
 	}

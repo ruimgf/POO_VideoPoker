@@ -51,7 +51,7 @@ public class OurVideoPoker implements Videopoker{
 	 * or bet result if valid
 	 * @param credits int that represent the credits to bet
 	 */
-	public Bet_Result bet(int credits) throws InvalidPlayException{
+	public BetResult bet(int credits) throws InvalidPlayException{
 		/*it can only bet in the gamestate 1*/
 		if(gamestate == 0 || gamestate == 3){
 			
@@ -83,7 +83,7 @@ public class OurVideoPoker implements Videopoker{
 			
 			
 			
-			return new Bet_Result(this.credits,this.lastbet);
+			return new BetResult(this.credits,this.lastbet);
 			
 			
 		}
@@ -97,7 +97,7 @@ public class OurVideoPoker implements Videopoker{
 	 * @return the result of the bet
 	 * @throws InvalidPlayException 
 	 */
-	public Bet_Result bet() throws InvalidPlayException{
+	public BetResult bet() throws InvalidPlayException{
 		
 		return bet(lastbet);	
 		
@@ -109,7 +109,7 @@ public class OurVideoPoker implements Videopoker{
 	 * @return the result of the deal
 	 * @throws InvalidPlayException 
 	 */
-	public Deal_Result deal() throws InvalidPlayException{
+	public DealResult deal() throws InvalidPlayException{
 		
 		/*In gamestate 3 we have to check if the player have money to deal*/
 		if(this.gamestate == 3){
@@ -157,7 +157,7 @@ public class OurVideoPoker implements Videopoker{
 			/*update the number of deals in the statisctics*/
 			this.game_stats.addDeal();
 			/*return result of the bet*/
-			return new Deal_Result(this.game_cards,this.credits);
+			return new DealResult(this.game_cards,this.credits);
 			
 			
 			
@@ -172,7 +172,7 @@ public class OurVideoPoker implements Videopoker{
 	 * are to hold
 	 * @throws InvalidPlayException 
 	 */
-	public Hold_Result hold(boolean[] to_hold) throws InvalidPlayException{
+	public HoldResult hold(boolean[] to_hold) throws InvalidPlayException{
 		
 		/* it can only do hold if the game is in the state 3*/
 		if(this.gamestate == 2){
@@ -203,19 +203,19 @@ public class OurVideoPoker implements Videopoker{
 			}
 			
 			/*analize the players hand*/
-			String finalhand = this.variation.evaluate_hand_name(this.game_cards);
+			String finalhand = this.variation.evaluateHandName(this.game_cards);
 			
 			/*update the credits*/
-			this.credits = this.credits + this.variation.get_payout(this.game_cards,this.lastbet);
+			this.credits = this.credits + this.variation.getPayout(this.game_cards,this.lastbet);
 			
 			/*update gamestate*/
 			this.gamestate = 3;
 			
 			/*update statistics*/
 			this.game_stats.updateActualCredit(this.credits);
-			this.game_stats.update_hand_stats(this.variation.evaluate_hand_name(this.game_cards));
+			this.game_stats.update_hand_stats(this.variation.evaluateHandName(this.game_cards));
 			/*return the result of the play*/
-			return new Hold_Result(this.game_cards,this.credits,finalhand);	
+			return new HoldResult(this.game_cards,this.credits,finalhand);	
 			
 		}
 		
@@ -225,26 +225,26 @@ public class OurVideoPoker implements Videopoker{
 	
 	
 		
-	public Credit_Result credit(){
+	public CreditResult credit(){
 		
-		return new Credit_Result(this.credits);
+		return new CreditResult(this.credits);
 		
 	}
 	
-	public Advice_Result advice() throws InvalidPlayException{
+	public AdviceResult advice() throws InvalidPlayException{
 		
 		/*if it is not on gamestate 2 then it cannot do advice*/
 		if(this.gamestate !=2){
 			throw new InvalidPlayException("a: illegal command");
 		}
 		
-		return new Advice_Result(this.credits,variation.evaluate_hand_advice(this.game_cards));
+		return new AdviceResult(this.credits,variation.evaluateHandAdvice(this.game_cards));
 		
 	}
 	
-	public Statistics_Result statistics(){
+	public StatisticsResult statistics(){
 		
-		return new Statistics_Result(this.credits,this.game_stats);
+		return new StatisticsResult(this.credits,this.game_stats);
 		
 	}
 	

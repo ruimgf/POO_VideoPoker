@@ -5,7 +5,7 @@ package videopoker;
  * @author Alexandre
  *
  */
-public class Bet_Result extends Result {
+public class BetResult extends Result {
 	
 	int bet;
 	
@@ -14,7 +14,7 @@ public class Bet_Result extends Result {
 	 * @param credits
 	 * @param bet
 	 */
-	public Bet_Result(int credits,int bet){
+	public BetResult(int credits,int bet){
 		
 		super(credits);
 		

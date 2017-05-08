@@ -9,14 +9,20 @@ import java.util.Comparator;
  */
 public class CardAnalizer {
 	/**
-	 * Hand to analise
+	 * Hand to analize
 	 */
-	private HandCards h;
-	// index i,j of vector count is -1 if card j of suit i don't exist in h or is equal to index of card i,j on hand
+	private HandCards hand;
+	/**
+	 *  index i,j of vector count is -1 if card j of suit i don't exist in h or is equal to index of card i,j on hand
+	 */
 	private int [][] indexCard = new int[4][14];
-	// total count of card of value i on h
+	/**
+	 *  total count of card of value i on hand
+	 */
 	private int [] totalcount = new int[14];
-	// number of cards of suit n on h
+	/**
+	 *  number of cards of suit n on hand
+	 */
 	private int [] nSuit = new int[4];
 	// analised cards
 	
@@ -26,8 +32,8 @@ public class CardAnalizer {
 	 * Reinitialize count and Analyze other hand
 	 * @param h
 	 */
-	public void reinitializeCount(HandCards h){
-		this.h = h;
+	public void reinitializeCount(HandCards hand){
+		this.hand = hand;
 		
 		int indexSuit;
 		int indexValue;
@@ -36,8 +42,8 @@ public class CardAnalizer {
 		Arrays.fill(indexCard,-1);
 		
 		
-		for(int i=0; i<h.length(); i++){
-			Card temp = h.getCardN(i);
+		for(int i=0; i<hand.length(); i++){
+			Card temp = hand.getCardN(i);
 			
 			switch (temp.getSuit()) {
 			case DIAMONS:
@@ -535,7 +541,7 @@ public class CardAnalizer {
 		for(int i=0; i < IndexLastClass.length; i++){
 			if(IndexLastClass[i]==-1)
 				break;
-			if(isaHighCard(h.getCardN(IndexLastClass[i]))){
+			if(isaHighCard(hand.getCardN(IndexLastClass[i]))){
 				counter++;
 			}
 		}
@@ -558,7 +564,7 @@ public class CardAnalizer {
 		int count=0;
 		for (int i = 0; i < IndexLastClass.length; i++) {
 			if(IndexLastClass[i]!=-1){
-				c[count] = h.getCardN(IndexLastClass[i]);
+				c[count] = hand.getCardN(IndexLastClass[i]);
 				count++;
 			}
 		}

@@ -7,14 +7,14 @@ import cards.HandCards;
  * @author Alexandre
  *
  */
-public class Deal_Result extends ResultWithHand {
+public class DealResult extends ResultWithHand {
 
 	/**
 	 * TODO
 	 * @param hand
 	 * @param credits
 	 */
-	Deal_Result(HandCards hand,int credits){
+	DealResult(HandCards hand,int credits){
 		
 		super(credits,hand);
 		

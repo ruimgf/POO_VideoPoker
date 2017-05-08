@@ -4,9 +4,9 @@ package videopoker;
  * @author Alexandre
  *
  */
-public class Credit_Result extends Result{
+public class CreditResult extends Result{
 	
-	Credit_Result(int credits){
+	CreditResult(int credits){
 		
 		super(credits);
 		

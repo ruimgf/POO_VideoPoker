@@ -10,7 +10,10 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import cards.HandCards;
+import videopoker.DealResult;
+import videopoker.InvalidPlayException;
 import videopoker.Result;
+import videopoker.ResultWithHand;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -85,7 +88,7 @@ public class GuiPlayer extends Player10_7 {
 	* @param res o que recebes
 	*
 	*/
-	private void showCards(Result res){
+	private void showCards(ResultWithHand res){
 		HandCards h = res.getHand();
 		btnDeal.setEnabled(false);
 		btnHold.setEnabled(false);
@@ -115,7 +118,12 @@ public class GuiPlayer extends Player10_7 {
 						btnHold.setEnabled(false);
 						btnAdvice.setEnabled(false);
 						message.setVisible(true);
-						PrintStatistics(game.statistics());
+						try {
+							PrintStatistics(game.statistics());
+						} catch (InvalidPlayException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}catch(IndexOutOfBoundsException err){
 						btnDeal.setEnabled(false);
 						btnHold.setEnabled(true);
@@ -275,7 +283,7 @@ public class GuiPlayer extends Player10_7 {
 			public void actionPerformed(ActionEvent e) {
 				Arrays.fill(holdCards,false);
 				game.bet(betValue);
-				Result res = game.deal();
+				DealResult res = game.deal();
 				showCards(res);
 				credit.setText(game.credit().toString());
 				message.setVisible(false);
@@ -299,7 +307,7 @@ public class GuiPlayer extends Player10_7 {
 		btnHold.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Result res = game.hold(holdCards);
+				HoldResult res = game.hold(holdCards);
 				showCards(res);
 
 			}

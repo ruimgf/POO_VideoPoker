@@ -7,7 +7,7 @@ import cards.HandCards;
  * @author Alexandre
  *
  */
-public class Hold_Result extends ResultWithHand{
+public class HoldResult extends ResultWithHand{
 	
 	protected String finalhand;
 	
@@ -17,7 +17,7 @@ public class Hold_Result extends ResultWithHand{
 	 * @param credits
 	 * @param finalhand
 	 */
-	public Hold_Result(HandCards hand, int credits , String finalhand){
+	public HoldResult(HandCards hand, int credits , String finalhand){
 		
 		super(credits,hand);
 		

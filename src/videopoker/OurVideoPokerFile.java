@@ -13,7 +13,7 @@ public class OurVideoPokerFile extends OurVideoPoker {
 		
 	}
 	
-	public Deal_Result deal() throws InvalidPlayException{
+	public DealResult deal() throws InvalidPlayException{
 		
 		/*In gamestate 3 we have to check if the player have money to deal*/
 		if(this.gamestate == 3){
@@ -60,7 +60,7 @@ public class OurVideoPokerFile extends OurVideoPoker {
 			/*update the number of deals in the statisctics*/
 			this.game_stats.addDeal();
 			/*return result of the bet*/
-			return new Deal_Result(this.game_cards,this.credits);
+			return new DealResult(this.game_cards,this.credits);
 			
 			
 			

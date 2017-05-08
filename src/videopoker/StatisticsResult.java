@@ -5,7 +5,7 @@ package videopoker;
  * @author Alexandre
  *
  */
-public class Statistics_Result extends Result {
+public class StatisticsResult extends Result {
 	
 	protected Statistics game_stats;
 	
@@ -14,7 +14,7 @@ public class Statistics_Result extends Result {
 	 * @param credits
 	 * @param game_stats
 	 */
-	Statistics_Result(int credits, Statistics game_stats){
+	StatisticsResult(int credits, Statistics game_stats){
 		
 		super(credits);
 		this.game_stats = game_stats;
