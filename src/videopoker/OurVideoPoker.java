@@ -242,11 +242,7 @@ public class OurVideoPoker implements Videopoker{
 		return new Invalid_Result("q: illegal command!",this.credits);
 	}
 	
-	
-	/**
-	 * MAIN METHOD USED TO TEST THIS CLASS
-	 * @param args
-	 */
+
 	public static void main(String[] args) {
 		
 		DoubleBonus10_7 variation = new DoubleBonus10_7();
