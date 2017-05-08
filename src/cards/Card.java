@@ -1,20 +1,24 @@
 
 package cards;
 
-import jdk.Exported;
-
 /**
  * Class that represents a card
- * @author Rui Figueiredo, Pedro Martinho, Alexandre Candeias
+ * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo 
  */
 
 public class Card {
-	
-	protected final Suit suit; 
+	/**
+	 * Suit of card
+	 */
+	protected final Suit suit;
+	/**
+	 * Value of card
+	 */
 	protected final CardValue value;
+	
 
 	/**
-	 * 
+	 * Construct with {@link cards.Suit enum Suit} and {@link cards.CardValue enum Card Value}
 	 * @param inSuit Suit of Card
 	 * @param inValue Value of Card
 	 */

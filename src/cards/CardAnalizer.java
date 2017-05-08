@@ -4,39 +4,35 @@ import java.util.Arrays;
 import java.util.Comparator;
 /**
  * Class that permits analyze one HandCards 
- * @author rui
+ * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo
  *
  */
 public class CardAnalizer {
-	// index i,j of vector count is -1 if card j of suit i don't exist in h or is equal to index of card i,j on hand
-	private int [][] indexCard;
-	// total count of card of value i on h
-	private int [] totalcount;
-	// number of cards of suit n on h
-	private int [] nSuit;
-	// analised cards
+	/**
+	 * Hand to analise
+	 */
 	private HandCards h;
-	private int [] IndexLastClass; // Important indexes used in last classification
+	// index i,j of vector count is -1 if card j of suit i don't exist in h or is equal to index of card i,j on hand
+	private int [][] indexCard = new int[4][14];
+	// total count of card of value i on h
+	private int [] totalcount = new int[14];
+	// number of cards of suit n on h
+	private int [] nSuit = new int[4];
+	// analised cards
 	
+	private int [] IndexLastClass  = new int[5]; // Important indexes used in last classification
 	
 	/**
-	 * Construct a card analyzer, make all counts to make more easy to analyze
-	 * 
-	 * 
-	 * @param h - hand to analyze
+	 * Reinitialize count and Analyze other hand
+	 * @param h
 	 */
-	public CardAnalizer(HandCards h){
+	public void reinitializeCount(HandCards h){
 		this.h = h;
-		
-		indexCard = new int[4][14];
-		totalcount = new int[14];
-		nSuit = new int[4];
-		
-		IndexLastClass = new int[5];
 		
 		int indexSuit;
 		int indexValue;
-		
+		Arrays.fill(nSuit,0);
+		Arrays.fill(totalcount,0);
 		Arrays.fill(indexCard,-1);
 		
 		
@@ -83,9 +79,7 @@ public class CardAnalizer {
 	 * Reinitialize vector that save important indexes
 	 */
 	private void resetIndexLastClass(){
-		for (int i = 0; i < IndexLastClass.length; i++) {
-			IndexLastClass[i] = -1;
-		}
+		Arrays.fill(IndexLastClass, -1);
 	}
 	
 	/**
@@ -784,8 +778,8 @@ public class CardAnalizer {
 		}
 		
 		System.out.println("");
-		analise = new CardAnalizer(h);
-		
+		analise = new CardAnalizer();
+		analise.reinitializeCount(h);
 		if(analise.NFlush(5)){
 			System.out.println("N Flush");
 			analise.printHoldIndex();
