@@ -1,16 +1,23 @@
 package videopoker;
 
 import java.util.HashMap;
-
 import cards.CardAnalizer;
 import cards.CardValue;
 import cards.HandCards;
 
+
+/**
+ * Class that implements the DoubleBonus10_7 variation of videopoker game
+ * It implements all the methods specified in the VideoPOkerVariation interface
+ * @author Alexandre
+ *
+ */
 public class DoubleBonus10_7 implements VideoPokerVariation{
 	
 	private HashMap<String, Integer > PayoutMap = new HashMap<String, Integer>();
-	
-	
+	/**
+	 * 
+	 */
 	public DoubleBonus10_7(){
 		
 		/*create the payout table and put in the payoutmap the payouttable have the multiplier of each hand

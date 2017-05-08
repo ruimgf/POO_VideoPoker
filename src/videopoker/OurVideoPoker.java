@@ -194,6 +194,7 @@ public class OurVideoPoker implements Videopoker{
 			/*update statistics*/
 			this.game_stats.updateActualCredit(this.credits);
 			//TODO update the hands table of statistics
+			this.game_stats.update_hand_stats(this.variation.evaluate_hand_name(this.game_cards));
 			/*return the result of the play*/
 			return new Hold_Result(this.game_cards,this.credits,finalhand);	
 			
