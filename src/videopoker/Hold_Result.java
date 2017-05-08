@@ -1,19 +1,25 @@
 package videopoker;
 
 import cards.HandCards;
+
 /**
- * Class that extends the results for a hold result - a hold result has a final hand that the player hand with 
- * the information if it wins or not
+ * TODO
  * @author Alexandre
  *
  */
-public class Hold_Result extends Result{
+public class Hold_Result extends ResultWithHand{
 	
-	private String finalhand;
+	protected String finalhand;
 	
-	public Hold_Result(HandCards player_cards, int credits , String finalhand){
+	/**
+	 * TODO
+	 * @param hand
+	 * @param credits
+	 * @param finalhand
+	 */
+	public Hold_Result(HandCards hand, int credits , String finalhand){
 		
-		super(player_cards,credits);
+		super(credits,hand);
 		
 		this.finalhand = finalhand;
 		

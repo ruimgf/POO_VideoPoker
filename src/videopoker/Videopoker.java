@@ -1,12 +1,13 @@
 package videopoker;
 
+
 public interface Videopoker {
-	public Result bet(int credits);
-	public Result bet();
-	public Result credit();
-	public Result deal();
-	public Result hold(boolean[] indexs);
-	public Result advice();
-	public Result statistics();	
-	public Result quit();
+	public Bet_Result bet(int credits) throws InvalidPlayException;
+	public Bet_Result bet() throws InvalidPlayException;
+	public Credit_Result credit() throws InvalidPlayException;
+	public Deal_Result deal() throws InvalidPlayException;
+	public Hold_Result hold(boolean[] indexs) throws InvalidPlayException;
+	public Advice_Result advice() throws InvalidPlayException;
+	public Statistics_Result statistics() throws InvalidPlayException;	
+	public void quit() throws InvalidPlayException;
 }

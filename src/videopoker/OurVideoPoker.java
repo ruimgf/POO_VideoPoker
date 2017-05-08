@@ -3,6 +3,7 @@ package videopoker;
 
 import cards.Card;
 import cards.Deck;
+import cards.EndOfDeck;
 import cards.HandCards;
 /**
  * Class that implements the videopoker interface, this class needs a 
@@ -50,20 +51,21 @@ public class OurVideoPoker implements Videopoker{
 	 * or bet result if valid
 	 * @param credits int that represent the credits to bet
 	 */
-	public Result bet(int credits){
+	public Bet_Result bet(int credits) throws InvalidPlayException{
 		/*it can only bet in the gamestate 1*/
 		if(gamestate == 0 || gamestate == 3){
 			
+			/*checks if that it can bet or have sufficient credits*/
 			if(credits <0 || credits >5){
-				return new Invalid_Result("Invalid number of credits to bet!",this.credits);
+				throw new InvalidPlayException("b: illegal command, please make a bet in the range [1,5]");
 			}
 			if(this.credits == 0){
-				return new Invalid_Result("No more credits please quit!",this.credits);
+				throw new InvalidPlayException("b: illegal command, player without credits");
 			}
 			
 			if(this.credits-credits < 0){
 				/*player cannot bet*/
-				return new Invalid_Result("Illegal amount",this.credits);
+				throw new InvalidPlayException("b: illegal command, player without credits for that bet");
 			}			
 			
 			this.credits = this.credits - credits;
@@ -84,22 +86,20 @@ public class OurVideoPoker implements Videopoker{
 			return new Bet_Result(this.credits,this.lastbet);
 			
 			
-		}else{
-			
-			return new Invalid_Result("b: illegal command",this.credits);
-			
 		}
+			
+		throw new InvalidPlayException("b: illegal command");
 		
 	}
 
 	/**
 	 * Method to handle the bet with no args, default behavior is to bet the last valid bet
 	 * @return the result of the bet
+	 * @throws InvalidPlayException 
 	 */
-	public Result bet(){
+	public Bet_Result bet() throws InvalidPlayException{
 		
-		return bet(lastbet);
-		
+		return bet(lastbet);	
 		
 	}
 	
@@ -107,8 +107,21 @@ public class OurVideoPoker implements Videopoker{
 	 * method that implements the deal in the interface, return a Deal_Result with the info with the cards that
 	 * have been given to the player
 	 * @return the result of the deal
+	 * @throws InvalidPlayException 
 	 */
-	public Result deal(){
+	public Deal_Result deal() throws InvalidPlayException{
+		
+		/*In gamestate 3 we have to check if the player have money to deal*/
+		if(this.gamestate == 3){
+			if(this.credits == 0){
+				throw new InvalidPlayException("d: illegal command, player without credits");
+			}
+			
+			if(this.credits-credits < 0){
+				/*player cannot bet*/
+				throw new InvalidPlayException("d: illegal command, player without credits for that bet");
+			}			
+		}
 		
 		if(this.gamestate == 1 || this.gamestate == 3 || this.gamestate == 4){
 			
@@ -116,7 +129,11 @@ public class OurVideoPoker implements Videopoker{
 			/*pick 5 cards*/
 			Card[] aux = new Card[5];
 			for(int i=0;i<5;i++){
-				aux[i] = this.game_deck.get_card();
+				try {
+					aux[i] = this.game_deck.get_card();
+				} catch (EndOfDeck e) {
+					throw new InvalidPlayException( e.getMessage());
+				}
 			}
 			/*pass cards to the player hand*/
 			this.game_cards.newCards(aux);
@@ -146,24 +163,23 @@ public class OurVideoPoker implements Videopoker{
 			
 		}
 		
-		return new Invalid_Result("d: illegal command",this.credits);
-		
-		
+		throw new InvalidPlayException("d: illegal command");		
 	}
 
 	/**
 	 * method that implements the hold play.
 	 * @param to_hold - boolean array with false in the index that are not to hold and true in the ones that
 	 * are to hold
+	 * @throws InvalidPlayException 
 	 */
-	public Result hold(boolean[] to_hold){
+	public Hold_Result hold(boolean[] to_hold) throws InvalidPlayException{
 		
 		/* it can only do hold if the game is in the state 3*/
 		if(this.gamestate == 2){
 			
 			/*only to avoid errors*/
 			if(to_hold.length != 5){
-				return new Invalid_Result("h: illegal command - error in hold",this.credits);
+				throw new InvalidPlayException("ERROR: ARRAY OF HOLD DONT HAVE 5 FIELDS");
 			}
 			
 			/*keep the cards that are to hold and give new cards to the player, only at the ones that it dont 
@@ -176,7 +192,11 @@ public class OurVideoPoker implements Videopoker{
 					/*if the card is to modify : ask a new card from the deck and change the index i of the
 					 * game cards
 					 */
-					this.game_cards.modifyCard(this.game_deck.get_card(), i);
+					try {
+						this.game_cards.modifyCard(this.game_deck.get_card(), i);
+					} catch (EndOfDeck e) {
+						throw new InvalidPlayException(e.getMessage());						
+					}
 					
 				}
 				
@@ -193,7 +213,6 @@ public class OurVideoPoker implements Videopoker{
 			
 			/*update statistics*/
 			this.game_stats.updateActualCredit(this.credits);
-			//TODO update the hands table of statistics
 			this.game_stats.update_hand_stats(this.variation.evaluate_hand_name(this.game_cards));
 			/*return the result of the play*/
 			return new Hold_Result(this.game_cards,this.credits,finalhand);	
@@ -201,49 +220,47 @@ public class OurVideoPoker implements Videopoker{
 		}
 		
 		/*if not in the right game state*/
-		return new Invalid_Result("h: illegal command",this.credits);
-		
+		throw new InvalidPlayException("h: illegal command");
 	}
 	
 	
 		
-	public Result credit(){
+	public Credit_Result credit(){
 		
 		return new Credit_Result(this.credits);
 		
 	}
 	
-	public Result advice(){
+	public Advice_Result advice() throws InvalidPlayException{
 		
 		/*if it is not on gamestate 2 then it cannot do advice*/
 		if(this.gamestate !=2){
-			return new Invalid_Result("a: illegal command!",this.credits);
+			throw new InvalidPlayException("a: illegal command");
 		}
 		
-		return new Advice_Result(variation.evaluate_hand_advice(this.game_cards));
+		return new Advice_Result(this.credits,variation.evaluate_hand_advice(this.game_cards));
 		
 	}
 	
-	public Result statistics(){
+	public Statistics_Result statistics(){
 		
-		return new Statistics_Result(this.game_stats);
+		return new Statistics_Result(this.credits,this.game_stats);
 		
 	}
 	
-	public Result quit(){
+	public void quit() throws InvalidPlayException{
 		/*it can only quit if it is in the gamestate 0 or 3*/
 		if(this.gamestate == 3 || this.gamestate == 0){
 		
 		System.out.println("QUIT");
 		System.exit(1);
-		return new Invalid_Result("No more credits please quit!",this.credits);
 		}
 		
-		return new Invalid_Result("q: illegal command!",this.credits);
+		throw new InvalidPlayException("q: illegal command");
 	}
 	
 
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		
 		DoubleBonus10_7 variation = new DoubleBonus10_7();
 		OurVideoPoker jogo = new OurVideoPoker(10000,variation);
@@ -254,19 +271,23 @@ public class OurVideoPoker implements Videopoker{
 		to_hold[3] = true;
 		to_hold[4] = false;
 		
-		System.out.println(jogo.hold(to_hold));
-		System.out.println(jogo.credit());
-		System.out.println(jogo.bet());
-		System.out.println(jogo.credit());
-		System.out.println(jogo.hold(to_hold));
-		System.out.println(jogo.credit());
-		System.out.println(jogo.deal());
-		System.out.println(jogo.credit());
-		System.out.println(jogo.bet());
-		System.out.println(jogo.hold(to_hold));
-		System.out.println(jogo.deal());
-		System.out.println(jogo.bet());
-		System.out.println(jogo.deal());
+		
+		try {
+			System.out.println(jogo.bet()+"");
+		} catch (InvalidPlayException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		try {
+			System.out.println(jogo.bet()+"");
+		} catch (InvalidPlayException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
+		
+		
+		
+		
 	}
 	
 

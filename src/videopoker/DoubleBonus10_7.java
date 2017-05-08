@@ -4,6 +4,7 @@ import java.util.HashMap;
 import cards.CardAnalizer;
 import cards.CardValue;
 import cards.HandCards;
+import cards.InvalidCard;
 
 
 /**
@@ -28,17 +29,32 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 		PayoutMap.put("Straight Flush", 50);
 		PayoutMap.put("Four "+CardValue.ACE, 160);
 		for(int i=1; i<4 ; i++){
-			PayoutMap.put("Four "+CardValue.parse(i), 80);
+			try {
+				PayoutMap.put("Four "+CardValue.parse(i), 80);
+			} catch (InvalidCard e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		for(int i=4;i<13;i++){
-			PayoutMap.put("Four "+CardValue.parse(i), 50);
+			try {
+				PayoutMap.put("Four "+CardValue.parse(i), 50);
+			} catch (InvalidCard e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		PayoutMap.put("Full House",10);
 		PayoutMap.put("Flush",7);
 		PayoutMap.put("Straight",5);
 		for(int i=1;i<14;i++){
-			PayoutMap.put("Three "+CardValue.parse(i), 3);
+			try {
+				PayoutMap.put("Three "+CardValue.parse(i), 3);
+			} catch (InvalidCard e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		PayoutMap.put("Two Pair",1);
 		PayoutMap.put("Jacks or Better",1);
@@ -72,10 +88,15 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 		/*check if 4 equal cards*/
 		for(int i=1;i<14;i++){
 			
-			if(aux.NequalValueCards(4, CardValue.parse(i))){
-				
-				return "Four " + CardValue.parse(i);
-				
+			try {
+				if(aux.NequalValueCards(4, CardValue.parse(i))){
+					
+					return "Four " + CardValue.parse(i);
+					
+				}
+			} catch (InvalidCard e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		
@@ -97,9 +118,14 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 		/*check if 3 equal cards*/
 		for(int i=1;i<14;i++){
 			
-			if(aux.NequalValueCards(3, CardValue.parse(i))){
-				return "Three " + CardValue.parse(i);
-				
+			try {
+				if(aux.NequalValueCards(3, CardValue.parse(i))){
+					return "Three " + CardValue.parse(i);
+					
+				}
+			} catch (InvalidCard e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 			
 		}

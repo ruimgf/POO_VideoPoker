@@ -1,13 +1,33 @@
 package videopoker;
 
 
-
+/**
+TODO
+ * @author Alexandre
+ *
+ */
 public class Advice_Result extends Result {
+	
+	protected boolean[] holdcards;
 
-	public Advice_Result(boolean[] holdCards) {
-		// TODO Auto-generated constructor stub
-		this.holdcards = holdCards;
+	/**
+	 * TODO
+	 * @param credits
+	 * @param holdCards
+	 */
+	public Advice_Result(int credits, boolean[] holdCards) {
+		super(credits);
+		this.holdcards = holdCards;	
 	}
+	
+	/**
+	 * TODO
+	 * @return
+	 */
+	public boolean[] getHoldCards(){
+		return this.holdcards;
+	}
+
 	
 	public String toString() {
 		String str; // left see case when is to discard everything
