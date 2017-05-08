@@ -1,10 +1,10 @@
 package players;
 import java.util.*;
 
-import doublebonus10_7.DebugDoubleBonus10_7;
+import videopoker.DoubleBonus10_7;
+import videopoker.OurVideoPokerFile;
 
 import java.io.*;
-
 
 public class DebugPlayer extends Player10_7 {
 	
@@ -13,7 +13,7 @@ public class DebugPlayer extends Player10_7 {
 	public DebugPlayer(int credits, String cmdfile,String cardfile) {
 		// TODO Auto-generated constructor stub
 		super(credits);
-		game = new DebugDoubleBonus10_7(credits,cardfile);
+		game = new OurVideoPokerFile(credits,cardfile, new DoubleBonus10_7());
 		try {
 			ReadCmds(cmdfile);
 		} catch (IOException e) {

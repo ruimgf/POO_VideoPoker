@@ -51,6 +51,7 @@ public class Main {
 				player = new InteractivePlayer(Integer.parseInt(args[1]));
 				break;
 			case "-g":
+				player = new GuiPlayer();
 				break;
 			default:
 				System.out.println("Wrong usage");

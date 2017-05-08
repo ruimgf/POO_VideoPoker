@@ -1,12 +1,13 @@
 package players;
 
-import doublebonus10_7.DoubleBonus10_7;
+import videopoker.*;
 
 public abstract class Player10_7 {
-	DoubleBonus10_7 game;
+	Videopoker game;
 	
 	public Player10_7(int credits) {
-		this.game = new DoubleBonus10_7(credits);
+		this.game = new OurVideoPoker(credits,new DoubleBonus10_7());
+
 	}
 	
 	abstract void Play();
