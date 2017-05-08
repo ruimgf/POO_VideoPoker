@@ -127,7 +127,7 @@ public class CardAnalizer {
 	 * 
 	 * 
 	 * @param N - number of cards that i have to a Straight
-	 * @return
+	 * @return true if is a NStraight
 	 */
 	public boolean NStraight(int N){
 		int countToStr = 0;
@@ -160,7 +160,7 @@ public class CardAnalizer {
 	 * 
 	 * 
 	 * @param N - number of cards that i have to a flush
-	 * @return
+	 * @return true if is a NFlush
 	 */
 	public boolean NFlush(int N){
 		resetIndexLastClass();
@@ -184,7 +184,7 @@ public class CardAnalizer {
 	 * 
 	 * 
 	 * @param N - number of cards that i have to a Straight Flush
-	 * @return
+	 * @return true if is a NStrFlush
 	 */
 	public boolean NtoStrFlush(int N){
 		int counter = 0;
@@ -218,7 +218,7 @@ public class CardAnalizer {
 	 * 
 	 * 
 	 * @param N - number of cards that i have to a Royal Flush
-	 * @return
+	 * @return true if is a NtoRoyalFlush
 	 */
 	public boolean NtoRoyalFlush(int N){
 		int counter = 0;
@@ -247,7 +247,7 @@ public class CardAnalizer {
 	 * 
 	 * @param N - Number of cards
 	 * @param v - value of card
-	 * @return
+	 * @return true if there is a N equal value cards
 	 */
 	public boolean NequalValueCards(int N,CardValue v){
 		resetIndexLastClass();
