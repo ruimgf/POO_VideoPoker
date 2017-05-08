@@ -3,17 +3,17 @@ package cards;
 import java.util.Arrays;
 import java.util.Comparator;
 /**
- * Class that permits analyze one HandCards 
+ * Class that permits analyze one {@link HandCards HandCards} 
  * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo
  *
  */
 public class CardAnalizer {
 	/**
-	 * Hand to analize
+	 * Hand to analyze
 	 */
 	private HandCards hand;
 	/**
-	 *  index i,j of vector count is -1 if card j of suit i don't exist in h or is equal to index of card i,j on hand
+	 *  index i,j of vector count is -1 if card j of suit i don't exist in hand or is equal to index of card i,j on hand
 	 */
 	private int [][] indexCard = new int[4][14];
 	/**
@@ -21,16 +21,18 @@ public class CardAnalizer {
 	 */
 	private int [] totalcount = new int[14];
 	/**
-	 *  number of cards of suit n on hand
+	 *  number of cards of suit i on hand
 	 */
 	private int [] nSuit = new int[4];
-	// analised cards
-	
-	private int [] IndexLastClass  = new int[5]; // Important indexes used in last classification
+
+	/**
+	 *  Important indexes used in last classification
+	 */
+	private int [] IndexLastClass  = new int[5]; 
 	
 	/**
 	 * Reinitialize count and Analyze other hand
-	 * @param h
+	 * @param hand hand to analyze
 	 */
 	public void reinitializeCount(HandCards hand){
 		this.hand = hand;
@@ -116,7 +118,7 @@ public class CardAnalizer {
 		System.out.println("");
 	}
 	/**
-	 * Function that analysis if there is N cards to a Straight
+	 * Function that analysis if there are N cards to a Straight
 	 * 
 	 * Example: If i want to know if i have a straight, make N = 5
 	 * 
@@ -149,7 +151,7 @@ public class CardAnalizer {
 	}
 	
 	/**
-	 * Function that analysis if there is N cards to a Flush
+	 * Function that analysis if there are N cards to a Flush
 	 * 
 	 * Example: If i want to know if i have a Flush, make N = 5
 	 * 
@@ -173,7 +175,7 @@ public class CardAnalizer {
 		return false;
 	}
 	/**
-	 * Function that analysis if there is N cards to a Straight Flush
+	 * Function that analysis if there are N cards to a Straight Flush
 	 * 
 	 * Example: If i want to know if i have a straight Flush, make N = 5
 	 * 
@@ -207,7 +209,7 @@ public class CardAnalizer {
 		return false;
 	}
 	/**
-	 * Function that analysis if there is N cards to a Royal Flush
+	 * Function that analysis if there are N cards to a Royal Flush
 	 * 
 	 * Example: If i want to know if i have a Royal Flush, make N = 5
 	 * 
@@ -372,7 +374,7 @@ public class CardAnalizer {
 	
 	
 	/**
-	 * Function that analyze if i have a Inside Straight
+	 * Function that analyze if hand have a Inside Straight
 	 * @return true if there is a Inside Straight
 	 */
 	public boolean InsideStraight(){
@@ -409,7 +411,7 @@ public class CardAnalizer {
 	
 	
 	/**
-	 * Function that analyze if i have a OutSide Straight
+	 * Function that analyze if hand have a OutSide Straight
 	 * @return true if there is an OutSideStraight
 	 */
 	public boolean OutsideStraight(){
@@ -461,7 +463,7 @@ public class CardAnalizer {
 	
 	
 	/**
-	 * Function that analyze if i have a AKQJ suited
+	 * Function that analyze if hand have a AKQJ suited
 	 * @return true if there is a AKQJ suited
 	 */
 	public boolean AKQJunsuited(){
@@ -491,7 +493,7 @@ public class CardAnalizer {
 		return true;	
 	}
 	/**
-	 * Function that analyze if i have a KQJ unsuited
+	 * Function that analyze if hand have a KQJ unsuited
 	 * @return true if there is a KQJ unsuited
 	 */
 	public boolean KQJunsuited(){
@@ -679,7 +681,7 @@ public class CardAnalizer {
 		return false;
 	}
 	/**
-	 * See if there the cards of value c1 and c2 of same suit are present
+	 * See if the cards of value c1 and c2 of same suit are present
 	 * @param c1 - Card 1
 	 * @param c2 - Card 2
 	 * @return true if there is an card C1 and C2 from same suit

@@ -1,8 +1,19 @@
 package cards;
-
+/**
+ * 
+ * enum type that represents possible values of a Card
+ * 
+ * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo
+ *
+ */
 public enum CardValue {
 	TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGTH,NINE,TEN,JACK,QUEEN,KING,ACE;
-	
+	/**
+	 * Function to know CardValue with a char description
+	 * @param value - char Value
+	 * @return CardValue Value of card
+	 * @throws InvalidCard if description is invalid
+	 */
 	public static CardValue parse(char value) throws InvalidCard {
 		switch(value) {
 			case '2': return TWO;
@@ -22,7 +33,10 @@ public enum CardValue {
 				throw new InvalidCard("Invalid Card Value");
 		}
 	}
-	
+	/**
+	 * Function to know int value of a Card
+	 * @return int value
+	 */
 	public int intValue() {
 		switch(this) {
 			case TWO: return 1;
@@ -41,7 +55,12 @@ public enum CardValue {
 			default: return -1; // gerar expecao
 		}
 	}
-	
+	/**
+	 * Function to know CardValue with a intValue
+	 * @param value - int Values
+	 * @return CardValue
+	 * @throws InvalidCard
+	 */
 	public static CardValue parse(int value) throws InvalidCard {
 		switch(value) {
 			case 1: return TWO;
@@ -62,6 +81,7 @@ public enum CardValue {
 		}
 	}
 	
+	@Override
 	public String toString() {
 		switch(this) {
 			case TWO: return "2";
