@@ -1,7 +1,5 @@
 package players;
 
-import doublebonus10_7.DebugDoubleBonus10_7;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -21,6 +19,7 @@ public class Main {
 				player = new InteractivePlayer(Integer.parseInt(args[1]));
 				break;
 			case "-g":
+				
 				break;
 			default:
 				System.out.println("Wrong usage");
