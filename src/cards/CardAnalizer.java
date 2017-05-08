@@ -37,14 +37,7 @@ public class CardAnalizer {
 		int indexSuit;
 		int indexValue;
 		
-		
-		// inicializate index;
-		for(int i=0;i<4;i++){
-			for(int j=0;j<14;j++){
-				indexCard[i][j]  = -1 ;
-			}
-			
-		}
+		Arrays.fill(indexCard,-1);
 		
 		
 		for(int i=0; i<h.length(); i++){
