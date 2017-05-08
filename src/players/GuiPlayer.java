@@ -5,8 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
-
-
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
@@ -23,6 +21,8 @@ import java.util.Arrays;
 
 import java.awt.Font;
 import java.awt.Cursor;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class GuiPlayer extends Player10_7 {
 
@@ -40,9 +40,10 @@ public class GuiPlayer extends Player10_7 {
 	boolean [] chipsAux = new boolean[5];
 	Timer timer;
 	int timerAux=0;
-	
+
 
 	private JLabel credit;
+	private JTable table;
 	
 	/**
 	 * Create the application.
@@ -55,9 +56,10 @@ public class GuiPlayer extends Player10_7 {
 		message.setHorizontalAlignment(SwingConstants.CENTER);
 		message.setForeground(Color.WHITE);
 		message.setFont(new Font("URW Bookman L", Font.BOLD, 35));
-		message.setBounds(112, 430, 773, 50);
+		message.setBounds(112, 520, 773, 50);
 		frame.getContentPane().add(message);		
 		JLabel backGround = new JLabel(new ImageIcon(GuiPlayer.class.getResource("/images/backGround.png")));
+		backGround.setLocation(0, 0);
 		backGround.setSize(1000, 700);
 		backGround.setBackground(new Color(238, 238, 238));
 		frame.getContentPane().add(backGround);
@@ -76,54 +78,73 @@ public class GuiPlayer extends Player10_7 {
 			}
 		});
 	}
-	
+	/**
+	* eSTA FUNÇAO MEXE EM COISAS
+	* @param res o que recebes
+	*
+	*/
 	private void showCards(Result res){
 		HandCards h = res.getHand();
+		btnDeal.setEnabled(false);
+		btnHold.setEnabled(false);
+		btnAdvice.setEnabled(false);
 		for(int i=0; i<5;i++){
 			if(holdCards[i]==false){
 				cards[i].setIcon(new ImageIcon(new ImageIcon("src/images/cardBack.png").getImage()));
+				cards[i].setRolloverIcon(null);
 			}
 		}
 		ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-            	if(holdCards[timerAux]==false){
-            		cards[timerAux].setIcon(new ImageIcon(new ImageIcon("src/images/"+h.getCardN(timerAux)+".png").getImage()));
-            		cards[timerAux].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/"+h.getCardN(timerAux)+"on.png")));
-            		cards[timerAux].setBounds(cardsXpos[timerAux], 180, 145, 216);
-            	}else{
-            		downCards(timerAux);
-            	}
-            	timerAux++;
-				if(timerAux==5){
+            	if(timerAux==5){
 					timer.stop();
 					timerAux=0;
 					Arrays.fill(holdCards,true);
-				try{	
-					String [] finalHand =res.toString().split("\n");
-					if(finalHand[1].contains("loses")){
-						message.setText("Player loses!");
-					}else{
-						finalHand =finalHand[1].split(" and ");
-						message.setText(finalHand[0]);
+					
+					try{	
+						String [] finalHand =res.toString().split("\n");
+						if(finalHand[1].contains("loses")){
+							message.setText("Player loses!");
+						}else{
+							finalHand =finalHand[1].split(" and ");
+							message.setText(finalHand[0]);
+						}
+						btnDeal.setEnabled(true);
+						btnHold.setEnabled(false);
+						btnAdvice.setEnabled(false);
+						message.setVisible(true);
+					}catch(IndexOutOfBoundsException err){
+						btnDeal.setEnabled(false);
+						btnHold.setEnabled(true);
+						btnAdvice.setEnabled(true);
 					}
-					message.setVisible(true);
-				}catch(IndexOutOfBoundsException err){}
-				credit.setText(game.credit().toString());				
-				}	
+					
+					credit.setText(game.credit().toString());				
+				}else{	
+	            	if(holdCards[timerAux]==false){
+	            		cards[timerAux].setIcon(new ImageIcon(new ImageIcon("src/images/"+h.getCardN(timerAux)+".png").getImage()));
+	            		cards[timerAux].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/"+h.getCardN(timerAux)+"on.png")));
+	            		cards[timerAux].setBounds(cardsXpos[timerAux], 290, 145, 216);
+	            	}else{
+	            		downCards(timerAux);
+	            	}
+	            	timerAux++;
+				}
+				
             }
 		};
-		timer = new Timer(250, taskPerformer);
+		timer = new Timer(300, taskPerformer);
 		timer.start();
 	}
 	
 	private void upCards(int index){
 		int upCrad= 50;
-		cards[index].setBounds(cardsXpos[index],  180 - upCrad, 145, 216);
+		cards[index].setBounds(cardsXpos[index],  290 - upCrad, 145, 216);
 		holdCards[index] = false;
 	}
 	
 	private void downCards(int index){
-		cards[index].setBounds(cardsXpos[index],  180, 145, 216);
+		cards[index].setBounds(cardsXpos[index],  290, 145, 216);
 		holdCards[index] = true;
 	}
 	
@@ -141,7 +162,7 @@ public class GuiPlayer extends Player10_7 {
 		for(int i=0; i<5;i++){
 			int a=i;
 			cards[i] = new JButton("");
-			//card0.setIcon(new ImageIcon(GuiPlayerv2.class.getResource("/images/cardBack.png")));
+			//card0.setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/cardBack.png")));
 			
 			cards[i].addMouseListener(new MouseAdapter() {
 				@Override
@@ -154,7 +175,7 @@ public class GuiPlayer extends Player10_7 {
 				}
 			
 			});
-			cards[i].setBounds(cardsXpos[i], 180, 145, 216);
+			cards[i].setBounds(cardsXpos[i], 290, 145, 216);
 			cards[i].setOpaque(false);
 			cards[i].setContentAreaFilled(false);
 			cards[i].setBorderPainted(false);
@@ -170,9 +191,9 @@ public class GuiPlayer extends Player10_7 {
 			chips[i].setOpaque(false);
 			chips[i].setContentAreaFilled(false);
 			chips[i].setBorderPainted(false);
-			chips[i].setIcon(new ImageIcon(GuiPlayer.class.getResource("../images/chips.png")));
-			chips[i].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("src/images/chipson.png")));
-			chips[i].setBounds(500+(80*i), 60, 70, 50);
+			chips[i].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chips.png")));
+			chips[i].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipson.png")));
+			chips[i].setBounds(112+(80*i), 130, 70, 50);
 			frame.getContentPane().add(chips[i]);
 			chips[i].addMouseListener(new MouseAdapter() {
 	        	@Override
@@ -181,22 +202,21 @@ public class GuiPlayer extends Player10_7 {
 	        		if(chipsAux[a]==false){
 		        		for(j=0; j<=a;j++){
 		        			chips[j].setIcon(new ImageIcon(new ImageIcon("src/images/chips.png").getImage()));
-		        			chips[j].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("src/images/chipson.png")));
-		        			chips[j].setBounds(500+(80*j), 60, 70, 50);
+		        			chips[j].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipson.png")));
+	
 		        			chipsAux[j]=true;
 		        		}
 		        		
 		        		for(int aux=j; aux<=4; aux++){
 		        			chips[aux].setIcon(new ImageIcon(new ImageIcon("src/images/chipsBlack.png").getImage()));
-		        			chips[aux].setRolloverIcon(null);
-							chips[aux].setBounds(500+(80*aux), 60, 70, 50);
+		        			chips[aux].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
+							
 							chipsAux[aux]=false;
 						}
 	        		}else{
 	        			for(j=a+1; j<5; j++){
 		        			chips[j].setIcon(new ImageIcon(new ImageIcon("src/images/chipsBlack.png").getImage()));
-		        			chips[j].setRolloverIcon(null);
-							chips[j].setBounds(500+(80*j), 60, 70, 50);
+		        			chips[j].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
 							chipsAux[j]=false;
 						}
 	        		}
@@ -206,18 +226,54 @@ public class GuiPlayer extends Player10_7 {
 		}
 	}
 	
+	private void InitializeStatisticsTable(){
+		table = new JTable();
+		table.setForeground(Color.WHITE);
+		table.setShowGrid(false);
+		table.setOpaque(false);
+		table.setFont(new Font("URW Bookman L", Font.BOLD, 12));
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Jacks or Better", new Integer(0)},
+				{"Two Pair", new Integer(0)},
+				{"Straight", new Integer(0)},
+				{"Three of a Kind", new Integer(0)},
+				{"Straight", new Integer(0)},
+				{"Flush", new Integer(0)},
+				{"Full House", new Integer(0)},
+				{"Four of a Kind", new Integer(0)},
+				{"Straight Flush", new Integer(0)},
+				{"Royal Flush", new Integer(0)},
+				{"Other", new Integer(0)},
+				{"Total", new Integer(0)},
+				{"Credit", new String ("CREDITO (%)")},
+			},
+			new String[] {
+				"Hand", "New column"
+			}
+		));
+		
+		table.setBackground(new Color(0,0,0,0));
+		table.setBounds(684, 12, 290, 236);
+		frame.getContentPane().add(table);
+	}
+	
+	private void UpdateTable(int i){
+		table.getModel().setValueAt("", i,1);
+	}
+	
 	private void InitializeCreditMessage(){
 		
 		credit = new JLabel(game.credit().toString());
 		credit.setHorizontalAlignment(SwingConstants.LEFT);
 		credit.setForeground(Color.WHITE);
-		credit.setFont(new Font("URW Bookman L", Font.BOLD, 25));
-		credit.setBounds(112, 60, 400, 50);
+		credit.setFont(new Font("URW Bookman L", Font.BOLD, 30));
+		credit.setBounds(112, 70, 500, 50);
 		frame.getContentPane().add(credit);
 		
 	}
 	
-	private void InitializeButtons(){
+	private void InitializeButtonDeal(){
 		
 		btnDeal = new JButton("");
 		btnDeal.setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/buttonDOff.png")));
@@ -227,7 +283,7 @@ public class GuiPlayer extends Player10_7 {
 		btnDeal.setContentAreaFilled(false);
 		btnDeal.setBorderPainted(false);
 		btnDeal.setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/button_deal.png")));
-		btnDeal.setBounds(100, 530, 220, 60);
+		btnDeal.setBounds(100, 600, 220, 60);
 		frame.getContentPane().add(btnDeal);
 		
 		btnDeal.addActionListener(new ActionListener() {
@@ -236,14 +292,14 @@ public class GuiPlayer extends Player10_7 {
 				game.bet(betValue);
 				Result res = game.deal();
 				showCards(res);
-				btnDeal.setEnabled(false);
-				btnHold.setEnabled(true);
-				btnAdvice.setEnabled(true);
+
 				credit.setText(game.credit().toString());
 				message.setVisible(false);
 			}
 		});
+	}
 		
+	private void InitializeButtonHold(){
 		btnHold = new JButton("");
 		btnHold.setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/buttonHOff.png")));
 		btnHold.setBorder(null);
@@ -253,7 +309,7 @@ public class GuiPlayer extends Player10_7 {
 		btnHold.setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/button_hold.png")));
 		btnHold.setEnabled(false);
 		
-		btnHold.setBounds(380, 530, 220, 60);
+		btnHold.setBounds(380, 600, 220, 60);
 		frame.getContentPane().add(btnHold);
 		
 		btnHold.addActionListener(new ActionListener() {
@@ -261,14 +317,14 @@ public class GuiPlayer extends Player10_7 {
 				
 				Result res = game.hold(holdCards);
 				showCards(res);
-				btnDeal.setEnabled(true);
-				btnHold.setEnabled(false);
-				btnAdvice.setEnabled(false);
+
 
 
 			}
 		});
+	}
 		
+	private void InitializeButtonAdvice(){	
 		btnAdvice = new JButton("");
 		btnAdvice.setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/buttonAOff.png")));
 		btnAdvice.setBorder(null);
@@ -277,7 +333,7 @@ public class GuiPlayer extends Player10_7 {
 		btnAdvice.setOpaque(false);
 		btnAdvice.setContentAreaFilled(false);
 		btnAdvice.setBorderPainted(false);
-		btnAdvice.setBounds(640, 530, 220, 60);
+		btnAdvice.setBounds(640, 600, 220, 60);
 		frame.getContentPane().add(btnAdvice);
 		
 		btnAdvice.addActionListener(new ActionListener() {
@@ -288,6 +344,12 @@ public class GuiPlayer extends Player10_7 {
 
 			}
 		});	
+	}
+	
+	private void InitializeButtons(){
+		InitializeButtonDeal();
+		InitializeButtonHold();
+		InitializeButtonAdvice();
 	}
 	
 	/**
@@ -305,6 +367,7 @@ public class GuiPlayer extends Player10_7 {
 		InitializeChips();
 		InitializeCreditMessage();
 		InitializeButtons();	
+		InitializeStatisticsTable();
 	}
 	
 	/**
