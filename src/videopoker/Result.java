@@ -45,5 +45,8 @@ public abstract class Result {
 		return credits;
 	}
 
+	public HandCards getHand(){
+		return hand;
+	}
 	
 }
