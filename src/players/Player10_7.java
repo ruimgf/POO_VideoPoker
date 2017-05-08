@@ -72,7 +72,7 @@ public abstract class Player10_7 {
 				break;
 			}
 		} catch (InvalidPlayException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		
 
