@@ -1,12 +1,23 @@
 package cards;
-
+/**
+ * 
+ * enum type that represents possible suit of a Card
+ * 
+ * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo
+ *
+ */
 public enum Suit {
 	
 	DIAMONS,
     CLUBS,
     HEARTS,
     SPADES;
-	
+	/**
+	 * 
+	 * @param Value to parse
+	 * @return Correspond CardValue
+	 * @throws InvalidCard if parse is invalid
+	 */
 	public static Suit parse(char Value) throws InvalidCard {
 		switch(Value) {
 			case 'D': return DIAMONS;
