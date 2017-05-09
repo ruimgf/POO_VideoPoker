@@ -1,8 +1,10 @@
-package videopoker;
+package ourvideopoker;
 
 import cards.Card;
 import cards.DebugDeck;
 import cards.EndOfDeck;
+
+import videopoker.*;
 
 /**
  * TODO

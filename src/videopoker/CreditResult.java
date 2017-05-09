@@ -10,7 +10,7 @@ public class CreditResult extends Result{
 	 * Constructor for the credit result only takes the credits that the player have
 	 * @param credits credits that the player have at the time of the command credit
 	 */
-	CreditResult(int credits){
+	public CreditResult(int credits){
 		
 		super(credits);
 		

@@ -1,10 +1,12 @@
-package videopoker;
+package ourvideopoker;
 
 
 import cards.Card;
 import cards.Deck;
 import cards.EndOfDeck;
 import cards.HandCards;
+
+import videopoker.*;
 /**
  * TODO
  * @author Alexandre, Rui , Pedro
@@ -274,7 +276,7 @@ public class OurVideoPoker implements Videopoker{
 	 */
 	public StatisticsResult statistics(){
 		
-		return new StatisticsResult(this.credits,this.game_stats);
+		return new StatisticsResult(this.credits,this.game_stats.toString());
 		
 	}
 	

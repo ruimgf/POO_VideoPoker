@@ -1,4 +1,4 @@
-package videopoker;
+package ourvideopoker;
 
 import java.util.HashMap;
 import cards.CardAnalizer;
@@ -6,6 +6,7 @@ import cards.CardValue;
 import cards.HandCards;
 import cards.InvalidCard;
 
+import videopoker.*;
 
 /**
  * TODO

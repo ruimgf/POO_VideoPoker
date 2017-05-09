@@ -1,4 +1,4 @@
-package videopoker;
+package ourvideopoker;
 
 /**
  * TODO
@@ -28,7 +28,7 @@ public class Statistics {
 	 * TODO
 	 * @param initial_credit
 	 */
-	Statistics(int initial_credit){
+	public Statistics(int initial_credit){
 		
 		this.initial_credit=initial_credit;
 	}
@@ -167,7 +167,7 @@ public class Statistics {
 	 * TODO
 	 * @param actual_credit
 	 */
-	void updateActualCredit(int actual_credit){
+	public void updateActualCredit(int actual_credit){
 		
 		this.actual_credit = actual_credit;
 		
@@ -177,7 +177,7 @@ public class Statistics {
 	/**
 	 *	TODO
 	 */
-	void addDeal(){
+	public void addDeal(){
 		this.number_deals = this.number_deals +1;
 	}
 

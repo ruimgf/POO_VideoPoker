@@ -17,7 +17,7 @@ public class DealResult extends ResultWithHand {
 	 * @param credits that the player have after the deal
 	 * @see HandCards
 	 */
-	DealResult(HandCards hand,int credits){
+	public DealResult(HandCards hand,int credits){
 		
 		super(credits,hand);
 		

@@ -12,6 +12,7 @@ import javax.swing.Timer;
 import cards.HandCards;
 
 import videopoker.*;
+import ourvideopoker.*;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;

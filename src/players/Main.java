@@ -1,9 +1,9 @@
 package players;
 
-import videopoker.DoubleBonus10_7;
-import videopoker.OurVideoPoker;
-import videopoker.OurVideoPokerFile;
-import videopoker.Videopoker;
+import videopoker.*;
+import ourvideopoker.*;
+
+
 
 public class Main {
 
