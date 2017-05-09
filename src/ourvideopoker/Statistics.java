@@ -1,32 +1,43 @@
 package ourvideopoker;
 
 /**
- * TODO
+ * This Class provides a implementation to deal with statistics in {@link OurVideoPoker} implementation.
+ * It only hands statistics with the following hands:
+ *  <p>- Jacks or Better</p>
+ *  <p>- Two Pair</p>
+ *  <p>- Three of a Kind</p>
+ *  <p>- Straight</p>
+ *  <p>- Flush</p>
+ *  <p>- Full House</p>
+ *  <p>- Four of a Kind</p>
+ *  <p>- Straight Flush</p>
+ *  <p>- Royal Flush</p>
  * @author Alexandre, Rui , Pedro
  *
  */
 public class Statistics {
 	/* position 0 representes jacks --- 9 represents 0ther hands*/
 	/**
-	 * TODO
+	 * int array that represents the table of statistics, it contains the number of time each hand have appeard
+	 * in our videopoker machine
 	 */
 	private int[] hands_stats = new int[10];
 	/**
-	 * TODO
+	 * the initial credit that the player insert int he videopoker machine
 	 */
 	private int initial_credit;
 	/**
-	 * TODO
+	 * the last update credit in the statisctics
 	 */
 	private int actual_credit;
 	/**
-	 * TODO
+	 * number of deals that have appen in the machine
 	 */
 	private int number_deals;
 	
 	/**
-	 * TODO
-	 * @param initial_credit
+	 * Constructor only requires the initial credit that has been introduced in the machine.
+	 * @param initial_credit initial credit introduced in the machine
 	 */
 	public Statistics(int initial_credit){
 		
@@ -34,8 +45,8 @@ public class Statistics {
 	}
 	
 	/**
-	 * TODO
-	 * @param hand_name
+	 * Method that receives the string with the hand_name and increments the handstats based on the name
+	 * @param hand_name string with the name of the hand to add in statistics
 	 */
 	public void update_hand_stats(String hand_name){
 		
@@ -83,7 +94,7 @@ public class Statistics {
 	}
 	
 	/**
-	 * TODO
+	 * Method that add 1 in the Jacks stats
 	 */
 	private void addJacks(){
 		this.hands_stats[0] = this.hands_stats[0] + 1;
@@ -91,7 +102,7 @@ public class Statistics {
 	}
 	
 	/**
-	 * TODO
+	 * Method that add 1 in the TwoPair stats
 	 */
 	private void addTwoPair(){
 		this.hands_stats[1] = this.hands_stats[1] + 1;
@@ -99,7 +110,7 @@ public class Statistics {
 	}
 	
 	/**
-	 * TODO
+	 * Method that add 1 in the Three of a Kind stats
 	 * 
 	 */
 	private void addThree(){
@@ -108,7 +119,7 @@ public class Statistics {
 	}
 	
 	/**
-	 * TODO
+	 * Method that add 1 in the Straight stats
 	 */
 	private void addStraight(){
 		this.hands_stats[3] = this.hands_stats[3] + 1;
@@ -116,7 +127,7 @@ public class Statistics {
 	}
 	
 	/**
-	 * TODO
+	 * Method that add 1 in the Flush stats
 	 */
 	private void addFlush(){
 		this.hands_stats[4] = this.hands_stats[4] + 1;
@@ -124,7 +135,7 @@ public class Statistics {
 	}
 	
 	/**
-	 * TODO
+	 * Method that add 1 in the Full House stats
 	 */
 	private void addFullHouse(){
 		this.hands_stats[5] = this.hands_stats[5] + 1;
@@ -132,7 +143,7 @@ public class Statistics {
 	}
 	
 	/**
-	 * TODO
+	 * Method that add 1 in the Four of Kind stats
 	 */
 	private void addFour(){
 		this.hands_stats[6] = this.hands_stats[6] + 1;
@@ -140,7 +151,7 @@ public class Statistics {
 	}
 	
 	/**
-	 * TODO
+	 * Method that add 1 in the Straight Flush stats
 	 */
 	private void addStraightFlush(){
 		this.hands_stats[7] = this.hands_stats[7] + 1;
@@ -148,7 +159,7 @@ public class Statistics {
 	}
 	
 	/**
-	 * TODO
+	 * Method that add 1 in the Royal Flush stats
 	 */
 	private void addRoyalFlush(){
 		this.hands_stats[8] = this.hands_stats[8] + 1;
@@ -156,7 +167,7 @@ public class Statistics {
 	}
 	
 	/**
-	 * TODO
+	 * Method that add 1 in the other type of hands stats
 	 */
 	private void addOther(){
 		this.hands_stats[9] = this.hands_stats[9] + 1;
@@ -164,8 +175,8 @@ public class Statistics {
 	}
 	
 	/**
-	 * TODO
-	 * @param actual_credit
+	 * Method that return update the actual credit of the machine in the machine stats
+	 * @param actual_credit new credit of the player
 	 */
 	public void updateActualCredit(int actual_credit){
 		
@@ -175,7 +186,7 @@ public class Statistics {
 	}
 	
 	/**
-	 *	TODO
+	 *	method that add a deal in the stats
 	 */
 	public void addDeal(){
 		this.number_deals = this.number_deals +1;
