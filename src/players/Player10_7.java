@@ -4,7 +4,9 @@ import videopoker.*;
 
 public abstract class Player10_7 {
 	Videopoker game;
-	
+	protected Player10_7(){
+		game = null;
+	};
 	public Player10_7(int credits) {
 		this.game = new OurVideoPoker(credits,new DoubleBonus10_7());
 
