@@ -5,9 +5,9 @@ import videopoker.Videopoker;
 
 import java.io.*;
 
-public class DebugPlayer extends Player10_7 {
+public class DebugPlayer extends Player {
 	
-	ArrayList<String> commandsDebug; 
+	private ArrayList<String> commandsDebug; 
 	
 	public DebugPlayer(Videopoker game, String cmdfile) {
 		super(game);

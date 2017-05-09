@@ -12,7 +12,7 @@ public class Main {
 			System.out.println("Wrong usage");
 			System.exit(-1);
 		}
-		Player10_7 player=null;
+		Player player=null;
 		Videopoker game=null;
 		switch(args[0]){
 			case "-d":

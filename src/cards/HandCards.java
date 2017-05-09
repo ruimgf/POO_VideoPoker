@@ -17,10 +17,18 @@ public class HandCards {
 	private int length = 5;
 	
 	/**
-	 * Default constructor for HandCards, it only initialise gamecards with null
+	 * Default constructor for HandCards, it only initialize gamecards with null and create space for 5 cards
 	 */
 	public HandCards(){
 		gamecards = new Card[5];
+	}
+	/**
+	 * Constructor for HandCards, it only initialize gamecards with null and create space for length cards
+	 * @param length number of cards in hand of player
+	 */
+	public HandCards(int length){
+		this.length = length;
+		gamecards = new Card[length];
 	}
 	
 	public int length(){

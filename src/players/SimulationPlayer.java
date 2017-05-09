@@ -3,7 +3,7 @@ package players;
 import videopoker.InvalidPlayException;
 import videopoker.Videopoker;
 
-public class SimulationPlayer extends Player10_7 {
+public class SimulationPlayer extends Player {
 		int numPlays;
 		int betValue;
 		
