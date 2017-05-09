@@ -15,7 +15,8 @@ public class DebugPlayer extends Player {
 		try {
 			ReadCmds(cmdfile);
 		} catch (Throwable e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			System.exit(-1);
 		}
 		
 	}

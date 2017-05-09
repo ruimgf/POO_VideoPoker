@@ -29,7 +29,7 @@ public abstract class Player {
 					
 				}else{
 					
-						System.out.println(game.bet());
+					System.out.println(game.bet());
 					
 				}
 				break;
@@ -66,7 +66,8 @@ public abstract class Player {
 				System.out.println(game.advice());
 				break;
 			case 'q':
-				game.quit();
+				game.quit(); // if not permited an exception in throwed
+				System.exit(0);
 				break;
 			default:
 				System.out.println("Invalid instruction!");
@@ -75,7 +76,11 @@ public abstract class Player {
 			}
 		} catch (InvalidPlayException e) {
 			System.out.println(e.getMessage());
+		} catch (StringIndexOutOfBoundsException e) {
+			System.out.println("Invalid instruction!");
+			System.out.println("\n Please insert a command of type: b [amount(1-5)], h [cards to hold], $, d, a, s, q");
 		}
+		
 		
 
 	}

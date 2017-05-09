@@ -1,5 +1,7 @@
 package ourvideopoker;
 
+import java.util.Locale;
+
 /**
  * This Class provides a implementation to deal with statistics in {@link OurVideoPoker} implementation.
  * It only hands statistics with the following hands:
@@ -212,7 +214,7 @@ public class Statistics {
 				"-------------------------------------" + "\n" +
 				"Total                       " + this.number_deals + "\n" +
 				"-------------------------------------" + "\n" +
-				"Credit                      " + this.actual_credit + " (" + credit_return + ")" +
+				"Credit                      " + this.actual_credit + " (" + String.format(Locale.ROOT,"%.2f", credit_return) + ")" +
 				"\n";
 	}
 	
