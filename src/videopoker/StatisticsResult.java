@@ -9,14 +9,14 @@ package videopoker;
 public class StatisticsResult extends Result {
 	
 	/**
-	 * This class have a a object of type Statistics that represent the statistics of the machine when the command is called @see Statistics
+	 * This class have a string description of the statistics at the time of the command
 	 */
 	protected String game_stats;
 	
 	/**
-	 * Constructor requires the objectt of Statistics of the game at the time that the command is called
-	 * @param credits
-	 * @param game_stats
+	 * Constructor requires the string description of Statistics of the game at the time that the command is called
+	 * @param credits the credits that the player have at the time of the command
+	 * @param game_stats string description of the game statistics ate the time of the command
 	 */
 	public StatisticsResult(int credits, String game_stats){
 		

@@ -2,7 +2,7 @@ package videopoker;
 
 /**
  * This Class implements a Exception for a invalid play in a videopooker machine implemented by the
- * VideoPoker interface. it extends the Exception class
+ * {@link Videopoker} interface. it extends the Exception class
  * @see Videopoker
  * @see Exception
  * @author Alexandre , Rui , Pedro
