@@ -22,10 +22,7 @@ import java.util.Arrays;
 
 import java.awt.Font;
 import java.awt.Cursor;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextArea;
-import javax.swing.JTextPane;
 import javax.swing.JTextField;
 
 public class GuiPlayer extends Player10_7 {
