@@ -3,52 +3,51 @@ package cards;
 import java.util.Arrays;
 import java.util.Comparator;
 /**
- * Class that permits analyze one HandCards 
- * @author rui
+ * Class that permits analyze one {@link HandCards HandCards} 
+ * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo
  *
  */
 public class CardAnalizer {
-	// index i,j of vector count is -1 if card j of suit i don't exist in h or is equal to index of card i,j on hand
-	private int [][] indexCard;
-	// total count of card of value i on h
-	private int [] totalcount;
-	// number of cards of suit n on h
-	private int [] nSuit;
-	// analised cards
-	private HandCards h;
-	private int [] IndexLastClass; // Important indexes used in last classification
-	
+	/**
+	 * Hand to analyze
+	 */
+	private HandCards hand;
+	/**
+	 *  index i,j of vector count is -1 if card j of suit i don't exist in hand or is equal to index of card i,j on hand
+	 */
+	private int [][] indexCard = new int[4][14];
+	/**
+	 *  total count of card of value i on hand
+	 */
+	private int [] totalcount = new int[14];
+	/**
+	 *  number of cards of suit i on hand
+	 */
+	private int [] nSuit = new int[4];
+
+	/**
+	 *  Important indexes used in last classification
+	 */
+	private int [] IndexLastClass  = new int[5]; 
 	
 	/**
-	 * Construct a card analyzer, make all counts to make more easy to analyze
-	 * 
-	 * 
-	 * @param h - hand to analyze
+	 * Reinitialize count and Analyze other hand
+	 * @param hand hand to analyze
 	 */
-	public CardAnalizer(HandCards h){
-		this.h = h;
-		
-		indexCard = new int[4][14];
-		totalcount = new int[14];
-		nSuit = new int[4];
-		
-		IndexLastClass = new int[5];
+	public void reinitializeCount(HandCards hand){
+		this.hand = hand;
 		
 		int indexSuit;
 		int indexValue;
+		Arrays.fill(nSuit,0);
+		Arrays.fill(totalcount,0);
+		for (int[] row: indexCard)
+		    Arrays.fill(row, -1);
 		
 		
-		// inicializate index;
-		for(int i=0;i<4;i++){
-			for(int j=0;j<14;j++){
-				indexCard[i][j]  = -1 ;
-			}
-			
-		}
 		
-		
-		for(int i=0; i<h.length(); i++){
-			Card temp = h.getCardN(i);
+		for(int i=0; i<hand.length(); i++){
+			Card temp = hand.getCardN(i);
 			
 			switch (temp.getSuit()) {
 			case DIAMONS:
@@ -90,9 +89,7 @@ public class CardAnalizer {
 	 * Reinitialize vector that save important indexes
 	 */
 	private void resetIndexLastClass(){
-		for (int i = 0; i < IndexLastClass.length; i++) {
-			IndexLastClass[i] = -1;
-		}
+		Arrays.fill(IndexLastClass, -1);
 	}
 	
 	/**
@@ -121,7 +118,7 @@ public class CardAnalizer {
 		System.out.println("");
 	}
 	/**
-	 * Function that analysis if there is N cards to a Straight
+	 * Function that analysis if there are N cards to a Straight
 	 * 
 	 * Example: If i want to know if i have a straight, make N = 5
 	 * 
@@ -154,7 +151,7 @@ public class CardAnalizer {
 	}
 	
 	/**
-	 * Function that analysis if there is N cards to a Flush
+	 * Function that analysis if there are N cards to a Flush
 	 * 
 	 * Example: If i want to know if i have a Flush, make N = 5
 	 * 
@@ -178,7 +175,7 @@ public class CardAnalizer {
 		return false;
 	}
 	/**
-	 * Function that analysis if there is N cards to a Straight Flush
+	 * Function that analysis if there are N cards to a Straight Flush
 	 * 
 	 * Example: If i want to know if i have a straight Flush, make N = 5
 	 * 
@@ -212,7 +209,7 @@ public class CardAnalizer {
 		return false;
 	}
 	/**
-	 * Function that analysis if there is N cards to a Royal Flush
+	 * Function that analysis if there are N cards to a Royal Flush
 	 * 
 	 * Example: If i want to know if i have a Royal Flush, make N = 5
 	 * 
@@ -315,7 +312,7 @@ public class CardAnalizer {
 	}
 	/**
 	 * Function that analyze if there are N high cards on HandCards h
-	 * @param N
+	 * @param N Number of High Cards
 	 * @return true if there is a N High Cards
 	 */
 	public boolean NHighCards(int N){
@@ -377,7 +374,7 @@ public class CardAnalizer {
 	
 	
 	/**
-	 * Function that analyze if i have a Inside Straight
+	 * Function that analyze if hand have a Inside Straight
 	 * @return true if there is a Inside Straight
 	 */
 	public boolean InsideStraight(){
@@ -414,7 +411,7 @@ public class CardAnalizer {
 	
 	
 	/**
-	 * Function that analyze if i have a OutSide Straight
+	 * Function that analyze if hand have a OutSide Straight
 	 * @return true if there is an OutSideStraight
 	 */
 	public boolean OutsideStraight(){
@@ -466,7 +463,7 @@ public class CardAnalizer {
 	
 	
 	/**
-	 * Function that analyze if i have a AKQJ suited
+	 * Function that analyze if hand have a AKQJ suited
 	 * @return true if there is a AKQJ suited
 	 */
 	public boolean AKQJunsuited(){
@@ -496,7 +493,7 @@ public class CardAnalizer {
 		return true;	
 	}
 	/**
-	 * Function that analyze if i have a KQJ unsuited
+	 * Function that analyze if hand have a KQJ unsuited
 	 * @return true if there is a KQJ unsuited
 	 */
 	public boolean KQJunsuited(){
@@ -529,7 +526,7 @@ public class CardAnalizer {
 	
 	/**
 	 * Function that sees if a card is an High Card
-	 * @param c
+	 * @param c card to analyze
 	 * @return true if there is a HighCard
 	 */
 	private boolean isaHighCard(Card c){
@@ -548,7 +545,7 @@ public class CardAnalizer {
 		for(int i=0; i < IndexLastClass.length; i++){
 			if(IndexLastClass[i]==-1)
 				break;
-			if(isaHighCard(h.getCardN(IndexLastClass[i]))){
+			if(isaHighCard(hand.getCardN(IndexLastClass[i]))){
 				counter++;
 			}
 		}
@@ -571,7 +568,7 @@ public class CardAnalizer {
 		int count=0;
 		for (int i = 0; i < IndexLastClass.length; i++) {
 			if(IndexLastClass[i]!=-1){
-				c[count] = h.getCardN(IndexLastClass[i]);
+				c[count] = hand.getCardN(IndexLastClass[i]);
 				count++;
 			}
 		}
@@ -652,6 +649,7 @@ public class CardAnalizer {
 	
 	/**
 	 * See if there is a 4 to inside Straight with N high Cards
+	 * @param N - Number of High Cards
 	 * @return true if there is a 4 to inside Straight
 	 */
 	public boolean fourInStrWithNHighCards(int N){
@@ -668,6 +666,7 @@ public class CardAnalizer {
 	
 	/**
 	 * See if there is a 3 to Flush with N high Cards
+	 * @param N - Number of High cards
 	 * @return true if there is a three to Flush with N High Cards
 	 */
 	public boolean threeToFlushWithNHighCards(int N){
@@ -682,8 +681,10 @@ public class CardAnalizer {
 		return false;
 	}
 	/**
-	 * See if there the cards of value c1 and c2 of same suite are present
-	 * @return
+	 * See if the cards of value c1 and c2 of same suit are present
+	 * @param c1 - Card 1
+	 * @param c2 - Card 2
+	 * @return true if there is an card C1 and C2 from same suit
 	 */
 	public boolean C1C2Suited(CardValue c1, CardValue c2){
 		int c1Index = c1.intValue();
@@ -701,8 +702,10 @@ public class CardAnalizer {
 		return false;
 	}
 	/**
-	 * See if there the cards of value c1 and c2 of with diferent suite are present
-	 * @return
+	 * See if the cards of value c1 and c2 of with different suit are present
+	 * @param c1 - Card 1
+	 * @param c2 - Card 2
+	 * @return true if cards of value c1 and c2 of with different suit are present
 	 */
 	public boolean C1C2Unsuited(CardValue c1, CardValue c2){
 		int c1Index = c1.intValue();
@@ -724,7 +727,7 @@ public class CardAnalizer {
 	}
 	/**
 	 * See if there are present two Suited high cards
-	 * @return
+	 * @return true if there is two Suited High Cards
 	 */
 	public boolean twoSuitedHighCards(){
 		resetIndexLastClass();
@@ -748,7 +751,7 @@ public class CardAnalizer {
 	/**
 	 * 
 	 * Return index important in last Classification
-	 * @return
+	 * @return boolean vector with true in positions to hold
 	 */
 	public boolean[]holdCards(){
 		boolean[] ret = new boolean[5];
@@ -785,8 +788,8 @@ public class CardAnalizer {
 		}
 		
 		System.out.println("");
-		analise = new CardAnalizer(h);
-		
+		analise = new CardAnalizer();
+		analise.reinitializeCount(h);
 		if(analise.NFlush(5)){
 			System.out.println("N Flush");
 			analise.printHoldIndex();

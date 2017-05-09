@@ -1,30 +1,54 @@
-/**
- * cards is a group of utilities for operating on card things.
- */
+
 package cards;
 
+/**
+ * Class that represents a card
+ * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo 
+ */
+
 public class Card {
-	
+	/**
+	 * Suit of card
+	 */
+	protected final Suit suit;
+	/**
+	 * Value of card
+	 */
+	protected final CardValue value;
 	
 
-	final Suit suit;
-	final CardValue value;
-	
+	/**
+	 * Construct with {@link cards.Suit enum Suit} and {@link cards.CardValue enum Card Value}
+	 * @param inSuit Suit of Card
+	 * @param inValue Value of Card
+	 */
 	public Card(Suit inSuit, CardValue inValue) {
 		suit = inSuit;
 		value = inValue;
 	}
 	
-	public Card(String desc){
+	/**
+	 * Construct a card with char description
+	 * @param desc Description of card
+	 * @throws InvalidCard Invalid Card Construction 
+	 */
+	public Card(String desc) throws InvalidCard{
 		value = CardValue.parse(desc.charAt(0));
 		suit = Suit.parse(desc.charAt(1));
 	}
 	
-	
+	/**
+	 * Getter to Suit
+	 * @return Suit of Card
+	 */
 	public Suit getSuit() {
 		return suit;
 	}
-
+	
+	/**
+	 * Getter to CardValue
+	 * @return value of Card
+	 */
 	public CardValue getValue() {
 		return value;
 	}
@@ -60,6 +84,11 @@ public class Card {
 		return true;
 	}
 	
+	/**
+	 * Method to compare suit of two cards
+	 * @param obj to compare
+	 * @return true if the two cards are from same Suit.
+	 */
 	public boolean equalsSuit(Object obj) {
 		if (this == obj)
 			return true;
@@ -73,6 +102,11 @@ public class Card {
 		return true;
 	}
 	
+	/**
+	 * Method to compare value of two cards
+	 * @param obj to compare
+	 * @return true if the two cards are the same value.
+	 */
 	public boolean equalsValue(Object obj) {
 		if (this == obj)
 			return true;
@@ -85,7 +119,7 @@ public class Card {
 			return false;
 		return true;
 	}
-
+	
 	public static void main(String[] args) {
 		
 		for (Suit S : Suit.values()){
@@ -118,8 +152,14 @@ public class Card {
 			
 		}
 		
-		Card c2 = new Card("TD");
-		System.out.println("Card new constructor : " +  c2);
+		Card c2;
+		try {
+			c2 = new Card("TD");
+			System.out.println("Card new constructor : " +  c2);
+		} catch (InvalidCard e) {
+			e.printStackTrace();
+		}
+		
 		
 	}
 	

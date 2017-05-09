@@ -2,25 +2,56 @@ package videopoker;
 
 import cards.Card;
 import cards.DebugDeck;
-import cards.Deck;
+import cards.EndOfDeck;
 
+/**
+ * TODO
+ * @author Alexandre, Rui, Pedro
+ *
+ */
 public class OurVideoPokerFile extends OurVideoPoker {
 
-	public OurVideoPokerFile(int credits,String cardfile, VideoPokerVariation variation) {
+	/**
+	 * TODO
+	 * @param credits
+	 * @param cardfile
+	 * @param variation
+	 * @throws Throwable
+	 */
+	public OurVideoPokerFile(int credits,String cardfile, VideoPokerVariation variation) throws Throwable {
 		super(credits,variation);
+		
 		game_deck = new DebugDeck(cardfile);
 		
 	}
 	
-	public Result deal(){
+	/**
+	 * TODO
+	 */
+	public DealResult deal() throws InvalidPlayException{
 		
-
+		/*In gamestate 3 we have to check if the player have money to deal*/
+		if(this.gamestate == 3){
+			if(this.credits == 0){
+				throw new InvalidPlayException("d: illegal command, player without credits");
+			}
+			
+			if(this.credits-credits < 0){
+				/*player cannot bet*/
+				throw new InvalidPlayException("d: illegal command, player without credits for that bet");
+			}			
+		}
+		
 		if(this.gamestate == 1 || this.gamestate == 3 || this.gamestate == 4){
 			
 			/*pick 5 cards*/
 			Card[] aux = new Card[5];
 			for(int i=0;i<5;i++){
-				aux[i] = this.game_deck.get_card();
+				try {
+					aux[i] = this.game_deck.get_card();
+				} catch (EndOfDeck e) {
+					throw new InvalidPlayException( e.getMessage());
+				}
 			}
 			/*pass cards to the player hand*/
 			this.game_cards.newCards(aux);
@@ -44,13 +75,14 @@ public class OurVideoPokerFile extends OurVideoPoker {
 			/*update the number of deals in the statisctics*/
 			this.game_stats.addDeal();
 			/*return result of the bet*/
-			return new Deal_Result(this.game_cards,this.credits);
+			return new DealResult(this.game_cards,this.credits);
 			
 			
 			
 		}
 		
-		return new Invalid_Result("d: illegal command",this.credits);
+		throw new InvalidPlayException("d: illegal command");	
+
 	}
 
 }

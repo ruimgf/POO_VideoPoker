@@ -1,52 +1,33 @@
 package videopoker;
 
-import cards.HandCards;
- 
 /**
- * 
- * @author Alexandre
- * Abstract Class that returns the result of a play, it can be a bet, hold , credit , deal, advice  and statistics
- * or invalid the plays are to be implemented by subcalss's
- * @see Bet_Result @see Invalid_Result
- *
+ * The Result class is an abstract class that represents the result(valid output) of a play in the videopoker machine.
+ * @author Alexandre , Rui , Pedro
+ * @see BetResult @see InvalidResult @see CreditResult @see AdviceResult @see HoldResult @see StatisticsResult
  */
 public abstract class Result {
 	
-	int credits;
-	HandCards hand;
-	boolean[] holdcards;
-	
-	public boolean[] getHoldcards() {
-		return holdcards;
-	}	
-	
-	public Result(){
+	/**
+	 * All Results in our implementation have a int field credits that represent the credits
+	 * that the player have in the machine after that play.
+	 */
+	protected int credits;
 		
-		this.credits = -1;
-		this.hand = null;
-	}
-	
-	
-	// nao sei se gosto de tantos construtores
-	public Result(int credits){
+	/**
+	 * Constructor of the Class Result, all results in this implementation have the filed credits
+	 * @param credits int that is the credits of the player in the machine after a play move.
+	 */
+	Result(int credits){
 		this.credits = credits;
 	}
 	
-	public Result(HandCards hand){
-		this.hand = hand;
-	}
-	
-	public Result(HandCards hand,int credits){
-		this.credits = credits;
-		this.hand = hand;
-	}
-	
+	/**
+	 * Getter method for the field credits
+	 * @return a int that is the credits of the player after that play move.
+	 */
 	public int getCredits(){
 		return credits;
 	}
-
-	public HandCards getHand(){
-		return hand;
-	}
 	
+	 
 }

@@ -2,14 +2,18 @@ package cards;
 
 /**
  * Class that represent the 5 cards in the game, that are owned by the player.
- * @author Alexandre
+ * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo
  *
  */
 public class HandCards {
 	
-	/*hand of the player*/
+	/*
+	 * hand of the player
+	 * */
 	private Card[] gamecards;
-	/*lenght of the hand*/
+	/*
+	 * lenght of the hand
+	 * */
 	private int length = 5;
 	
 	/**
@@ -35,8 +39,8 @@ public class HandCards {
 	
 	/**
 	 * method to add a card only - only to debug i think
-	 * @param to_add
-	 * @param index
+	 * @param to_add card to add
+	 * @param index index of card
 	 */
 	public void addCard(Card to_add,int index){
 		
@@ -67,8 +71,8 @@ public class HandCards {
 
 	/**
 	 * method that return the card specified in the index
-	 * @param index
-	 * @return
+	 * @param index index of card to get
+	 * @return Card at index
 	 */
 	public Card getCardN(int index){
 		
@@ -81,7 +85,7 @@ public class HandCards {
 	}
 	/**
 	 * getter method for the game cards
-	 * @return
+	 * @return Game Cards
 	 */
 	public Card[] getGameCards(){
 		

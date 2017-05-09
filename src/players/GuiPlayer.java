@@ -10,9 +10,8 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import cards.HandCards;
-import videopoker.DoubleBonus10_7;
-import videopoker.OurVideoPoker;
-import videopoker.Result;
+
+import videopoker.*;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -80,7 +79,7 @@ public class GuiPlayer extends Player10_7 {
 	* @param res o que recebes
 	*
 	*/
-	private void showCards(Result res){
+	private void showCards(ResultWithHand res){
 		HandCards h = res.getHand();
 		btnDeal.setEnabled(false);
 		btnHold.setEnabled(false);
@@ -110,14 +109,24 @@ public class GuiPlayer extends Player10_7 {
 						btnHold.setEnabled(false);
 						btnAdvice.setEnabled(false);
 						message.setVisible(true);
-						PrintStatistics(game.statistics());
+						try {
+							PrintStatistics(game.statistics());
+						} catch (InvalidPlayException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}catch(IndexOutOfBoundsException err){
 						btnDeal.setEnabled(false);
 						btnHold.setEnabled(true);
 						btnAdvice.setEnabled(true);
 					}
 					
-					credit.setText(game.credit().toString());				
+					try {
+						credit.setText(game.credit().toString());
+					} catch (InvalidPlayException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}				
 				}else{	
 	            	if(holdCards[timerAux]==false){
 	            		cards[timerAux].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/"+h.getCardN(timerAux)+".png")));
@@ -260,8 +269,13 @@ public class GuiPlayer extends Player10_7 {
 
 	
 	private void InitializeCreditMessage(){
-		
-		credit = new JLabel("");
+	
+		try {
+			credit = new JLabel(game.credit().toString());
+		} catch (InvalidPlayException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		credit.setHorizontalAlignment(SwingConstants.LEFT);
 		credit.setForeground(Color.WHITE);
 		credit.setFont(new Font("URW Bookman L", Font.BOLD, 30));
@@ -288,10 +302,16 @@ public class GuiPlayer extends Player10_7 {
 		btnDeal.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Arrays.fill(holdCards,false);
-				game.bet(betValue);
-				Result res = game.deal();
-				showCards(res);
-				credit.setText(game.credit().toString());
+				
+				try {
+					game.bet(betValue);
+					DealResult res = game.deal();
+					showCards(res);
+					credit.setText(game.credit().toString());
+				} catch (InvalidPlayException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				message.setVisible(false);
 			}
 		});
@@ -314,8 +334,15 @@ public class GuiPlayer extends Player10_7 {
 		btnHold.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Result res = game.hold(holdCards);
-				showCards(res);
+				HoldResult res;
+				try {
+					res = game.hold(holdCards);
+					showCards(res);
+				} catch (InvalidPlayException e1) {
+					// TODO INSERT CODE TO INVALID HOLD
+					e1.printStackTrace();
+				}
+				
 
 			}
 		});
@@ -336,10 +363,14 @@ public class GuiPlayer extends Player10_7 {
 		
 		btnAdvice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Result res = game.advice();
-				holdCards = res.getHoldcards();
-				adviceUp();
-
+				AdviceResult res;
+				try {
+					res = game.advice();
+					holdCards = res.getHoldCards();
+					adviceUp();
+				} catch (InvalidPlayException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});	
 	}

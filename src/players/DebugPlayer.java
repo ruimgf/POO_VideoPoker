@@ -11,13 +11,12 @@ public class DebugPlayer extends Player10_7 {
 	ArrayList<String> commandsDebug; 
 	
 	public DebugPlayer(int credits, String cmdfile,String cardfile) {
-		// TODO Auto-generated constructor stub
 		super(credits);
-		game = new OurVideoPokerFile(credits,cardfile, new DoubleBonus10_7());
+		
 		try {
+			game = new OurVideoPokerFile(credits,cardfile, new DoubleBonus10_7());
 			ReadCmds(cmdfile);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 		
