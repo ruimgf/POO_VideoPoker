@@ -2,12 +2,12 @@ package players;
 
 import videopoker.*;
 
-public abstract class Player10_7 {
+public abstract class Player {
 	Videopoker game;
-	protected Player10_7(){
+	protected Player(){
 		game = null;
 	};
-	public Player10_7(Videopoker game) {
+	public Player(Videopoker game) {
 		this.game = game;
 
 	}
