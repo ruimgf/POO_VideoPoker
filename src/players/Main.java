@@ -25,7 +25,7 @@ public class Main {
 					System.exit(-1);
 				}
 				try {
-					game = new OurVideoPokerFile(Integer.parseInt(args[1]),args[2], new DoubleBonus10_7());
+					game = new OurVideoPokerFile(Integer.parseInt(args[1]),args[3], new DoubleBonus10_7());
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

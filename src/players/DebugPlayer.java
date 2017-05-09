@@ -22,7 +22,7 @@ public class DebugPlayer extends Player10_7 {
 	
 	public void ReadCmds (String filename) throws IOException{
 		
-		BufferedReader cmdBuffer = new BufferedReader(new FileReader("filename"));
+		BufferedReader cmdBuffer = new BufferedReader(new FileReader(filename));
 		String allCmds = new String();
 		String cmd = new String();
 		String line = cmdBuffer.readLine();
