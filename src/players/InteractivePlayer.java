@@ -3,6 +3,7 @@ import java.util.*;
 
 import videopoker.Videopoker;
 
+
 public class InteractivePlayer extends Player10_7 {
 	
 	String cmd;
