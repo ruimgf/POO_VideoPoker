@@ -5,7 +5,8 @@ import java.util.LinkedList;
 
 /**
  * Class that represents a Card Deck with Cards of all possible combinations between {@link CardValue} and {@link Suit}
- * @author rui
+ * Deck has always this cards
+ * @author Rui Figueiredo, Alexandre Candeias, Pedro Martinho
  *
  */
 
@@ -17,8 +18,8 @@ public class Deck {
 	
 	
 	/**
-	 * Get first Card of Deck
-	 * @return First card
+	 * Get first Card of Deck and put it at the end of Deck
+	 * @return First card of Deck
 	 * @throws EndOfDeck if deck is empty
 	 */
 	public Card get_card() throws EndOfDeck{
