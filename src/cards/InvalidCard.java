@@ -3,7 +3,7 @@ package cards;
  *  Exception to take of invalid {@link Card} Construction
  */
 
-public class InvalidCard extends Throwable {
+public class InvalidCard extends Exception {
 
 	/**
 	 * 

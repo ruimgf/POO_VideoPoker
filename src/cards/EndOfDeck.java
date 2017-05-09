@@ -4,7 +4,7 @@ package cards;
  * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo
  *
  */
-public class EndOfDeck extends Throwable {
+public class EndOfDeck extends Exception {
 
 	/**
 	 * 
