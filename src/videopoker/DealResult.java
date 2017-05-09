@@ -6,7 +6,8 @@ import cards.HandCards;
  * DealResult is a Class that extends ResultWithHand and represents the result of a
  * deal play move in the videopoker machine
  * @author Alexandre , Rui , Pedro
- * @see Result @see ResultWithHand
+ * @see Result
+ * @see ResultWithHand
  */
 public class DealResult extends ResultWithHand {
 

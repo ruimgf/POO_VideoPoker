@@ -5,7 +5,8 @@ import cards.HandCards;
 /**
  * Class that represents the Result of the hold playmove
  * @author Alexandre , Rui , Pedro
- * @see Result @see ResultWithHand
+ * @see Result
+ * @see ResultWithHand
  */
 public class HoldResult extends ResultWithHand{
 	

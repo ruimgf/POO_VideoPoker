@@ -8,22 +8,30 @@ import cards.InvalidCard;
 
 
 /**
- * TODO
+ * Class that implements the VideoPokerVariation Interface with the DoubleBonus 10_7 variation of a videopoker
+ * game.
  * @author Alexandre, Rui , Pedro
- *
+ * @see VideoPokerVariation
  */
 public class DoubleBonus10_7 implements VideoPokerVariation{
+	/**
+	 * This variation is equipped with a object for analyze handcards and give a framework 
+	 * of methods to give advices for the player.
+	 * @see CardAnalizer
+	 */
 	CardAnalizer analizer = new CardAnalizer();
 
-	/**TODO
-	 * 
+	/**
+	 * This object is a private hashmap that represents the payout table for this variation.
 	 */
-	private HashMap<String, Integer > PayoutMap = new HashMap<String, Integer>();
+	private final HashMap<String, Integer > PayoutMap;
 	
 	/**
-	 * TODO
+	 * Constructor of the DoubleBonus10_7 variation, it only initializes the payout hashmap 
 	 */
 	public DoubleBonus10_7(){
+		
+		PayoutMap = new HashMap<String, Integer>();
 		
 		/*create the payout table and put in the payoutmap the payouttable have the multiplier of each hand
 		 * 
@@ -65,7 +73,10 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 	}
 	
 	/**
-	 * TODO
+	 * Method that returns the name of the hand in this varitation given a hand
+	 * @param hand - it receives a HandCards object with a hand of cards to be evaluated
+	 * @return returns a string that is the name of the given hand in this variation
+	 * @see HandCards
 	 */
 	public String evaluateHandName(HandCards hand)
 	{
@@ -146,7 +157,11 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 
 	
 	/**
-	 * TODO
+	 * Method that takes a hand of cards and the bet that the player have placed and returns the respective payout
+	 * @param hand it receives a HandCards object with a hand of cards to be evaluated
+	 * @param bet the value that the player is betting in the hand
+	 * @return it returns a int whit the payout for the given hand
+	 * @see HandCards
 	 */
 	@Override
 	public int getPayout(HandCards hand, int bet) {
@@ -170,7 +185,11 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 	}
 
 	/**
-	 * TODO
+	 * This method gives advices of cards that a player have to hold
+	 * for the DoubleBonus variation of the VideoPoker based on a given hand
+	 * @param hand it receives a HandCards object with a hand of cards to be evaluated
+	 * @return it returns a fixed 5 size boolean array that is true in the index's of the hand the player have to hold
+	 * and false in the index's that are not to hold
 	 */
 	@Override
 	public boolean[] evaluateHandAdvice(HandCards hand) {

@@ -3,7 +3,12 @@ package videopoker;
 /**
  * The Result class is an abstract class that represents the result(valid output) of a play in the videopoker machine.
  * @author Alexandre , Rui , Pedro
- * @see BetResult @see InvalidResult @see CreditResult @see AdviceResult @see HoldResult @see StatisticsResult
+ * @see BetResult
+ * @see InvalidResult
+ * @see CreditResult 
+ * @see AdviceResult
+ * @see HoldResult
+ * @see StatisticsResult
  */
 public abstract class Result {
 	
