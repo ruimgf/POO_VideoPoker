@@ -1,8 +1,6 @@
 package players;
 import java.util.*;
 
-import videopoker.DoubleBonus10_7;
-import videopoker.OurVideoPokerFile;
 import videopoker.Videopoker;
 
 import java.io.*;
@@ -55,7 +53,8 @@ public class DebugPlayer extends Player10_7 {
 					cmd=cmd.concat(cmdsAux[i+1]);
 					i++;
 				}catch(NumberFormatException e){
-					//TODO code for catch of the exception
+					
+				
 				}
 			}else if(cmdsAux[i].contains("h")){
 				cmd=cmdsAux[i];
