@@ -4,8 +4,20 @@ import cards.Card;
 import cards.DebugDeck;
 import cards.EndOfDeck;
 
+/**
+ * TODO
+ * @author Alexandre, Rui, Pedro
+ *
+ */
 public class OurVideoPokerFile extends OurVideoPoker {
 
+	/**
+	 * TODO
+	 * @param credits
+	 * @param cardfile
+	 * @param variation
+	 * @throws Throwable
+	 */
 	public OurVideoPokerFile(int credits,String cardfile, VideoPokerVariation variation) throws Throwable {
 		super(credits,variation);
 		
@@ -13,6 +25,9 @@ public class OurVideoPokerFile extends OurVideoPoker {
 		
 	}
 	
+	/**
+	 * TODO
+	 */
 	public DealResult deal() throws InvalidPlayException{
 		
 		/*In gamestate 3 we have to check if the player have money to deal*/

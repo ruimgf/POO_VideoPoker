@@ -6,14 +6,15 @@ import cards.Deck;
 import cards.EndOfDeck;
 import cards.HandCards;
 /**
- * Class that implements the videopoker interface, this class needs a 
- * variation of the video poker to be given in is cronstructor
- * 
- * @author Alexandre
+ * TODO
+ * @author Alexandre, Rui , Pedro
  *
  */
 public class OurVideoPoker implements Videopoker{
 	
+	/**
+	 * TODO
+	 */
 	int credits;
 	/* represents the state were the game is 
 	 * 0 - begin
@@ -22,14 +23,37 @@ public class OurVideoPoker implements Videopoker{
 	 * 3 - after the hold - and end of play
 	 * 4 - after the bet but not the first bet
 	 * */
+	/**
+	 * TODO
+	 */
 	int gamestate = 0;
 	/*last bet of the player by default is 5*/
+	/**
+	 * TODO
+	 */
 	int lastbet = 5;
+	/**TODO
+	 * 
+	 */
 	Deck game_deck;
+	/**TODO
+	 * 
+	 */
 	HandCards game_cards;
+	/**
+	 * TODO 
+	 */
 	Statistics game_stats;
+	/**TODO
+	 * 
+	 */
 	VideoPokerVariation variation;
 	
+	/**
+	 * TODO
+	 * @param credits
+	 * @param variation
+	 */
 	public OurVideoPoker(int credits,VideoPokerVariation variation){
 		
 		this.credits = credits;
@@ -45,11 +69,8 @@ public class OurVideoPoker implements Videopoker{
 		
 	}
 	
-	
 	/**
-	 * Method that implements the interface bet method returns a invalid_result if bet not valid
-	 * or bet result if valid
-	 * @param credits int that represent the credits to bet
+	 * TODO
 	 */
 	public BetResult bet(int credits) throws InvalidPlayException{
 		/*it can only bet in the gamestate 1*/
@@ -93,9 +114,7 @@ public class OurVideoPoker implements Videopoker{
 	}
 
 	/**
-	 * Method to handle the bet with no args, default behavior is to bet the last valid bet
-	 * @return the result of the bet
-	 * @throws InvalidPlayException 
+	 * TODO
 	 */
 	public BetResult bet() throws InvalidPlayException{
 		
@@ -104,10 +123,7 @@ public class OurVideoPoker implements Videopoker{
 	}
 	
 	/**
-	 * method that implements the deal in the interface, return a Deal_Result with the info with the cards that
-	 * have been given to the player
-	 * @return the result of the deal
-	 * @throws InvalidPlayException 
+	 * TODO
 	 */
 	public DealResult deal() throws InvalidPlayException{
 		
@@ -167,10 +183,7 @@ public class OurVideoPoker implements Videopoker{
 	}
 
 	/**
-	 * method that implements the hold play.
-	 * @param to_hold - boolean array with false in the index that are not to hold and true in the ones that
-	 * are to hold
-	 * @throws InvalidPlayException 
+	 * TODO
 	 */
 	public HoldResult hold(boolean[] to_hold) throws InvalidPlayException{
 		
@@ -224,13 +237,19 @@ public class OurVideoPoker implements Videopoker{
 	}
 	
 	
-		
+	/**
+	 * TODO	
+	 */
 	public CreditResult credit(){
 		
 		return new CreditResult(this.credits);
 		
 	}
 	
+	/**
+	 * TODO
+	 * 
+	 */
 	public AdviceResult advice() throws InvalidPlayException{
 		
 		/*if it is not on gamestate 2 then it cannot do advice*/
@@ -242,12 +261,18 @@ public class OurVideoPoker implements Videopoker{
 		
 	}
 	
+	/**
+	 * TODO
+	 */
 	public StatisticsResult statistics(){
 		
 		return new StatisticsResult(this.credits,this.game_stats);
 		
 	}
 	
+	/**
+	 * TODO
+	 */
 	public void quit() throws InvalidPlayException{
 		/*it can only quit if it is in the gamestate 0 or 3*/
 		if(this.gamestate == 3 || this.gamestate == 0){

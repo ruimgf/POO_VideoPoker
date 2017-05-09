@@ -1,28 +1,41 @@
 package videopoker;
 
 /**
- * Class that implements the statisctics of the game, that is , the number of hands of each wining hand and 
- * the tools to keep tracking of player wins
- * @author Alexandre
+ * TODO
+ * @author Alexandre, Rui , Pedro
  *
  */
 public class Statistics {
 	/* position 0 representes jacks --- 9 represents 0ther hands*/
-	private int[] hands_stats = new int[10];
-	private int initial_credit;
-	private int actual_credit;
-	private int number_deals;
 	/**
-	 * constructor of statistics
-	 * @param initial_credit the initial credit of the player
+	 * TODO
+	 */
+	private int[] hands_stats = new int[10];
+	/**
+	 * TODO
+	 */
+	private int initial_credit;
+	/**
+	 * TODO
+	 */
+	private int actual_credit;
+	/**
+	 * TODO
+	 */
+	private int number_deals;
+	
+	/**
+	 * TODO
+	 * @param initial_credit
 	 */
 	Statistics(int initial_credit){
 		
 		this.initial_credit=initial_credit;
 	}
+	
 	/**
-	 * method that give a name of a hand by the variation videopoker updates the table of statistics
-	 * @param hand_name string with the hand name
+	 * TODO
+	 * @param hand_name
 	 */
 	public void update_hand_stats(String hand_name){
 		
@@ -68,8 +81,9 @@ public class Statistics {
 		return;
 		
 	}
+	
 	/**
-	 * method that increment the number of Jacks or Better hands
+	 * TODO
 	 */
 	private void addJacks(){
 		this.hands_stats[0] = this.hands_stats[0] + 1;
@@ -77,59 +91,92 @@ public class Statistics {
 	}
 	
 	/**
-	 * method that increment the number of two pair hands
+	 * TODO
 	 */
 	private void addTwoPair(){
 		this.hands_stats[1] = this.hands_stats[1] + 1;
 		
 	}
 	
+	/**
+	 * TODO
+	 * 
+	 */
 	private void addThree(){
 		this.hands_stats[2] = this.hands_stats[2] + 1;
 		
 	}
 	
+	/**
+	 * TODO
+	 */
 	private void addStraight(){
 		this.hands_stats[3] = this.hands_stats[3] + 1;
 		
 	}
 	
+	/**
+	 * TODO
+	 */
 	private void addFlush(){
 		this.hands_stats[4] = this.hands_stats[4] + 1;
 		
 	}
 	
+	/**
+	 * TODO
+	 */
 	private void addFullHouse(){
 		this.hands_stats[5] = this.hands_stats[5] + 1;
 		
 	}
 	
+	/**
+	 * TODO
+	 */
 	private void addFour(){
 		this.hands_stats[6] = this.hands_stats[6] + 1;
 		
 	}
 	
+	/**
+	 * TODO
+	 */
 	private void addStraightFlush(){
 		this.hands_stats[7] = this.hands_stats[7] + 1;
 		
 	}
 	
+	/**
+	 * TODO
+	 */
 	private void addRoyalFlush(){
 		this.hands_stats[8] = this.hands_stats[8] + 1;
 		
 	}
 	
+	/**
+	 * TODO
+	 */
 	private void addOther(){
 		this.hands_stats[9] = this.hands_stats[9] + 1;
 		
 	}
 	
+	/**
+	 * TODO
+	 * @param actual_credit
+	 */
 	void updateActualCredit(int actual_credit){
 		
 		this.actual_credit = actual_credit;
 		
 		
 	}
+	
+	/**
+	 *	TODO
+	 */
 	void addDeal(){
 		this.number_deals = this.number_deals +1;
 	}

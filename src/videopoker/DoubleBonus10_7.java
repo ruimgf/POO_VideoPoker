@@ -8,17 +8,20 @@ import cards.InvalidCard;
 
 
 /**
- * Class that implements the DoubleBonus10_7 variation of videopoker game
- * It implements all the methods specified in the VideoPOkerVariation interface
- * @author Alexandre
+ * TODO
+ * @author Alexandre, Rui , Pedro
  *
  */
 public class DoubleBonus10_7 implements VideoPokerVariation{
 	CardAnalizer analizer = new CardAnalizer();
 
-	private HashMap<String, Integer > PayoutMap = new HashMap<String, Integer>();
-	/**
+	/**TODO
 	 * 
+	 */
+	private HashMap<String, Integer > PayoutMap = new HashMap<String, Integer>();
+	
+	/**
+	 * TODO
 	 */
 	public DoubleBonus10_7(){
 		
@@ -62,8 +65,7 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 	}
 	
 	/**
-	 * Method that give the hand cards of the game gives the name of the and
-	 * @return a string with the name of the hand according with DoubleBonus10_7
+	 * TODO
 	 */
 	public String evaluateHandName(HandCards hand)
 	{
@@ -144,9 +146,7 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 
 	
 	/**
-	 * Method that given the hand and the bet gives the payout of the bet
-	 * @param hand - player hand , bet - bet that the player had place
-	 * @return payout of the bet
+	 * TODO
 	 */
 	@Override
 	public int getPayout(HandCards hand, int bet) {
@@ -169,6 +169,9 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 		
 	}
 
+	/**
+	 * TODO
+	 */
 	@Override
 	public boolean[] evaluateHandAdvice(HandCards hand) {
 		analizer.reinitializeCount(hand);
