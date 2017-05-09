@@ -10,12 +10,8 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 import cards.HandCards;
-import videopoker.AdviceResult;
-import videopoker.DealResult;
-import videopoker.HoldResult;
-import videopoker.InvalidPlayException;
-import videopoker.Result;
-import videopoker.ResultWithHand;
+
+import videopoker.*;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -30,6 +26,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.JTextField;
 
 public class GuiPlayer extends Player10_7 {
 
@@ -47,29 +44,21 @@ public class GuiPlayer extends Player10_7 {
 	boolean [] chipsAux = new boolean[5];
 	Timer timer;
 	int timerAux=0;
-
-	private JLabel credit;
+	JLabel credit;
 	JTextArea statistics;
+	JTextField userCreditText;
+	JLabel initMessage;
+	JLabel initMessageError;
+	int initCredit=0;
+	
 	
 	/**
 	 * Create the application.
 	 */
 	public GuiPlayer() {
-		super(1000);
-		initialize();
-		
-		message = new JLabel("");
-		message.setBorder(null);
-		message.setHorizontalAlignment(SwingConstants.CENTER);
-		message.setForeground(Color.WHITE);
-		message.setFont(new Font("URW Bookman L", Font.BOLD, 35));
-		message.setBounds(112, 520, 773, 50);
-		frame.getContentPane().add(message);		
-		JLabel backGround = new JLabel(new ImageIcon(GuiPlayer.class.getResource("/images/backGround.png")));
-		backGround.setLocation(0, 0);
-		backGround.setSize(1000, 700);
-		backGround.setBackground(new Color(238, 238, 238));
-		frame.getContentPane().add(backGround);
+		super();		
+		initialize();	
+				
 		
 		
 	}
@@ -97,7 +86,7 @@ public class GuiPlayer extends Player10_7 {
 		btnAdvice.setEnabled(false);
 		for(int i=0; i<5;i++){
 			if(holdCards[i]==false){
-				cards[i].setIcon(new ImageIcon(new ImageIcon("src/images/cardBack.png").getImage()));
+				cards[i].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/cardBack.png")));
 				cards[i].setRolloverIcon(null);
 			}
 		}
@@ -140,7 +129,7 @@ public class GuiPlayer extends Player10_7 {
 					}				
 				}else{	
 	            	if(holdCards[timerAux]==false){
-	            		cards[timerAux].setIcon(new ImageIcon(new ImageIcon("src/images/"+h.getCardN(timerAux)+".png").getImage()));
+	            		cards[timerAux].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/"+h.getCardN(timerAux)+".png")));
 	            		cards[timerAux].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/"+h.getCardN(timerAux)+"on.png")));
 	            		cards[timerAux].setBounds(cardsXpos[timerAux], 290, 145, 216);
 	            	}else{
@@ -176,6 +165,16 @@ public class GuiPlayer extends Player10_7 {
 		}
 	}
 	
+	private void InitializeMessage(){
+		message = new JLabel("");
+		message.setBorder(null);
+		message.setHorizontalAlignment(SwingConstants.CENTER);
+		message.setForeground(Color.WHITE);
+		message.setFont(new Font("URW Bookman L", Font.BOLD, 35));
+		message.setBounds(112, 520, 773, 50);
+		frame.getContentPane().add(message);
+	}
+	
 	private void InitializeCards(){
 		for(int i=0; i<5;i++){
 			int a=i;
@@ -197,6 +196,7 @@ public class GuiPlayer extends Player10_7 {
 			cards[i].setOpaque(false);
 			cards[i].setContentAreaFilled(false);
 			cards[i].setBorderPainted(false);
+			cards[i].setVisible(false);
 			//cards[i].setHorizontalAlignment(SwingConstants.CENTER);
 			frame.getContentPane().add(cards[i]);
 		}
@@ -212,6 +212,7 @@ public class GuiPlayer extends Player10_7 {
 			chips[i].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chips.png")));
 			chips[i].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipson.png")));
 			chips[i].setBounds(112+(80*i), 130, 70, 50);
+			chips[i].setVisible(false);
 			frame.getContentPane().add(chips[i]);
 			chips[i].addMouseListener(new MouseAdapter() {
 	        	@Override
@@ -219,24 +220,24 @@ public class GuiPlayer extends Player10_7 {
 	        		int j;
 	        		if(chipsAux[a]==false){
 		        		for(j=0; j<=a;j++){
-		        			chips[j].setIcon(new ImageIcon(new ImageIcon("src/images/chips.png").getImage()));
+		        			chips[j].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipson.png")));
 		        			chips[j].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipson.png")));
-	
 		        			chipsAux[j]=true;
 		        		}
 		        		
 		        		for(int aux=j; aux<=4; aux++){
-		        			chips[aux].setIcon(new ImageIcon(new ImageIcon("src/images/chipsBlack.png").getImage()));
+		        			chips[aux].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
 		        			chips[aux].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
-							
 							chipsAux[aux]=false;
 						}
 	        		}else{
-	        			for(j=a+1; j<5; j++){
-		        			chips[j].setIcon(new ImageIcon(new ImageIcon("src/images/chipsBlack.png").getImage()));
-		        			chips[j].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
-							chipsAux[j]=false;
-						}
+	        		
+		        			for(j=a+1; j<5; j++){
+			        			chips[j].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
+			        			chips[j].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
+								chipsAux[j]=false;
+		        			}
+		        		
 	        		}
 		        	betValue=a+1;
 	        	}
@@ -259,11 +260,16 @@ public class GuiPlayer extends Player10_7 {
 		statistics.setForeground(Color.WHITE);
 		statistics.setEditable(false);
 		statistics.setBounds(685, 24, 287, 222);
+		statistics.setVisible(false);
 		frame.getContentPane().add(statistics);
 	}
 	
+
+	
+
+	
 	private void InitializeCreditMessage(){
-		
+	
 		try {
 			credit = new JLabel(game.credit().toString());
 		} catch (InvalidPlayException e) {
@@ -274,6 +280,7 @@ public class GuiPlayer extends Player10_7 {
 		credit.setForeground(Color.WHITE);
 		credit.setFont(new Font("URW Bookman L", Font.BOLD, 30));
 		credit.setBounds(112, 70, 500, 50);
+		credit.setVisible(false);
 		frame.getContentPane().add(credit);
 		
 	}
@@ -289,6 +296,7 @@ public class GuiPlayer extends Player10_7 {
 		btnDeal.setBorderPainted(false);
 		btnDeal.setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/button_deal.png")));
 		btnDeal.setBounds(100, 600, 220, 60);
+		btnDeal.setVisible(false);
 		frame.getContentPane().add(btnDeal);
 		
 		btnDeal.addActionListener(new ActionListener() {
@@ -320,6 +328,7 @@ public class GuiPlayer extends Player10_7 {
 		btnHold.setEnabled(false);
 		
 		btnHold.setBounds(380, 600, 220, 60);
+		btnHold.setVisible(false);
 		frame.getContentPane().add(btnHold);
 		
 		btnHold.addActionListener(new ActionListener() {
@@ -349,6 +358,7 @@ public class GuiPlayer extends Player10_7 {
 		btnAdvice.setContentAreaFilled(false);
 		btnAdvice.setBorderPainted(false);
 		btnAdvice.setBounds(640, 600, 220, 60);
+		btnAdvice.setVisible(false);
 		frame.getContentPane().add(btnAdvice);
 		
 		btnAdvice.addActionListener(new ActionListener() {
@@ -365,6 +375,95 @@ public class GuiPlayer extends Player10_7 {
 		});	
 	}
 	
+	private void InitializeCreditButton(){	
+		JButton creditButton = new JButton("");
+		creditButton.setVerticalAlignment(SwingConstants.BOTTOM);
+		creditButton.setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/play.png")));
+		creditButton.setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/playon.png")));
+		creditButton.setBounds(410, 340, 190, 290);
+		creditButton.setOpaque(false);
+		creditButton.setContentAreaFilled(false);
+		creditButton.setBorderPainted(false);
+		frame.getContentPane().add(creditButton);
+		creditButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try{
+					initCredit=Integer.parseInt(userCreditText.getText()); 
+					System.out.println("Olá");
+					
+					game = new OurVideoPoker(initCredit, new DoubleBonus10_7());
+					PrintStatistics(game.statistics());
+					credit.setText(game.credit().toString());
+					GameVisible();
+					creditButton.setVisible(false);
+					initMessage.setVisible(false);
+					initMessageError.setVisible(false);
+					userCreditText.setVisible(false);
+				}catch (NumberFormatException getError){
+					System.out.println("Adeus");
+					initMessageError.setText("(Invalid format. Please insert valid credit)");
+				}
+
+			}
+		});
+	}
+	
+	private void InitializeFrame(){
+		frame = new JFrame();
+		frame.setResizable(false);
+		frame.getContentPane().setLayout(null);
+		frame.setBounds(100, 100, 1000, 700);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	private void GameVisible(){
+		
+		for(int i=0; i<5; i++){
+			chips[i].setVisible(true);
+			cards[i].setVisible(true);
+		}
+		statistics.setVisible(true);
+		btnAdvice.setVisible(true);
+		btnHold.setVisible(true);
+		btnDeal.setVisible(true);
+		credit.setVisible(true);
+		message.setVisible(true);
+		
+	}
+	
+	private void InitializeInitMessage(){
+		initMessage = new JLabel("Insert your credit here:");
+		initMessage.setHorizontalAlignment(SwingConstants.LEFT);
+		initMessage.setForeground(Color.WHITE);
+		initMessage.setFont(new Font("URW Bookman L", Font.BOLD, 40));
+		initMessage.setBounds(100, 125, 700, 50);
+		frame.getContentPane().add(initMessage);
+	}
+	
+	private void InitializeInitMessageError(){
+		initMessageError = new JLabel("");
+		initMessageError.setHorizontalAlignment(SwingConstants.LEFT);
+		initMessageError.setForeground(Color.WHITE);
+		initMessageError.setFont(new Font("URW Bookman L", Font.BOLD, 20));
+		initMessageError.setBounds(100, 165, 700, 50);
+		frame.getContentPane().add(initMessageError);
+	}
+	
+	private void InitializeCreditGeter(){
+		userCreditText = new JTextField();
+		userCreditText.setSelectedTextColor(Color.WHITE);
+		userCreditText.setSelectionColor(Color.WHITE);
+		userCreditText.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		userCreditText.setForeground(Color.WHITE);
+		userCreditText.setOpaque(false);
+		
+		userCreditText.setFont(new Font("URW Bookman L", Font.BOLD, 40));
+		userCreditText.setBounds(380, 250, 240, 60);
+		frame.getContentPane().add(userCreditText);
+		
+	}
+	
 	private void InitializeButtons(){
 		InitializeButtonDeal();
 		InitializeButtonHold();
@@ -376,23 +475,24 @@ public class GuiPlayer extends Player10_7 {
 	 */
 	private void initialize() {
 
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.getContentPane().setLayout(null);
-		frame.setBounds(100, 100, 1000, 700);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Arrays.fill(chipsAux,true);	
+		InitializeFrame();
+		InitializeInitMessage();
+		InitializeInitMessageError();
+		InitializeCreditGeter();
+		InitializeCreditButton();
+		Arrays.fill(chipsAux,true);
+		InitializeMessage();
 		InitializeCards(); 
 		InitializeChips();
 		InitializeCreditMessage();
 		InitializeButtons();	
 		InitializeStatistics();
-		try {
-			PrintStatistics(game.statistics());
-		} catch (InvalidPlayException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		JLabel backGround = new JLabel(new ImageIcon(GuiPlayer.class.getResource("/images/backGround.png")));
+		backGround.setLocation(0, 0);
+		backGround.setSize(1000, 700);
+		backGround.setBackground(new Color(238, 238, 238));
+		frame.getContentPane().add(backGround);
+		
 	}
 	
 	/**
