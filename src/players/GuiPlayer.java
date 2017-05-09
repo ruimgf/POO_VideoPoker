@@ -393,8 +393,18 @@ public class GuiPlayer extends Player10_7 {
 					System.out.println("Olá");
 					
 					game = new OurVideoPoker(initCredit, new DoubleBonus10_7());
-					PrintStatistics(game.statistics());
-					credit.setText(game.credit().toString());
+					try {
+						PrintStatistics(game.statistics());
+					} catch (InvalidPlayException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+					try {
+						credit.setText(game.credit().toString());
+					} catch (InvalidPlayException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					GameVisible();
 					creditButton.setVisible(false);
 					initMessage.setVisible(false);
