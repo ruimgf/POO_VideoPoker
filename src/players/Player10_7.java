@@ -7,8 +7,8 @@ public abstract class Player10_7 {
 	protected Player10_7(){
 		game = null;
 	};
-	public Player10_7(int credits) {
-		this.game = new OurVideoPoker(credits,new DoubleBonus10_7());
+	public Player10_7(Videopoker game) {
+		this.game = game;
 
 	}
 	

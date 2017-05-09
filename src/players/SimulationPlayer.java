@@ -1,13 +1,14 @@
 package players;
 
 import videopoker.InvalidPlayException;
+import videopoker.Videopoker;
 
 public class SimulationPlayer extends Player10_7 {
 		int numPlays;
 		int betValue;
 		
-		public SimulationPlayer(int credits,int betValue , int numPlays) {
-			super(credits);
+		public SimulationPlayer(Videopoker game,int betValue , int numPlays) {
+			super(game);
 			this.betValue = betValue;
 			this.numPlays = numPlays;
 		}
@@ -22,7 +23,7 @@ public class SimulationPlayer extends Player10_7 {
 		}
 		
 		public void Play () {
-			int currentCredit=0;
+			
 
 			while(numPlays>0 ){
 			
@@ -46,8 +47,8 @@ public class SimulationPlayer extends Player10_7 {
 		
 		public static void main(String[] args){
 			
-			SimulationPlayer player= new SimulationPlayer(10000,5,100000);
-			player.Play();
+			//SimulationPlayer player = new SimulationPlayer(10000,5,100000);
+			//player.Play();
 			
 		}
 }

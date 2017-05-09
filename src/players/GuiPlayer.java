@@ -458,11 +458,11 @@ public class GuiPlayer extends Player10_7 {
 	
 	private void InitializeCreditGeter(){
 		userCreditText = new JTextField();
-		userCreditText.setSelectedTextColor(Color.WHITE);
+		userCreditText.setSelectedTextColor(Color.BLACK);
 		userCreditText.setSelectionColor(new Color(0,0,0,0));
 		userCreditText.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		userCreditText.setForeground(new Color(0,0,0,0));
-		userCreditText.setOpaque(false);
+		userCreditText.setOpaque(true);
 		
 		userCreditText.setFont(new Font("URW Bookman L", Font.BOLD, 40));
 		userCreditText.setBounds(380, 250, 240, 60);

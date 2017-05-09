@@ -1,12 +1,14 @@
 package players;
 import java.util.*;
 
+import videopoker.Videopoker;
+
 public class InteractivePlayer extends Player10_7 {
 	
 	String cmd;
 	Scanner scan = new Scanner(System.in);
-	public InteractivePlayer(int credits) {
-		super(credits);
+	public InteractivePlayer(Videopoker game) {
+		super(game);
 	}
 	
 	public void ReadCmd () {
@@ -25,8 +27,8 @@ public class InteractivePlayer extends Player10_7 {
 	}
 	public static void main(String[] args){
 		
-		InteractivePlayer player= new InteractivePlayer(1000);
+		//InteractivePlayer player= new InteractivePlayer(1000);
 		 
-		player.Play();
+		//player.Play();
 	}
 }

@@ -3,6 +3,7 @@ import java.util.*;
 
 import videopoker.DoubleBonus10_7;
 import videopoker.OurVideoPokerFile;
+import videopoker.Videopoker;
 
 import java.io.*;
 
@@ -10,11 +11,10 @@ public class DebugPlayer extends Player10_7 {
 	
 	ArrayList<String> commandsDebug; 
 	
-	public DebugPlayer(int credits, String cmdfile,String cardfile) {
-		super(credits);
+	public DebugPlayer(Videopoker game, String cmdfile) {
+		super(game);
 		
 		try {
-			game = new OurVideoPokerFile(credits,cardfile, new DoubleBonus10_7());
 			ReadCmds(cmdfile);
 		} catch (Throwable e) {
 			e.printStackTrace();
