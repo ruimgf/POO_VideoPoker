@@ -15,11 +15,11 @@ import videopoker.*;
 public class OurVideoPokerFile extends OurVideoPoker {
 
 	/**
-	 * Constructor that
-	 * @param credits
-	 * @param cardfile
-	 * @param variation
-	 * @throws Throwable
+	 * Constructor that receives also the file from where the deck is to be loaded
+	 * @param credits initial_credits of the player
+	 * @param cardfile string with the file where the deck is located
+	 * @param variation variation of the videopoker thtat is to be played
+	 * @throws Throwable Execption because of the file manipulation
 	 */
 	public OurVideoPokerFile(int credits,String cardfile, VideoPokerVariation variation) throws Throwable {
 		super(credits,variation);
@@ -29,7 +29,11 @@ public class OurVideoPokerFile extends OurVideoPoker {
 	}
 	
 	/**
-	 * TODO
+	 * Deal method has been re-implemented because in this variation of {@link OurVideoPoker} we cannot shuffle the deck
+	 * @return DealResult object if the deal is valid
+	 * @throws the same thing as {@link OurVideoPoker.deal} see that method for information about what it throws
+	 * @see DealResult
+	 * @see OurVideoPoker
 	 */
 	public DealResult deal() throws InvalidPlayException{
 		
