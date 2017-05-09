@@ -23,14 +23,18 @@ public class SimulationPlayer extends Player10_7 {
 		}
 		
 		public void Play () {
-		
 			while(numPlays>0 ){
 			
 				try {
 					Intructions(betValue);
 					numPlays--;
 				} catch (InvalidPlayException e) {
-					e.printStackTrace();
+					System.out.println(e.getMessage());
+					try {
+						System.out.println(game.statistics());
+					} catch (InvalidPlayException e1) {
+						e1.printStackTrace();
+					}
 					System.exit(-1);
 				}
 				
@@ -39,7 +43,8 @@ public class SimulationPlayer extends Player10_7 {
 			try {
 				System.out.println(game.statistics());
 			} catch (InvalidPlayException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
+				System.exit(-1);
 			}
 		} 
 

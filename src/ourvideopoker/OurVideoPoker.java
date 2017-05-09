@@ -8,53 +8,65 @@ import cards.HandCards;
 
 import videopoker.*;
 /**
- * TODO
+ * This Class is our implementation of a videopoker machine, it implements the Videopooker interface
  * @author Alexandre, Rui , Pedro
+ * @see Videopooker
  *
  */
 public class OurVideoPoker implements Videopoker{
 	
 	/**
-	 * TODO
+	 * This field represents the credits that the player have in the Videopooker machine
 	 */
-	int credits;
-	/* represents the state were the game is 
+	protected int credits;
+	
+	/**
+	 * To implement the game we use a simple StateMachine, this field is the state of the game at each time
 	 * 0 - begin
 	 * 1 - after first bet 
 	 * 2 - after deal
 	 * 3 - after the hold - and end of play
 	 * 4 - after the bet but not the first bet
-	 * */
-	/**
-	 * TODO
 	 */
-	int gamestate = 0;
-	/*last bet of the player by default is 5*/
-	/**
-	 * TODO
-	 */
-	int lastbet = 5;
-	/**TODO
-	 * 
-	 */
-	Deck game_deck;
-	/**TODO
-	 * 
-	 */
-	HandCards game_cards;
-	/**
-	 * TODO 
-	 */
-	Statistics game_stats;
-	/**TODO
-	 * 
-	 */
-	VideoPokerVariation variation;
+	protected int gamestate = 0;
 	
 	/**
-	 * TODO
-	 * @param credits
-	 * @param variation
+	 * This filed represents the last bet placed by the player in the machine
+	 */
+	protected int lastbet = 5;
+	
+	/**
+	 * This field is the Deck of the videopoker machine.
+	 * @see Deck
+	 */
+	protected Deck game_deck;
+	
+	/**
+	 * This filed represents the cards that he machine have , for that it uses a object of type HandCards
+	 * @see HandCards
+	 */
+	protected HandCards game_cards;
+	
+	/**
+	 * For save the machine Statistics we use a object of type Statistics to handl the hands that had been
+	 * given in the past
+	 * @see Statistics
+	 */
+	protected Statistics game_stats;
+	
+	/**
+	 * Must important thing it uses a object that implements the VideoPokerVariation Interface, is with that
+	 * object that the machine knows what variation of videopoker is being played
+	 * @see VideoPokerVariation
+	 */
+	protected final VideoPokerVariation variation;
+	
+	/**
+	 * Constructor of the Videopoker, it receives the initial credits that a player put in the machine
+	 * and a object with the variation that is to be played
+	 * @param credits the initial credits in the machine
+	 * @param variation the VideoPokerVariation that is going to be played in the machine
+	 * @see VideoPokerVariation
 	 */
 	public OurVideoPoker(int credits,VideoPokerVariation variation){
 		
@@ -72,7 +84,19 @@ public class OurVideoPoker implements Videopoker{
 	}
 	
 	/**
-	 * TODO
+	 * Method that implements the move for bet , it receives the credits that the player want to bet 
+	 * and if the bet is valid returns a BetResult otherwise throw a exception with a message of the error
+	 * occurred
+	 * @param credits - credits that the player want to bet between [1-5]
+	 * @return BetResult - object with information of the bet playmove
+	 * @throws InvalidPlayException in case of error the bet is not placed and this method throws a InvalidPlayException
+	 * with a message string that can be as it follows:
+	 *	<p> - if the bet is not in the range [1 - 5] : 'b: illegal command, please make a bet in the range [1,5]'</p>	
+	 *	<p>- if the player dont have credits : 'b: illegal command, player without credits'</p>
+	 * 	<p>- if the player dont have credtis for that bet : 'b: illegal command, player without credits for that bet'</p>
+	 *  <p>- if the gamestate don't permit that play (gamestate diferent from 0 and 3) : 'b: illegal command' </p>
+	 * @see BetResult
+	 * 
 	 */
 	public BetResult bet(int credits) throws InvalidPlayException{
 		/*it can only bet in the gamestate 1*/
@@ -116,9 +140,18 @@ public class OurVideoPoker implements Videopoker{
 	}
 
 	/**
-	 * Method to handle the bet with no args, default behavior is to bet the last valid bet
-	 * @return the result of the bet
-	 * @throws InvalidPlayException if an error occurred
+	 * Method that implements the move for bet with no arg, so it places a bet with the last valid bet
+	 * that had occurred.If the bet is valid returns a BetResult otherwise throw a exception with a message of the error
+	 * occurred
+	 * @return BetResult - object with information of the bet playmove
+	 * @throws InvalidPlayException in case of error the bet is not placed and this method throws a InvalidPlayException
+	 * with a message string that can be as it follows:
+	 *	<p> - if the bet is not in the range [1 - 5] : 'b: illegal command, please make a bet in the range [1,5]'</p>	
+	 *	<p>- if the player dont have credits : 'b: illegal command, player without credits'</p>
+	 * 	<p>- if the player dont have credtis for that bet : 'b: illegal command, player without credits for that bet'</p>
+	 *  <p>- if the gamestate don't permit that play (gamestate diferent from 0 and 3) : 'b: illegal command' </p>
+	 * @see BetResult
+	 * 
 	 */
 	public BetResult bet() throws InvalidPlayException{
 		
@@ -127,10 +160,17 @@ public class OurVideoPoker implements Videopoker{
 	}
 	
 	/**
-	 * method that implements the deal in the interface, return a Deal_Result with the info with the cards that
-	 * have been given to the player
-	 * @return the result of the deal
-	 * @throws InvalidPlayException if an error occurred
+	 * Method that implements the move for deal , if the deal
+	 * is valid returns a DealResult otherwise throw a exception with a message of the error
+	 * occurred
+	 * @return DealResult - object with information of the deal playmove
+	 * @throws InvalidPlayException in case of error this method throws a InvalidPlayException
+	 * with a message string that can be as it follows:
+	 *	<p>- if the player dont have credits : 'd: illegal command, player without credits'</p>
+	 * 	<p>- if the player dont have credtis for that bet : 'd: illegal command, player without credits for that bet'</p>
+	 *  <p>- if the gamestate don't permit that play (gamestate diferent from 1,3 and 4) : 'd: illegal command' </p>
+	 * @see DealResult
+	 * 
 	 */
 	public DealResult deal() throws InvalidPlayException{
 		
@@ -190,10 +230,20 @@ public class OurVideoPoker implements Videopoker{
 	}
 
 	/**
-	 * method that implements the hold play.
-	 * @param to_hold - boolean array with false in the index that are not to hold and true in the ones that
-	 * are to hold
-	 * @throws InvalidPlayException if an error occurred
+	 * Method that implements the move for hold , it receives a boolean array of size 5 whit true in the index's
+	 * with the cards that the player want to hold and false in the ones that the player want to discard
+	 * if the hold is valid returns a HoldResult otherwise throw a exception with a message of the error
+	 * occurred
+	 * @param to_hold - boolean array of size 5
+	 * @return HoldResult - object with information of the hold playmove
+	 * @throws InvalidPlayException in case of error the hold is not placed and this method throws a InvalidPlayException
+	 * with a message string that can be as it follows:
+	 *	<p> - if the array is not of size 5: 'ERROR: ARRAY OF HOLD DONT HAVE 5 FIELDS'</p>	
+	 *  <p>- if the gamestate don't permit that play (gamestate diferent from 2) : 'h: illegal command' </p>
+	 *  <p> - if the deck had finished: 'ERRO: END OF DECK'</p>
+	 * @see EndOfDeck
+	 * @see HoldResult
+	 * 
 	 */
 	public HoldResult hold(boolean[] to_hold) throws InvalidPlayException{
 		
@@ -218,7 +268,7 @@ public class OurVideoPoker implements Videopoker{
 					try {
 						this.game_cards.modifyCard(this.game_deck.get_card(), i);
 					} catch (EndOfDeck e) {
-						throw new InvalidPlayException(e.getMessage());						
+						throw new InvalidPlayException("ERRO: END OF DECK");						
 					}
 					
 				}
@@ -248,7 +298,9 @@ public class OurVideoPoker implements Videopoker{
 	
 	
 	/**
-	 * TODO	
+	 * Method that implements the credit command
+	 * @return it returns a CreditResult object with the information of the credits in the machine
+	 * @see CreditResult
 	 */
 	public CreditResult credit(){
 		
@@ -257,7 +309,13 @@ public class OurVideoPoker implements Videopoker{
 	}
 	
 	/**
-	 * TODO
+	 * Method that implements the move for advice, if the advice is valid returns a 
+	 * AdviceResult otherwise throw a exception with a message of the error occurred
+	 * @return AdviceResult - object with information of the AdviceResult
+	 * @throws InvalidPlayException in case of error this method throws a InvalidPlayException
+	 * with a message string that can be as it follows:
+	 *  <p>- if the gamestate don't permit that play (gamestate diferent from 2) : 'a: illegal command' </p>
+	 * @see AdviceResult
 	 * 
 	 */
 	public AdviceResult advice() throws InvalidPlayException{
@@ -271,8 +329,11 @@ public class OurVideoPoker implements Videopoker{
 		
 	}
 	
+	
 	/**
-	 * TODO
+	 * Method that implements the statistics command
+	 * @return it returns a StatisticsResult object with the information of the statistics in the machine
+	 * @see StatisticsResult
 	 */
 	public StatisticsResult statistics(){
 		
@@ -281,14 +342,18 @@ public class OurVideoPoker implements Videopoker{
 	}
 	
 	/**
-	 * TODO
+	 * Method that implements the quit command it returns nothing but if the command is invalid throws an
+	 * InvalidPlayException
+	 * @throws InvalidPlayException in case of error this method throws a InvalidPlayException
+	 * with a message string that can be as it follows:
+	 *  <p>- if the gamestate don't permit that play (gamestate diferent from 3 and 0) : 'q: illegal command' </p>
 	 */
 	public void quit() throws InvalidPlayException{
 		/*it can only quit if it is in the gamestate 0 or 3*/
 		if(this.gamestate == 3 || this.gamestate == 0){
 		
-		System.out.println("QUIT");
-		System.exit(1);
+			return;
+		
 		}
 		
 		throw new InvalidPlayException("q: illegal command");

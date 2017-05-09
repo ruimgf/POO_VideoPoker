@@ -1,6 +1,5 @@
 package videopoker;
 
-
 public interface Videopoker {
 	public BetResult bet(int credits) throws InvalidPlayException;
 	public BetResult bet() throws InvalidPlayException;

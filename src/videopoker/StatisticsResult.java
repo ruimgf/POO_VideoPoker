@@ -3,6 +3,7 @@ package videopoker;
 /**
  * Class that represents the result of the Statistics command insert in the videopoker machine
  * @author Alexandre , Rui , Pedro
+ * @see Result
  *
  */
 public class StatisticsResult extends Result {

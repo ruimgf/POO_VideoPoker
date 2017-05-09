@@ -34,7 +34,7 @@ public class Deck {
 		
 	}
 	/**
-	 * Create a new Deck
+	 * Create a new Deck with 52 cards 13 of each Suit
 	 * 
 	 */
 	public Deck() {
