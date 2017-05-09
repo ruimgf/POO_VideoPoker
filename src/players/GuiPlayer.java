@@ -270,12 +270,8 @@ public class GuiPlayer extends Player10_7 {
 	
 	private void InitializeCreditMessage(){
 	
-		try {
-			credit = new JLabel(game.credit().toString());
-		} catch (InvalidPlayException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		credit = new JLabel("");
 		credit.setHorizontalAlignment(SwingConstants.LEFT);
 		credit.setForeground(Color.WHITE);
 		credit.setFont(new Font("URW Bookman L", Font.BOLD, 30));
@@ -463,9 +459,9 @@ public class GuiPlayer extends Player10_7 {
 	private void InitializeCreditGeter(){
 		userCreditText = new JTextField();
 		userCreditText.setSelectedTextColor(Color.WHITE);
-		userCreditText.setSelectionColor(Color.WHITE);
+		userCreditText.setSelectionColor(new Color(0,0,0,0));
 		userCreditText.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		userCreditText.setForeground(Color.WHITE);
+		userCreditText.setForeground(new Color(0,0,0,0));
 		userCreditText.setOpaque(false);
 		
 		userCreditText.setFont(new Font("URW Bookman L", Font.BOLD, 40));
