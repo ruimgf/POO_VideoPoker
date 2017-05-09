@@ -4,10 +4,10 @@ import java.util.*;
 import videopoker.Videopoker;
 
 
-public class InteractivePlayer extends Player10_7 {
+public class InteractivePlayer extends Player {
 	
-	String cmd;
-	Scanner scan = new Scanner(System.in);
+	private String cmd;
+	private Scanner scan = new Scanner(System.in);
 	public InteractivePlayer(Videopoker game) {
 		super(game);
 	}

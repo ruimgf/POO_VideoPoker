@@ -3,7 +3,8 @@ package players;
 import videopoker.*;
 
 public abstract class Player {
-	Videopoker game;
+
+	protected Videopoker game;
 	protected Player(){
 		game = null;
 	};

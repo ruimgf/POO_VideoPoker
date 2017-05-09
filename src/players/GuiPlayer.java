@@ -26,7 +26,7 @@ import java.awt.Cursor;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class GuiPlayer extends Player10_7 {
+public class GuiPlayer extends Player {
 
 	private JFrame frame;
 	JButton [] cards = new JButton[5];
