@@ -7,14 +7,15 @@ import cards.EndOfDeck;
 import videopoker.*;
 
 /**
- * TODO
+ * This class extends the {@link OurVideoPoker} to add funcionalitys to run a videopooker with a deck that is load
+ * from a file
  * @author Alexandre, Rui, Pedro
- *
+ * @see OurVideoPoker
  */
 public class OurVideoPokerFile extends OurVideoPoker {
 
 	/**
-	 * TODO
+	 * Constructor that
 	 * @param credits
 	 * @param cardfile
 	 * @param variation
