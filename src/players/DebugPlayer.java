@@ -29,7 +29,7 @@ public class DebugPlayer extends Player10_7 {
 		String cmd = new String();
 		String line = cmdBuffer.readLine();
 		ArrayList<String> cmds =new ArrayList<String>();
-		int i=0,index;
+		int i=0;
 	    
 		
 		while (line != null) {
@@ -60,7 +60,7 @@ public class DebugPlayer extends Player10_7 {
 			}else if(cmdsAux[i].contains("h")){
 				cmd=cmdsAux[i];
 				while(i+1 < cmdsAux.length && Character.isDigit(cmdsAux[i+1].charAt(0))){
-					index=Integer.parseInt(cmdsAux[i+1]);
+					//Integer.parseInt(cmdsAux[i+1]);
 					cmd=cmd.concat(cmdsAux[i+1]);
 					i++;
 				}

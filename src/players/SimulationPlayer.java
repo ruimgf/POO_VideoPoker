@@ -22,8 +22,7 @@ public class SimulationPlayer extends Player10_7 {
 		}
 		
 		public void Play () {
-			int currentCredit=0;
-
+			
 			while(numPlays>0 ){
 			
 				try {
