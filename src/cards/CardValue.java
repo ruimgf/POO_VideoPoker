@@ -59,7 +59,7 @@ public enum CardValue {
 	 * Function to know CardValue with a intValue
 	 * @param value - int Values
 	 * @return CardValue
-	 * @throws InvalidCard
+	 * @throws InvalidCard if an error occurred
 	 */
 	public static CardValue parse(int value) throws InvalidCard {
 		switch(value) {

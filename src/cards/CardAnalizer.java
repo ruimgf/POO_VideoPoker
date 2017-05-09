@@ -526,7 +526,7 @@ public class CardAnalizer {
 	
 	/**
 	 * Function that sees if a card is an High Card
-	 * @param c
+	 * @param c card to analyze
 	 * @return true if there is a HighCard
 	 */
 	private boolean isaHighCard(Card c){

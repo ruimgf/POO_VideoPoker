@@ -1,6 +1,14 @@
 package cards;
+/**
+ *  Exception to take of invalid {@link Card} Construction
+ */
 
 public class InvalidCard extends Throwable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public InvalidCard() {
 		// TODO Auto-generated constructor stub

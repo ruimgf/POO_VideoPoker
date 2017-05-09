@@ -95,7 +95,7 @@ public class OurVideoPoker implements Videopoker{
 	/**
 	 * Method to handle the bet with no args, default behavior is to bet the last valid bet
 	 * @return the result of the bet
-	 * @throws InvalidPlayException 
+	 * @throws InvalidPlayException if an error occurred
 	 */
 	public BetResult bet() throws InvalidPlayException{
 		
@@ -107,7 +107,7 @@ public class OurVideoPoker implements Videopoker{
 	 * method that implements the deal in the interface, return a Deal_Result with the info with the cards that
 	 * have been given to the player
 	 * @return the result of the deal
-	 * @throws InvalidPlayException 
+	 * @throws InvalidPlayException if an error occurred
 	 */
 	public DealResult deal() throws InvalidPlayException{
 		
@@ -170,7 +170,7 @@ public class OurVideoPoker implements Videopoker{
 	 * method that implements the hold play.
 	 * @param to_hold - boolean array with false in the index that are not to hold and true in the ones that
 	 * are to hold
-	 * @throws InvalidPlayException 
+	 * @throws InvalidPlayException if an error occurred
 	 */
 	public HoldResult hold(boolean[] to_hold) throws InvalidPlayException{
 		

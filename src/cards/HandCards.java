@@ -2,14 +2,18 @@ package cards;
 
 /**
  * Class that represent the 5 cards in the game, that are owned by the player.
- * @author Alexandre
+ * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo
  *
  */
 public class HandCards {
 	
-	/*hand of the player*/
+	/*
+	 * hand of the player
+	 * */
 	private Card[] gamecards;
-	/*lenght of the hand*/
+	/*
+	 * lenght of the hand
+	 * */
 	private int length = 5;
 	
 	/**

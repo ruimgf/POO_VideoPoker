@@ -19,7 +19,7 @@ public class Deck {
 	/**
 	 * Get first Card of Deck
 	 * @return First card
-	 * @throws EndOfDeck
+	 * @throws EndOfDeck if deck is empty
 	 */
 	public Card get_card() throws EndOfDeck{
 		try {
