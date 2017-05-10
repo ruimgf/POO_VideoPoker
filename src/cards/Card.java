@@ -158,13 +158,6 @@ public class Card {
 			System.out.println("Card new constructor : " +  c2);
 		} catch (InvalidCard e) {
 			e.printStackTrace();
-		}
-		
-		
+		}	
 	}
-	
-	
-	
-	
-	
 }

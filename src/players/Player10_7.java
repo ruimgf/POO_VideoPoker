@@ -2,17 +2,47 @@ package players;
 
 import videopoker.*;
 
+/**
+ * Class that represents the game Player10_7 that can be played in four different modes 
+ * (Debug, Interactive, Simulation or GUI) 
+ * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo 
+ */
+
 public abstract class Player10_7 {
+	/**
+	 * Object that allow us to play the game
+	 */
 	Videopoker game;
+	
+	/**
+	 * Construct the player by initializing a game as null to be used as an auxiliar to the GUI mode VERREREREREERERRERE
+	 */
+	
 	protected Player10_7(){
 		game = null;
 	};
+	
+	/**
+	 * Construct the player by initializing game with a initial number of credits
+	 * @param credits number of credits in the beginning of the game
+	 */
+	
 	public Player10_7(int credits) {
+		
 		this.game = new OurVideoPoker(credits,new DoubleBonus10_7());
 
 	}
 	
+	/**
+	 * Abstract Method to be used by the subclasses in order to play the game VEEEEEEEEEEEEEERRRRRRRRRRRR!!
+	 */
+	
 	abstract void Play();
+	
+	/**
+	 * Method that receives a command, analyze it and turns it into a game action
+	 * @param cmd command word to an action in the game
+	 */
 	
 	public void Comand (String cmd){
 		
@@ -22,16 +52,12 @@ public abstract class Player10_7 {
 			case 'b':
 				if(cmd.length()>1){
 					int BetValue=Integer.parseInt(cmd.substring(1));
-				
-					System.out.println(game.bet(BetValue));
-			
-					
-				}else{
-					
-						System.out.println(game.bet());
-					
+					System.out.println(game.bet(BetValue));	
+				}else{	
+						System.out.println(game.bet());	
 				}
 				break;
+				
 			case 'h':
 				boolean[] hold_cards = new boolean[5];
 				boolean flag = true; // flag to know if there was an error on try catch
@@ -52,30 +78,35 @@ public abstract class Player10_7 {
 				if(flag == true)  
 					System.out.println(game.hold(hold_cards));
 				break;
+				
 			case '$' :
 				System.out.println(game.credit());
 				break;
+				
 			case 'd':
 				System.out.println(game.deal());
 				break;
+				
 			case 's':
 				System.out.println(game.statistics());
 				break;
+				
 			case 'a':
 				System.out.println(game.advice());
 				break;
+				
 			case 'q':
 				game.quit();
 				break;
+				
 			default:
 				System.out.println("Invalid instruction!");
 				System.out.println("\n Please insert a command of type: b [amount(1-5)], h [cards to hold], $, d, a, s, q");
 				break;
 			}
+			
 		} catch (InvalidPlayException e) {
 			System.out.println(e.getMessage());
 		}
-		
-
 	}
 }
