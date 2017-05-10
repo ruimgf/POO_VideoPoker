@@ -6,18 +6,21 @@ import videopoker.Videopoker;
 import java.io.*;
 
 /**
- * Class that represents a game in Debug mode that extends from the class Player10_7 
+ * Class that represents a game in Debug mode. This class is important to test your game. 
+ * You can test your game by considering a file with the commands you want to check and the 
+ * cards that will be played during this mode
  * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo 
  */
 public class DebugPlayer extends Player {
+	
 	/**
 	 * Array of strings used to store all the commands in the commands file
 	 */
 	private ArrayList<String> commandsDebug; 
+	
 	/**
-	 * Construct that extends from the class 
-	 * @param game VERRRRRRRR ISTO
-	 * 
+	 * Construct a Debug mode player 
+	 * @param game game that implements the interface of the {@link videopoker.Videopoker}
 	 */
 	public DebugPlayer(Videopoker game, String cmdfile) {
 		super(game);
@@ -33,7 +36,7 @@ public class DebugPlayer extends Player {
 	
 	/**
 	* Method used to read an input file with commands and store those commands into an 
-	* ArrayList of strings VERRERRRRREREREREERRRRRRRRRRRRRRR
+	* ArrayList of strings
 	* @param filename name of the file from where we want to read the commands 
 	*/
 	public void ReadCmds (String filename) throws IOException{
@@ -45,7 +48,6 @@ public class DebugPlayer extends Player {
 		ArrayList<String> cmds =new ArrayList<String>();
 		int i=0;
 	    
-		
 		while (line != null) {
 	    	allCmds=allCmds.concat(line);
 	        if(!allCmds.endsWith(" ")){
@@ -54,9 +56,6 @@ public class DebugPlayer extends Player {
 	        line = cmdBuffer.readLine();
 	    }
 	    cmdBuffer.close();
-	    
-	    
-	    
 	    String[] cmdsAux = allCmds.split(" ");
 	    for(int x=0; x< cmdsAux.length;x++){
 	    	cmdsAux[x].replace(" ","");
@@ -69,8 +68,6 @@ public class DebugPlayer extends Player {
 					cmd=cmd.concat(cmdsAux[i+1]);
 					i++;
 				}catch(NumberFormatException e){
-					
-				
 				}
 			}else if(cmdsAux[i].contains("h")){
 				cmd=cmdsAux[i];
@@ -88,16 +85,13 @@ public class DebugPlayer extends Player {
 	} 	
 	
 	/**
-	* Method used to play the game in debug mode 
+	* Method used to play the game in Debug mode. Considering the given commands the game is going 
+	* to be played until the all the commands are executed or the cards provided in the card file 
+	* are finished
 	*/
 	public void Play(){
 		for(String temp : commandsDebug){
 			Comand(temp);
 		}
 	}
-	
-	public static void main(String[] args) throws IOException {
-
-	}
-
 }
