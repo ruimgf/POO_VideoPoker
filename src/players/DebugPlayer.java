@@ -94,6 +94,7 @@ public class DebugPlayer extends Player {
 		for(String temp : commandsDebug){
 			Comand(temp);
 		}
+		System.exit(0);
 	}
 	
 	public static void main(String[] args) throws IOException {
