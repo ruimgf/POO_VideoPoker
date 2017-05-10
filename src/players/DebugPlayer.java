@@ -5,10 +5,20 @@ import videopoker.Videopoker;
 
 import java.io.*;
 
+/**
+ * Class that represents a game in Debug mode that extends from the class Player10_7 
+ * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo 
+ */
 public class DebugPlayer extends Player {
-	
+	/**
+	 * Array of strings used to store all the commands in the commands file
+	 */
 	private ArrayList<String> commandsDebug; 
-	
+	/**
+	 * Construct that extends from the class 
+	 * @param game VERRRRRRRR ISTO
+	 * 
+	 */
 	public DebugPlayer(Videopoker game, String cmdfile) {
 		super(game);
 		
@@ -21,6 +31,11 @@ public class DebugPlayer extends Player {
 		
 	}
 	
+	/**
+	* Method used to read an input file with commands and store those commands into an 
+	* ArrayList of strings VERRERRRRREREREREERRRRRRRRRRRRRRR
+	* @param filename name of the file from where we want to read the commands 
+	*/
 	public void ReadCmds (String filename) throws IOException{
 		
 		BufferedReader cmdBuffer = new BufferedReader(new FileReader(filename));
@@ -72,6 +87,9 @@ public class DebugPlayer extends Player {
 	    commandsDebug = cmds;
 	} 	
 	
+	/**
+	* Method used to play the game in debug mode 
+	*/
 	public void Play(){
 		for(String temp : commandsDebug){
 			Comand(temp);
