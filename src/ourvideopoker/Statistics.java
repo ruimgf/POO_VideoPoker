@@ -23,19 +23,19 @@ public class Statistics {
 	 * int array that represents the table of statistics, it contains the number of time each hand have appeard
 	 * in our videopoker machine
 	 */
-	private int[] hands_stats = new int[10];
+	int[] hands_stats = new int[10];
 	/**
 	 * the initial credit that the player insert int he videopoker machine
 	 */
-	private int initial_credit;
+	int initial_credit;
 	/**
 	 * the last update credit in the statisctics
 	 */
-	private int actual_credit;
+	int actual_credit;
 	/**
 	 * number of deals that have appen in the machine
 	 */
-	private int number_deals;
+	int number_deals;
 	
 	/**
 	 * Constructor only requires the initial credit that has been introduced in the machine.

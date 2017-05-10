@@ -25,7 +25,7 @@ public class DoubleBonus10_7 implements VideoPokerVariation{
 	/**
 	 * This object is a private hashmap that represents the payout table for this variation.
 	 */
-	private final HashMap<String, Integer > PayoutMap;
+	final HashMap<String, Integer > PayoutMap;
 	
 	/**
 	 * Constructor of the DoubleBonus10_7 variation, it only initializes the payout hashmap 

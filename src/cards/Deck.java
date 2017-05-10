@@ -14,7 +14,7 @@ public class Deck {
 	/**
 	 * List of cards present in deck
 	 */
-	protected LinkedList<Card> cards;
+	LinkedList<Card> cards;
 	
 	
 	/**

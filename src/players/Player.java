@@ -4,7 +4,7 @@ import videopoker.*;
 
 public abstract class Player {
 
-	protected Videopoker game;
+	Videopoker game;
 	protected Player(){
 		game = null;
 	};

@@ -18,7 +18,7 @@ public class OurVideoPoker implements Videopoker{
 	/**
 	 * This field represents the credits that the player have in the Videopooker machine
 	 */
-	protected int credits;
+	int credits;
 	
 	/**
 	 * To implement the game we use a simple StateMachine, this field is the state of the game at each time
@@ -28,38 +28,38 @@ public class OurVideoPoker implements Videopoker{
 	 * 3 - after the hold - and end of play
 	 * 4 - after the bet but not the first bet
 	 */
-	protected int gamestate = 0;
+	int gamestate = 0;
 	
 	/**
 	 * This filed represents the last bet placed by the player in the machine
 	 */
-	protected int lastbet = 5;
+	int lastbet = 5;
 	
 	/**
 	 * This field is the Deck of the videopoker machine.
 	 * @see Deck
 	 */
-	protected Deck game_deck;
+	Deck game_deck;
 	
 	/**
 	 * This filed represents the cards that he machine have , for that it uses a object of type HandCards
 	 * @see HandCards
 	 */
-	protected HandCards game_cards;
+	HandCards game_cards;
 	
 	/**
 	 * For save the machine Statistics we use a object of type Statistics to handl the hands that had been
 	 * given in the past
 	 * @see Statistics
 	 */
-	protected Statistics game_stats;
+	Statistics game_stats;
 	
 	/**
 	 * Must important thing it uses a object that implements the VideoPokerVariation Interface, is with that
 	 * object that the machine knows what variation of videopoker is being played
 	 * @see VideoPokerVariation
 	 */
-	protected final VideoPokerVariation variation;
+	final VideoPokerVariation variation;
 	
 	/**
 	 * Constructor of the Videopoker, it receives the initial credits that a player put in the machine

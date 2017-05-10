@@ -12,7 +12,7 @@ public class AdviceResult extends Result {
 	 * This Result type class have also a boolean field holdcards that is true in the 
 	 * index's of the player hand that are to hold by the advice ruller
 	 */
-	protected boolean[] holdcards;
+	boolean[] holdcards;
 
 	/**
 	 * Constructor for a Advice
