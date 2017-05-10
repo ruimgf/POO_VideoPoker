@@ -24,7 +24,7 @@ public class SimulationPlayer extends Player {
 	int betValue;
 	
 	/**
-	 * Construct that extends from the class 
+	 * Construct a Simulation mode player 
 	 * @param game game that implements the interface of the {@link videopoker.Videopoker}
 	 * @param Bet value for all the plays that are going to take place in Simulation mode
 	 * @param Number of plays that be applied in Simulation mode

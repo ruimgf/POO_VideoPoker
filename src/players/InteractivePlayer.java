@@ -22,7 +22,7 @@ public class InteractivePlayer extends Player {
 	private Scanner scan = new Scanner(System.in);
 	
 	/**
-	 * Construct that extends from the class Player10_7
+	 * Construct a Interactive mode player
 	 * @param game game that implements the interface of the {@link videopoker.Videopoker}
 	 */
 	public InteractivePlayer(Videopoker game) {

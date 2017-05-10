@@ -26,6 +26,10 @@ import java.awt.Cursor;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+/**
+ * Class that allow you to play the {@link videopoker.Videopoker} with an graphic interface
+ * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo 
+ */
 public class GuiPlayer extends Player {
 
 	private JFrame frame;
