@@ -6,9 +6,9 @@ import videopoker.Videopoker;
 import java.io.*;
 
 /**
- * Class that represents a game in Debug mode. This class is important to test your game. 
- * You can test your game by considering a file with the commands you want to check and the 
- * cards that will be played during this mode
+ * Class that allow you to play the {@link videopoker.Videopoker} in Debug mode. This class is important to test your game. when facing 
+ * some peculiar situations. You can test your game by considering a file with the commands you want 
+ * to check and the cards that will be played during this mode
  * @author Alexandre Candeias, Pedro Martinho, Rui Figueiredo 
  */
 public class DebugPlayer extends Player {
