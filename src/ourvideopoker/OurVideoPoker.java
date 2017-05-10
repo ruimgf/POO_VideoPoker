@@ -68,7 +68,7 @@ public class OurVideoPoker implements Videopoker{
 	 * @param variation the VideoPokerVariation that is going to be played in the machine
 	 * @see VideoPokerVariation
 	 */
-	public OurVideoPoker(int credits,VideoPokerVariation variation){
+	public OurVideoPoker(int credits,VideoPokerVariation variation){//TODO throw exception if variation is null or if credits are negative
 		
 		this.credits = credits;
 		
