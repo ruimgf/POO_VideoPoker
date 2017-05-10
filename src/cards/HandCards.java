@@ -10,7 +10,7 @@ public class HandCards {
 	/*
 	 * hand of the player
 	 * */
-	private Card[] gamecards;
+	Card[] gamecards;
 	/*
 	 * lenght of the hand
 	 * */

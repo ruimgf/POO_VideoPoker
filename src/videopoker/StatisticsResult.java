@@ -11,7 +11,7 @@ public class StatisticsResult extends Result {
 	/**
 	 * This class have a string description of the statistics at the time of the command
 	 */
-	protected String game_stats;
+	String game_stats;
 	
 	/**
 	 * Constructor requires the string description of Statistics of the game at the time that the command is called

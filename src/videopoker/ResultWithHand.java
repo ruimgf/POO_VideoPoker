@@ -15,7 +15,7 @@ public abstract class ResultWithHand extends Result {
 	 * after the play
 	 * @see HandCards
 	 */
-	protected HandCards hand;
+	HandCards hand;
 	
 	/**
 	 * Constructor takes the credits of the player after the play move and the hand

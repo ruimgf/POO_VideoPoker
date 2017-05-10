@@ -16,7 +16,7 @@ public abstract class Result {
 	 * All Results in our implementation have a int field credits that represent the credits
 	 * that the player have in the machine after that play.
 	 */
-	protected int credits;
+	int credits;
 		
 	/**
 	 * Constructor of the Class Result, all results in this implementation have the filed credits

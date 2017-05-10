@@ -13,7 +13,7 @@ public class HoldResult extends ResultWithHand{
 	/**
 	 * This class have also a string field with the final hand name that the player receives after the hold
 	 */
-	protected String finalhand;
+	String finalhand;
 	
 	/**
 	 * Constructor receives the hand of the player after the hold, the credit and the finalhand name of the hand

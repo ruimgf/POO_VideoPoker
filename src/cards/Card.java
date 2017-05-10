@@ -10,11 +10,11 @@ public class Card {
 	/**
 	 * Suit of card
 	 */
-	protected final Suit suit;
+	final Suit suit;
 	/**
 	 * Value of card
 	 */
-	protected final CardValue value;
+	final CardValue value;
 	
 
 	/**

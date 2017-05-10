@@ -11,24 +11,24 @@ public class CardAnalizer {
 	/**
 	 * Hand to analyze
 	 */
-	private HandCards hand;
+	HandCards hand;
 	/**
 	 *  index i,j of vector count is -1 if card j of suit i don't exist in hand or is equal to index of card i,j on hand
 	 */
-	private int [][] indexCard = new int[4][14];
+	int [][] indexCard = new int[4][14];
 	/**
 	 *  total count of card of value i on hand
 	 */
-	private int [] totalcount = new int[14];
+	int [] totalcount = new int[14];
 	/**
 	 *  number of cards of suit i on hand
 	 */
-	private int [] nSuit = new int[4];
+	int [] nSuit = new int[4];
 
 	/**
 	 *  Important indexes used in last classification
 	 */
-	private int [] IndexLastClass  = new int[5]; 
+	 int [] IndexLastClass  = new int[5]; 
 	
 	/**
 	 * Reinitialize count and Analyze other hand
