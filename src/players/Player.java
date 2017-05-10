@@ -46,8 +46,14 @@ public abstract class Player {
 			switch (cmd.charAt(0)) {
 			case 'b':
 				if(cmd.length()>1){
-					int BetValue=Integer.parseInt(cmd.substring(1));				
-					System.out.println(game.bet(BetValue));
+					try {
+						int BetValue=Integer.parseInt(cmd.substring(1));				
+						System.out.println(game.bet(BetValue));
+					} catch (NumberFormatException e) {
+						System.out.println("Invalid file format");
+						System.exit(-1);
+					}
+					
 			
 				}else{	
 						System.out.println(game.bet());	
@@ -95,6 +101,10 @@ public abstract class Player {
 			}
 		} catch (InvalidPlayException e) {
 			System.out.println(e.getMessage());
+			if(e.getMessage().contains("b: illegal command, player without credits")){
+				System.exit(0);
+			}
+			
 		} catch (StringIndexOutOfBoundsException e) {
 			System.out.println("Invalid instruction!");
 			System.out.println("\n Please insert a command of type: b [amount(1-5)], h [cards to hold], $, d, a, s, q");
