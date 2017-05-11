@@ -51,7 +51,11 @@ public class GuiPlayer extends Player {
 	JTextField userCreditText;
 	JLabel initMessage;
 	JLabel initMessageError;
+	JLabel [] discard = new JLabel[5];
 	int initCredit=0;
+	boolean cardsEnabled=true;
+	boolean chipsEnabled=true;
+	
 	
 	
 	/**
@@ -89,6 +93,20 @@ public class GuiPlayer extends Player {
 	}
 	
 	/**
+	* Initialize the label that informs the player if he lost or won
+	*/
+	private void InitializeDiscard(){
+		for(int i=0; i<5;i++){
+			discard[i] = new JLabel("");
+			discard[i].setHorizontalAlignment(SwingConstants.CENTER);
+			discard[i].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/discard.png")));
+			discard[i].setBounds(cardsXpos[i], 240, 145, 216);
+			frame.getContentPane().add(discard[i]);
+			discard[i].setVisible(false);
+		}
+	}
+	
+	/**
 	* Initialize the cards that are present in the table
 	*/
 	private void InitializeCards(){
@@ -100,10 +118,12 @@ public class GuiPlayer extends Player {
 			cards[i].addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(holdCards[a]){
-						upCards(a);
-					}else{
-						downCards(a);
+					if(cardsEnabled==true){
+						if(holdCards[a]){
+							upCards(a);
+						}else{
+							downCards(a);
+						}
 					}
 				}
 			
@@ -137,28 +157,30 @@ public class GuiPlayer extends Player {
 	        	@Override
 	        	public void mouseClicked(MouseEvent e) {
 	        		int j;
-	        		if(chipsAux[a]==false){
-		        		for(j=0; j<=a;j++){
-		        			chips[j].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chips.png")));
-		        			chips[j].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipson.png")));
-		        			chipsAux[j]=true;
+	        		if(chipsEnabled==true){
+	        			if(chipsAux[a]==false){
+			        		for(j=0; j<=a;j++){
+			        			chips[j].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chips.png")));
+			        			chips[j].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipson.png")));
+			        			chipsAux[j]=true;
+			        		}
+			        		
+			        		for(int aux=j; aux<=4; aux++){
+			        			chips[aux].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
+			        			chips[aux].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
+								chipsAux[aux]=false;
+							}
+		        		}else{
+		        		
+			        			for(j=a+1; j<5; j++){
+				        			chips[j].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
+				        			chips[j].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
+									chipsAux[j]=false;
+			        			}
+			        		
 		        		}
-		        		
-		        		for(int aux=j; aux<=4; aux++){
-		        			chips[aux].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
-		        			chips[aux].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
-							chipsAux[aux]=false;
-						}
-	        		}else{
-	        		
-		        			for(j=a+1; j<5; j++){
-			        			chips[j].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
-			        			chips[j].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/chipsBlackon.png")));
-								chipsAux[j]=false;
-		        			}
-		        		
+			        	betValue=a+1;
 	        		}
-		        	betValue=a+1;
 	        	}
 	        });
 		}
@@ -224,6 +246,8 @@ public class GuiPlayer extends Player {
 					credit.setText(game.credit().toString());
 					initMessageError.setVisible(false);
 					message.setVisible(false);
+					cardsEnabled=true;
+					chipsEnabled=false;
 				} catch (InvalidPlayException e1) {
 					
 					
@@ -246,7 +270,6 @@ public class GuiPlayer extends Player {
 		btnHold.setBorderPainted(false);
 		btnHold.setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/button_hold.png")));
 		btnHold.setEnabled(false);
-		
 		btnHold.setBounds(380, 600, 220, 60);
 		btnHold.setVisible(false);
 		frame.getContentPane().add(btnHold);
@@ -257,7 +280,8 @@ public class GuiPlayer extends Player {
 				try {
 					res = game.hold(holdCards);
 					showCards(res);
-					
+					cardsEnabled=false;
+					chipsEnabled=true;
 				} catch (InvalidPlayException e1) {
 					// TODO INSERT CODE TO INVALID HOLD
 					e1.printStackTrace();
@@ -448,8 +472,6 @@ public class GuiPlayer extends Player {
 					timer.stop();
 					timerAux=0;
 					Arrays.fill(holdCards,true);
-					
-					
 					try{	
 						String [] finalHand =res.toString().split("\n");
 						if(finalHand[1].contains("loses")){
@@ -462,6 +484,7 @@ public class GuiPlayer extends Player {
 						btnHold.setEnabled(false);
 						btnAdvice.setEnabled(false);
 						message.setVisible(true);
+						
 						try {
 							PrintStatistics(game.statistics());
 						} catch (InvalidPlayException e) {
@@ -486,6 +509,9 @@ public class GuiPlayer extends Player {
 						btnDeal.setEnabled(false);
 						btnHold.setEnabled(true);
 						btnAdvice.setEnabled(true);
+						for(int x=0; x<5;x++){
+							cards[x].setEnabled(true);
+						}
 					}
 					
 					try {
@@ -499,6 +525,7 @@ public class GuiPlayer extends Player {
 	            		cards[timerAux].setIcon(new ImageIcon(GuiPlayer.class.getResource("/images/"+h.getCardN(timerAux)+".png")));
 	            		cards[timerAux].setRolloverIcon(new ImageIcon(GuiPlayer.class.getResource("/images/"+h.getCardN(timerAux)+"on.png")));
 	            		cards[timerAux].setBounds(cardsXpos[timerAux], 290, 145, 216);
+	            		discard[timerAux].setVisible(false);
 	            	}else{
 	            		downCards(timerAux);
 	            	}
@@ -518,6 +545,7 @@ public class GuiPlayer extends Player {
 		int upCrad= 50;
 		cards[index].setBounds(cardsXpos[index],  290 - upCrad, 145, 216);
 		holdCards[index] = false;
+		discard[index].setVisible(true);
 	}
 	
 	/**
@@ -526,6 +554,7 @@ public class GuiPlayer extends Player {
 	private void downCards(int index){
 		cards[index].setBounds(cardsXpos[index],  290, 145, 216);
 		holdCards[index] = true;
+		discard[index].setVisible(false);
 	}
 	
 	/**
@@ -598,7 +627,9 @@ public class GuiPlayer extends Player {
 		InitializeCreditButton();
 		Arrays.fill(chipsAux,true);
 		InitializeMessage();
+		InitializeDiscard();
 		InitializeCards(); 
+		
 		InitializeChips();
 		InitializeCreditMessage();
 		InitializeButtonDeal();
