@@ -91,6 +91,8 @@ public class DebugPlayer extends Player {
 	*/
 	public void Play(){
 		for(String temp : commandsDebug){
+			System.out.println();
+			System.out.println("-cmd " + temp.replace("", " ").trim() );
 			Comand(temp);
 		}
 		System.exit(0);
