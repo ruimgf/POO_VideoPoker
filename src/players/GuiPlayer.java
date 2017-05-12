@@ -67,6 +67,9 @@ public class GuiPlayer extends Player {
 				
 	}
 	
+	/**
+	* Initialize play method
+	*/
 	public void Play(){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -93,7 +96,7 @@ public class GuiPlayer extends Player {
 	}
 	
 	/**
-	* Initialize the label that informs the player if he lost or won
+	* Initialize the discard information
 	*/
 	private void InitializeDiscard(){
 		for(int i=0; i<5;i++){
@@ -425,10 +428,9 @@ public class GuiPlayer extends Player {
 	private void InitializeCreditGeter(){
 		
 		userCreditText = new JTextField();
-		userCreditText.setSelectedTextColor(Color.WHITE);
-		userCreditText.setSelectionColor(Color.WHITE);
+
 		userCreditText.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		userCreditText.setForeground(Color.WHITE);
+		userCreditText.setForeground(Color.BLACK);
 		userCreditText.setOpaque(false);
 		userCreditText.setFont(new Font("URW Bookman L", Font.BOLD, 40));
 		userCreditText.setBounds(380, 250, 240, 60);
