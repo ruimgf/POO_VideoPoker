@@ -23,7 +23,7 @@ public abstract class Player {
 	
 	/**
 	 * Constructor that initializes a game with a initial number of credits
-	 * @param credits number of credits in the beginning of the game
+	 * @param game videopoker game to play
 	 */
 	public Player(Videopoker game) {
 		this.game = game;

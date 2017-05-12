@@ -26,8 +26,8 @@ public class SimulationPlayer extends Player {
 	/**
 	 * Construct a Simulation mode player 
 	 * @param game game that implements the interface of the {@link videopoker.Videopoker}
-	 * @param Bet value for all the plays that are going to take place in Simulation mode
-	 * @param Number of plays that be applied in Simulation mode
+	 * @param betValue for all the plays that are going to take place in Simulation mode
+	 * @param numPlays that be applied in Simulation mode
 	 */
 	public SimulationPlayer(Videopoker game ,int betValue , int numPlays) {
 		super(game);
@@ -37,7 +37,7 @@ public class SimulationPlayer extends Player {
 	
 	/**
 	* Method with all the commands to be applied in each play of the Simulation Mode 
-	* in order to have the best move done (Bet -> Deal -> Hold of the cards returned by the Advice)  
+	* in order to have the best move done (Bet - Deal - Hold of the cards returned by the Advice)  
 	* @param betValue bet value 
 	*/
 	public void Intructions (int betValue) throws InvalidPlayException{

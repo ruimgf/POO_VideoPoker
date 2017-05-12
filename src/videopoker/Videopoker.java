@@ -47,7 +47,7 @@ public interface Videopoker {
 	/**
 	 * This method is called when we want to do the hold command in the videopoker machine, that is
 	 * give the information of what cards do we want to hold.
-	 * @param index boolean array that is true in the index of the cards that we want to hold and false in
+	 * @param indexs boolean array that is true in the index of the cards that we want to hold and false in
 	 * the ones that we want to discard
 	 * @return HoldResult object with the result of the Hold move if it is valid
 	 * @throws InvalidPlayException throws this exception if the hold is not valid, with a message that

@@ -10,7 +10,7 @@ import videopoker.*;
 /**
  * This Class is our implementation of a videopoker machine, it implements the Videopooker interface
  * @author Alexandre, Rui , Pedro
- * @see Videopooker
+ * @see videopoker.Videopoker
  *
  */
 public class OurVideoPoker implements Videopoker{

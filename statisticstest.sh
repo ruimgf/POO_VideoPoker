@@ -3,9 +3,9 @@
 
 i="0"
 nrsimul="50"
-betval="5"
-ntry="9999999"
-inicialmoney="100000000"
+betval="2"
+ntry="1000000"
+inicialmoney="1000000"
 
 rm tempfile.txt
 while [ $i -lt $nrsimul ]
