@@ -1,15 +1,21 @@
 # POO_VideoPoker
-Java Project that implements Video Poker
+Java Project that implements Video Poker Double Bonus 10/7 Mode
 
+A .jar file must be created so that the program runs by typing in the terminal
 
-Instruções para inicializar projeto:
+- java -jar <<YOUR-JAR-NAME>>.jar -i credit
 
-- Criar pasta onde queres guardar o projeto
-- Navegar até essa pasta e faze ``` git init ``` 
-- Seguidamente ``` git remote add origin https://github.com/ruimgf/POO_VideoPoker ```
-- ``` git pull origin master ```
-- Ir até ao eclipse, abrir projeto e selecionar a pasta criada no primeiro passo.
-- Tentar sempre ter código limpo no master, que não tem erros, sempre que estiverem a tentar implementar uma nova feature devem criar um branch.
+for the interactive mode
 
+- java -jar <<YOUR-JAR-NAME>>.jar -d credit cmd-file card-file
 
-E por fim , quem escreveu isto é um picolho.
+for the debug mode
+
+- java -jar <<YOUR-JAR-NAME>>.jar -s credit bet nbdeals
+
+for the simulation mode.
+
+A Swing GUI is also provided the program should run by
+simply typing
+ - java -jar <<YOUR-JAR-NAME>>.jar -g
+
