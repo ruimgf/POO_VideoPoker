@@ -19,3 +19,4 @@ A Swing GUI is also provided the program should run by
 simply typing
  > java -jar <<YOUR-JAR-NAME>>.jar -g
 
+![Screenshot](view.png)
