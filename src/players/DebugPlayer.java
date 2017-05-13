@@ -27,8 +27,11 @@ public class DebugPlayer extends Player {
 		
 		try {
 			ReadCmds(cmdfile);
-		} catch (Throwable e) {
-			System.out.println(e.getMessage());
+		} catch (FileNotFoundException e) {
+			System.out.println("Cmd File not found");
+			System.exit(-1);
+		} catch (Throwable e){
+			System.out.println("File format invalid");
 			System.exit(-1);
 		}
 		
